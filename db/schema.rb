@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150907181646) do
+ActiveRecord::Schema.define(version: 20150907200743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignment_documents", force: :cascade do |t|
+    t.integer  "document_id"
+    t.integer  "assignment_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "assignment_documents", ["assignment_id"], name: "index_assignment_documents_on_assignment_id", using: :btree
+  add_index "assignment_documents", ["document_id"], name: "index_assignment_documents_on_document_id", using: :btree
+
+  create_table "assignment_students", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "assignment_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "assignment_students", ["assignment_id"], name: "index_assignment_students_on_assignment_id", using: :btree
+  add_index "assignment_students", ["student_id"], name: "index_assignment_students_on_student_id", using: :btree
 
   create_table "assignments", force: :cascade do |t|
     t.string   "title"
@@ -28,7 +48,6 @@ ActiveRecord::Schema.define(version: 20150907181646) do
     t.boolean  "project"
     t.boolean  "miscellaneous"
     t.boolean  "reading"
-    t.integer  "student_id"
     t.integer  "course_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
@@ -60,7 +79,6 @@ ActiveRecord::Schema.define(version: 20150907181646) do
     t.datetime "attach_updated_at"
     t.text     "google_drive_url"
     t.integer  "teacher_id"
-    t.integer  "assignment_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
@@ -115,6 +133,10 @@ ActiveRecord::Schema.define(version: 20150907181646) do
     t.datetime "updated_at",    null: false
   end
 
+  add_foreign_key "assignment_documents", "assignments"
+  add_foreign_key "assignment_documents", "documents"
+  add_foreign_key "assignment_students", "assignments"
+  add_foreign_key "assignment_students", "students"
   add_foreign_key "course_students", "courses"
   add_foreign_key "course_students", "students"
   add_foreign_key "grade_students", "grades"
