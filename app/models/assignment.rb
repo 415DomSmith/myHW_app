@@ -1,7 +1,7 @@
 class Assignment < ActiveRecord::Base
 
 	# belongs_to :course
-	has_many :assignment_courses, dependent: :destroy
+	has_many :assignment_courses
 	has_many :course, through: :assignment_courses
 
 	belongs_to :student
