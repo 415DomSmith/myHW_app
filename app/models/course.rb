@@ -3,7 +3,7 @@ class Course < ActiveRecord::Base
 	has_many :students, through: :course_students
 
 
-	has_many :assigment_courses, dependent: :destroy
-	has_many :assignments, through: :assigment_courses
+	has_many :assignment_courses, dependent: :destroy
+	has_many :assignments, through: :assignment_courses
 	belongs_to :teacher
 end
