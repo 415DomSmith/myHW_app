@@ -4,7 +4,7 @@
 
 myHW
 
-A class assignment management tool that allows Teachers to assign electronic documents, either uploaded to our app or pulled down from google drive. Teachers can track and grade assignments, and maintain a classroom grade book for each student.
+A platform for students and teachers to interact digitally online. Teachers assign homework through our app or by posting electronic documents, either uploaded to our app or pulled down from google drive. Teachers can track and grade assignments, and maintain a classroom grade book for each student.
 
 Base / MVP features:
 
