@@ -24,29 +24,29 @@ Students and teachers can see individual students grades
 
 Teachers can:
 
-Create a teacher account
-Create classes
-Populate a class with students
-Import their Google Drive documents
-Upload documents locally
+- Create a teacher account
+- Create classes
+- Populate a class with students
+- Import their Google Drive documents
+- Upload documents locally
 assign a document as an assignment to a class (making it publicly viewable by members of that class)
 manually input grades in to a grade book
-create categories in a grade book
+- create categories in a grade book
 view assignment submissions
 
-Teachers score assignments 
+- Teachers score assignments 
 
 Students can:
 
-Create a student account
-See multiple classes (that they've been assigned to)
-See assignments for all classes
-Go to a class page
-See assignment for that class
-Open assignment / goto assignment page
-Submit answers for assignment either as a link to an external document, or in a text box.
-See their grade for a class
-See their grade for an assignment
+- Create a student account
+- See multiple classes (that they've been assigned to)
+- See assignments for all classes
+- Go to a class page
+- See assignment for that class
+- Open assignment / goto assignment page
+- Submit answers for assignment either as a link to an external document, or in a text box.
+- See their grade for a class
+- See their grade for an assignment
 
 
 
@@ -88,6 +88,11 @@ goals:
 - Full models and associations
 - Implement Angular 
 - Paperclip & file crud
+
+DAY 2:
+
+- Implement Angular
+- Get oAuth / Google Auth working?
 
 
 Things you may want to cover:
