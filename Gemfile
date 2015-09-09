@@ -14,6 +14,17 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+#Devise gem for authentication
+gem 'devise_token_auth'
+
+# For use of .env file
+gem 'dotenv-rails', :groups => [:development, :test]
+
+# Gems for google authentication
+gem 'omniauth', '~> 1.2.2'
+gem 'omniauth-google-oauth2'
+gem 'json'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
