@@ -3,8 +3,8 @@ class CreateCourses < ActiveRecord::Migration
     create_table :courses do |t|
       t.string :name
       t.string :subject
-      t.integer :teacher_id
       t.string :school
+      t.integer :user_id
 
       t.timestamps null: false
     end

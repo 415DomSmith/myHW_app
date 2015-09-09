@@ -12,8 +12,6 @@ class CreateAssignments < ActiveRecord::Migration
       t.boolean :project
       t.boolean :miscellaneous
       t.boolean :reading
-      t.integer :student_id
-      t.integer :course_id
 
       t.timestamps null: false
     end

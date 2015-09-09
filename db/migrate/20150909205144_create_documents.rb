@@ -6,8 +6,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.string :attach_content_type
       t.datetime :attach_updated_at
       t.text :google_drive_url
-      t.integer :teacher_id
-      t.integer :assignment_id
+      t.integer :user_id
 
       t.timestamps null: false
     end

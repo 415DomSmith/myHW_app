@@ -1,99 +1,7 @@
 == README
 
-
-
-myHW
-
-A platform for students and teachers to interact digitally online. Teachers assign homework through our app or by posting electronic documents, either uploaded to our app or pulled down from google drive. Teachers can track and grade assignments, and maintain a classroom grade book for each student.
-
-Base / MVP features:
-
-oAuth / Google log-in only
-
-File upload with paperclip for local storage
-
-Google drive integration (get all of teachers docs) (default open with link, and title in the API)
-
-Score tracking / Grade books
-
-Students submit links to work or submit a form
-
-Students and teachers can see individual students grades
-
-
-
-Teachers can:
-
-- Create a teacher account
-- Create classes
-- Populate a class with students
-- Import their Google Drive documents
-- Upload documents locally
-assign a document as an assignment to a class (making it publicly viewable by members of that class)
-manually input grades in to a grade book
-- create categories in a grade book
-view assignment submissions
-
-- Teachers score assignments 
-
-Students can:
-
-- Create a student account
-- See multiple classes (that they've been assigned to)
-- See assignments for all classes
-- Go to a class page
-- See assignment for that class
-- Open assignment / goto assignment page
-- Submit answers for assignment either as a link to an external document, or in a text box.
-- See their grade for a class
-- See their grade for an assignment
-
-
-
-
-
-
-
-Stretch goals
-
-- teachers can organize files
-
-- teachers can create grade-book sections
-
-- school loop API integration (format grade-book for school loop)
-
-- Teachers can create an assignment for a class using a form
-
-- Chat between teachers and students
-
-- Teacher can post announcements on class page
-
-
-
-
-
-Super stretch goals:
-
-- charts (otherwise use caffeine meter)
-
-- Google calendar integration
-
-- Photo album for classroom (https://gethomeroom.com/)
-
-
-DAY 1:
-
-goals: 
-
-- Full models and associations
-- Implement Angular 
-- Paperclip & file crud
-
-DAY 2:
-
-- Implement Angular
-- Get oAuth / Google Auth working?
-
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
 Things you may want to cover:
 
@@ -116,4 +24,5 @@ Things you may want to cover:
 * ...
 
 
+Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
