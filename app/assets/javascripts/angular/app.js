@@ -21,8 +21,8 @@ app.config(["$routeProvider", function ($routeProvider){
 		controller: 'HomeController'
 	})
 	.when('/login', {
-		templateUrl: 'partials/studentLogin.html',
-		controller: 'StudentLoginController'
+		templateUrl: 'partials/login.html',
+		controller: 'LoginController'
 	})
 	.otherwise({ redirectTo: '/'})
 }]);
