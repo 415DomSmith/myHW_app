@@ -20,7 +20,7 @@ gem 'devise_token_auth'
 
 
 # Gems for google authentication
-gem 'omniauth'
+gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
 gem 'json'
 
