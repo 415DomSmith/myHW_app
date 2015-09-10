@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909223926) do
+ActiveRecord::Schema.define(version: 20150910212641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,10 +52,29 @@ ActiveRecord::Schema.define(version: 20150909223926) do
     t.datetime "updated_at",          null: false
   end
 
+  create_table "course_schools", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "course_schools", ["course_id"], name: "index_course_schools_on_course_id", using: :btree
+  add_index "course_schools", ["school_id"], name: "index_course_schools_on_school_id", using: :btree
+
+  create_table "course_users", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "course_users", ["course_id"], name: "index_course_users_on_course_id", using: :btree
+  add_index "course_users", ["user_id"], name: "index_course_users_on_user_id", using: :btree
+
   create_table "courses", force: :cascade do |t|
     t.string   "name"
     t.string   "subject"
-    t.string   "school"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,6 +90,35 @@ ActiveRecord::Schema.define(version: 20150909223926) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
+
+  create_table "school_users", force: :cascade do |t|
+    t.integer  "school_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "school_users", ["school_id"], name: "index_school_users_on_school_id", using: :btree
+  add_index "school_users", ["user_id"], name: "index_school_users_on_user_id", using: :btree
+
+  create_table "schools", force: :cascade do |t|
+    t.string   "name"
+    t.string   "city"
+    t.string   "image"
+    t.string   "mascot"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "submission_users", force: :cascade do |t|
+    t.integer  "submission_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "submission_users", ["submission_id"], name: "index_submission_users_on_submission_id", using: :btree
+  add_index "submission_users", ["user_id"], name: "index_submission_users_on_user_id", using: :btree
 
   create_table "submissions", force: :cascade do |t|
     t.integer  "max"
@@ -116,4 +164,12 @@ ActiveRecord::Schema.define(version: 20150909223926) do
   add_foreign_key "assignment_courses", "courses"
   add_foreign_key "assignment_documents", "assignments"
   add_foreign_key "assignment_documents", "documents"
+  add_foreign_key "course_schools", "courses"
+  add_foreign_key "course_schools", "schools"
+  add_foreign_key "course_users", "courses"
+  add_foreign_key "course_users", "users"
+  add_foreign_key "school_users", "schools"
+  add_foreign_key "school_users", "users"
+  add_foreign_key "submission_users", "submissions"
+  add_foreign_key "submission_users", "users"
 end

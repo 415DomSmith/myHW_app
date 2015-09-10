@@ -1,4 +1,17 @@
 class User < ActiveRecord::Base
+
+
+	has_many :documents
+
+	has_many :course_users, dependent: :destroy
+	has_many :courses, through: :course_users
+
+	has_many :submission_users, dependent: :destroy
+	has_many :submissions, through: :submission_users
+
+	has_many :school_users, dependent: :destroy
+	has_many :schools, through: :school_users
+  
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
