@@ -254,7 +254,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   json
-  omniauth
+  omniauth (~> 1.2.2)
   omniauth-google-oauth2
   paperclip (~> 4.3)
   pg
