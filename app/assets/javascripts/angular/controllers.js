@@ -4,12 +4,8 @@ app.controller("HomeController", ["$scope", "$location", "$http", function ($sco
 
 app.controller("LoginController", ["$scope", "$location", "$http", "$auth", function ($scope, $location, $http, $auth){
 	$scope.authenticateUser = function(){
-
-		console.log("hello");
+	//Send authentication request to Google
 		$auth.authenticate('google_oauth2')
-		.then(function(resp){
-			// $location.path("/users/")
-		});
 	};
 }]);
 
@@ -51,18 +47,33 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
     };
 }]);
 
-app.controller("AdditionalInfoController", ["$scope", "$location", "$http", function ($scope, $location, $http){
-	$scope.submitAdditionalInfo = function() {
-		// console.log("hello")
-		console.log($scope.formData);
-		// console.log($scope.student)
+app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$routeParams", function ($scope, $location, User, $routeParams){
+	$scope.submitAdditionalInfo = function(id) {
+		//Find user to update
+		$scope.user = User.get({id: $routeParams.id});
+
+		// Check if they are student or teacher
+		if($scope.formData.teacher) {
+			$scope.user.isTeacher = true
+		}
+
+		//Update the user with new information from formData
+
+
+		$scope.user.$update({id: $routeParams.id}).then(function() {
+        	$location.path('/');
+      });
 	};
 }]);
 
+
+//Controller to handle global events such as login and logout
 app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", function ($scope, $location, $http, $rootScope){
 	$rootScope.$on('auth:login-success', function(ev, user) {
 		console.log(ev);
 		console.log(user);
 		$location.path("/users/" + user.id + "/additional_info");
 	});
+
+	//TODO handle auth:login-failure gracefully
 }]);

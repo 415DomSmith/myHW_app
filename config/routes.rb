@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   	root 'statics#index'
   	get "/additional_info" => "statics#additional_info"
     # get "/omniauth/:provider/callback" => 'sessions#create'
+    scope '/api' do
+      resources :users, only: [:index, :show, :create, :update, :destroy]
+    end
 end
