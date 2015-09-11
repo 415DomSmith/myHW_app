@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 	# end
 
 	def update
-		binding.pry
+		# binding.pry
 		if @user.update(user_params)
 		  render json: @user, status: :ok
 		else

@@ -2,5 +2,21 @@
 	<input type="radio" ng-model="formData.teacher" name="userType"  value="Teacher" > Teacher
 	<br>
 	<input type="radio" ng-model="formData.student" name="userType" value="Student"> Student
+	<br>
+	<br>
+	<br>
+	<input type="radio" ng-model="formData.female" name="gender"  value="Female" > Female
+	<br>
+	<input type="radio" ng-model="formData.male" name="gender" value="Male"> Male
+	<br>
+	<br>
+	<br>
+	<select ng-model="formData.school">
+		<option ng-repeat="school in schools" value="{{school.id}}">{{school.name}}</option>
+	</select>
+
+	<br>
+	<br>
+	<br>
 	<input type="submit" value="Submit">
 </form>

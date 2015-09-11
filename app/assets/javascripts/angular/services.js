@@ -6,3 +6,10 @@ app.service('User', ['$resource', function($resource) {
     {update: {method: "PUT"}} 
   );
 }]);
+
+app.service('School', ['$resource', function($resource) {
+  return $resource(
+    "/api/schools/:id.json",
+    {id: "@id"}
+  );
+}]);

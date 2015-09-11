@@ -2,13 +2,55 @@ app.controller("HomeController", ["$scope", "$location", "$http", function ($sco
 	$scope.test = "TEST";
 }]);
 
+// ==================================================
+// LOGIN CONTROLLER ==
+// ==================================================
+
 app.controller("LoginController", ["$scope", "$location", "$http", "$auth", function ($scope, $location, $http, $auth){
 	$scope.authenticateUser = function(){
 	//Send authentication request to Google
-		$auth.authenticate('google_oauth2')
+		$auth.authenticate('google_oauth2');
 	};
 }]);
 
+// ==================================================
+// ADDITIONAL INFO CONTROLLER ==
+// ==================================================
+
+app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$routeParams", "School", function ($scope, $location, User, $routeParams, School){
+
+	//Find user to update
+	$scope.user = User.get({id: $routeParams.id});
+
+	//Find schools to add to user
+	$scope.schools = School.query();
+
+	console.log($scope.schools)
+
+	$scope.submitAdditionalInfo = function(id) {
+		
+
+		// Check if they are student or teacher
+		if($scope.formData.teacher) {
+			$scope.user.isTeacher = true;
+		} else {
+			$scope.user.isTeacher = false;
+		}
+
+		//Update the user with new information from formData
+
+		console.log($scope.formData.school)
+
+
+		$scope.user.$update({id: $routeParams.id}).then(function() {
+        	$location.path('/');
+      });
+	};
+}]);
+
+// ==================================================
+// LOCAL UPLOAD (PAPERCLIP) FOR DOCUMENTS CONTROLLER=
+// ==================================================
 
 app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
     $scope.$watch('files', function () {
@@ -47,27 +89,10 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
     };
 }]);
 
-app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$routeParams", function ($scope, $location, User, $routeParams){
-	$scope.submitAdditionalInfo = function(id) {
-		//Find user to update
-		$scope.user = User.get({id: $routeParams.id});
 
-		// Check if they are student or teacher
-		if($scope.formData.teacher) {
-			$scope.user.isTeacher = true
-		}
-
-		//Update the user with new information from formData
-
-
-		$scope.user.$update({id: $routeParams.id}).then(function() {
-        	$location.path('/');
-      });
-	};
-}]);
-
-
-//Controller to handle global events such as login and logout
+// ==================================================
+// GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ==
+// ==================================================
 app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", function ($scope, $location, $http, $rootScope){
 	$rootScope.$on('auth:login-success', function(ev, user) {
 		console.log(ev);
