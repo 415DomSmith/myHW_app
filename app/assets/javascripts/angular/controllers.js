@@ -126,7 +126,9 @@ app.controller("GlobalController", ["$scope", "$location", "User","$rootScope", 
 		User.get({id: user.id})
 			.$promise.then(function(loggedInUser){
 	//Set user on rootScope for access everywhere
+				console.log($rootScope)
 				$rootScope.user_id = user.id
+				console.log($rootScope)
 				// If the user is new...
 				if(loggedInUser.isNewUser) {
 					$location.path("/users/" + user.id + "/additional_info");	
