@@ -8,7 +8,7 @@ app.controller("LoginController", ["$scope", "$location", "$http", "$auth", func
 		console.log("hello")
 		$auth.authenticate('google_oauth2')
 		.then(function(resp){
-			$location.path("/")
+			// $location.path("/users/")
 		})
 	}
 	
@@ -16,9 +16,9 @@ app.controller("LoginController", ["$scope", "$location", "$http", "$auth", func
 
 app.controller("AdditionalInfoController", ["$scope", "$location", "$http", function ($scope, $location, $http){
 	$scope.submitAdditionalInfo = function() {
-		console.log("hello")
-		console.log($scope.teacher)
-		console.log($scope.student)
+		// console.log("hello")
+		console.log($scope.formData)
+		// console.log($scope.student)
 	}
 }]);
 
@@ -26,9 +26,6 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
 	$rootScope.$on('auth:login-success', function(ev, user) {
 		console.log(ev)
 		console.log(user)
-		// $rootScope.$apply(function() {
-		    $location.path("/");
-		    // console.log($location.path());
-		// });
+		$location.path("/users/" + user.id + "/additional_info");
 	});
 }]);
