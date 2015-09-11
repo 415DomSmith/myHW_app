@@ -1,12 +1,12 @@
-var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth', 'ngFileUpload']);
+var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth', 'ngFileUpload', "ngResource"]);
 
+// Config of Google Oauth
 app.config(["$authProvider", function($authProvider) {
     $authProvider.configure({
-      // apiUrl: 'http://localhost:3000',
       authProviderPaths: {
       google_oauth2: '/auth/google_oauth2' // <-- note that this is different than what was set with github
       },
-      omniauthWindowType:      'newWindow',
+      omniauthWindowType:'newWindow',
     });
   }]);
 
@@ -15,6 +15,7 @@ app.config(["$httpProvider", function($httpProvider) {
     $('meta[name=csrf-token]').attr('content');
 }]);
 
+// Angular Routes
 app.config(["$routeProvider", function ($routeProvider){
 	$routeProvider
 	.when('/', {
@@ -34,12 +35,6 @@ app.config(["$routeProvider", function ($routeProvider){
 		controller: 'LocalUploadController'
 	})
 	.otherwise({ redirectTo: '/'})
-}]);
-
-
-//Redirect after Login
-app.run(['$rootScope', '$location', function($rootScope, $location) {
-
 }]);
 
 
