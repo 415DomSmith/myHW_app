@@ -1,8 +1,8 @@
 class DocumentsController < ApplicationController
 	
 	def index
-		@documents = Document.all
-		render json: @documents, status: :ok
+		# @documents = Document.all
+		# render json: @documents, status: :ok
 	end
 
 	def show
@@ -16,26 +16,18 @@ class DocumentsController < ApplicationController
 	def create
 		@document = Document.new(document_params)
 
-		respond_to do |format|
-      if @document.save
-        format.html { redirect_to @document, notice: 'document was successfully created.' }
-        format.json { render json: @documents, status: :created }
-      else
-        format.html { render :new }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
+    if @document.save
+      render json: @documents, status: :created 
+    else
+      render json: @document.errors, status: :unprocessable_entity 
     end
 	end
 
 	def update
-    respond_to do |format|
-      if @document.update(document_params)
-        format.html { redirect_to @document, notice: 'document was successfully updated.' }
-        format.json { render json: @document, status: :ok}
-      else
-        format.html { render :edit }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
+    if @document.update(document_params)
+      render json: @document, status: :ok
+    else
+      render json: @document.errors, status: :unprocessable_entity
     end
 	end
 
