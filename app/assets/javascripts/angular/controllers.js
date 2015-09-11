@@ -53,6 +53,7 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 // ==================================================
 
 app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+    
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });
@@ -66,14 +67,24 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
     $scope.upload = function (files) {
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                $scope.upload = Upload.upload({
-                    url: 'localhost:3000/#/upload',
+              var file = files[i];
+              if (!file.$error) {
+                Upload.upload({
+                    url: 'http://localhost:3000/api/documents',
                     method: 'POST',
-                    fields: { 'user[name]': $scope.name },
+                    fields: {},
                     file: file,
-                    fileFormDataName: 'user[image]'
+                    fileFormDataName: 'document[attachment]'
+                }).progress(function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    $scope.log = 'progress: ' + progressPercentage + '% ' +
+                                evt.config.file.name + '\n' + $scope.log;
+                }).success(function (data, status, headers, config) {
+                    $timeout(function() {
+                        $scope.log = 'file: ' + config.file.name + ', Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+                    });
                 });
+              }
             }
         }
     };

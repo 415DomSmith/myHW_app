@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   	get "/additional_info" => "statics#additional_info"
 
   	
-  	resources :documents, only: [:new, :show, :create, :update, :destroy] 
+  	# resources :documents, only: [:new, :show, :create, :update, :destroy] 
+    
+
+
     # get "/omniauth/:provider/callback" => 'sessions#create'
 
     
@@ -17,5 +20,6 @@ Rails.application.routes.draw do
     scope '/api' do
       resources :users, only: [:index, :show, :create, :update, :destroy]
       resources :schools, only: [:index]
+      resources :documents, only: [:new, :show, :create, :update, :destroy] 
     end
 end

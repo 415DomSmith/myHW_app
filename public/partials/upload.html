@@ -22,15 +22,14 @@
 
 <div ng-controller="LocalUploadController"><!-- Username
     <input type="text" ng-model="username"></br></br> -->
-    watching model:
-    <div class="button" ngf-select ng-model="file" ngf-multiple="false">Select File</div>
-    on file change multiple:
-    <div class="button" ngf-select="upload($files)" ngf-multiple="true">Select File</div>
+  
+    <div class="button" ngf-select ng-model="file" ngf-multiple="true">Select File</div>
+    
     Drop File:
     <div ngf-drop ngf-select ng-model="files" class="drop-box" 
         ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
-        accept="image/*,application/pdf" 
-        ngf-pattern="'image/*,application/pdf'">Drop files here or click to upload</div>
+        accept="application/pdf" 
+        ngf-pattern="'application/pdf'">Drop files here or click to upload</div>
     <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
     Files:
     <ul>

@@ -1,9 +1,10 @@
 class DocumentsController < ApplicationController
+
 	
-	def index
-		# @documents = Document.all
-		# render json: @documents, status: :ok
-	end
+  def index
+		@documents = Document.all
+		render json: @documents, status: :ok
+  end
 
 	def show
 		render json: @documents, status: :ok
@@ -14,7 +15,9 @@ class DocumentsController < ApplicationController
 	end
 
 	def create
-		@document = Document.new(document_params)
+		binding.pry
+
+    @document = Document.new(document_params)
 
     if @document.save
       render json: @documents, status: :created 
@@ -47,7 +50,9 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:attach_file_size, :attach_content_type,:attach_updated_at, :google_drive_url )
+      params.require(:document).permit(:attachment)
     end
+
+
 
 end

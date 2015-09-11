@@ -6,6 +6,6 @@ class Document < ActiveRecord::Base
 	has_many :assignments, through: :assignment_documents
 
 
-	has_attached_file :attach
-	validates_attachment_content_type :attach, content_type: { content_type: "application/pdf" }
+	has_attached_file :attachment
+	validates_attachment_content_type :attachment, :content_type => "application/pdf" 
 end
