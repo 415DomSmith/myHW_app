@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20150911185531) do
     t.boolean  "isTeacher",              default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "isFemale"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

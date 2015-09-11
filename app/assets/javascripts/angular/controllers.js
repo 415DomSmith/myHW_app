@@ -68,7 +68,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 $scope.upload = Upload.upload({
-                    url: 'localhost:3000/',
+                    url: 'localhost:3000/#/upload',
                     method: 'POST',
                     fields: { 'user[name]': $scope.name },
                     file: file,
