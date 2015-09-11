@@ -5,7 +5,8 @@ app.config(["$authProvider", function($authProvider) {
       // apiUrl: 'http://localhost:3000',
       authProviderPaths: {
       google_oauth2: '/auth/google_oauth2' // <-- note that this is different than what was set with github
-      }
+      },
+      omniauthWindowType:      'newWindow',
     });
   }]);
 
@@ -21,8 +22,12 @@ app.config(["$routeProvider", function ($routeProvider){
 		controller: 'HomeController'
 	})
 	.when('/login', {
-		templateUrl: 'partials/studentLogin.html',
-		controller: 'StudentLoginController'
+		templateUrl: 'partials/login.html',
+		controller: 'LoginController'
+	})
+	.when('/users/:id/additional_info', {
+		templateUrl: 'partials/additionalInfo.html',
+		controller: 'AdditionalInfoController'
 	})
 	.when('/upload', {
 		templateUrl: 'partials/upload.html',
@@ -30,3 +35,15 @@ app.config(["$routeProvider", function ($routeProvider){
 	})
 	.otherwise({ redirectTo: '/'})
 }]);
+
+
+//Redirect after Login
+app.run(['$rootScope', '$location', function($rootScope, $location) {
+
+}]);
+
+
+
+
+
+
