@@ -25,27 +25,59 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 	//Find schools to add to user
 	$scope.schools = School.query();
 
-	console.log($scope.schools)
-
 	$scope.submitAdditionalInfo = function(id) {
 		
 
 		// Check if they are student or teacher
 		if($scope.formData.teacher) {
 			$scope.user.isTeacher = true;
-		} else {
+		} else if ($scope.formData.student) {
 			$scope.user.isTeacher = false;
 		}
 
-		//Update the user with new information from formData
+		//Check if they are male or female
+		if($scope.formData.female) {
+			$scope.user.isFemale = true;
+		} else if ($scope.formData.male) {
+			$scope.user.isFemale = false;
+		}
 
-		console.log($scope.formData.school)
+		//Choose the school the teacher/student is a part of.
+		$scope.user.school = $scope.formData.school
 
-
+		// Update the user
 		$scope.user.$update({id: $routeParams.id}).then(function() {
-        	$location.path('/');
-      });
+        	$location.path('/users/' + $routeParams.id );
+      	});
 	};
+}]);
+
+// ==================================================
+// DASHBOARD (USER SHOW) CONTROLLER ==
+// ==================================================
+
+app.controller("DashboardController", ["$scope", "$location", "User", "$routeParams", "School", function ($scope, $location, User, $routeParams, School){
+	$scope.user = User.get({id: $routeParams.id});
+	$scope.toCoursesNew = function(){
+		$location.path("/courses/new")
+	}
+}]);
+
+// ==================================================
+// COURSES NEW CONTROLLER ==
+// ==================================================
+
+app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Course", function ($scope, $location, $rootScope, Course){
+	$scope.courses = "yeah"
+	$scope.createCourse = function(){
+		var course = $scope.courseData
+		course.teacherId = parseInt($rootScope.user_id);
+		var newCourse = new Course(course)
+		newCourse.$save().then(function(){
+			$location.path("/users/" + $rootScope.user_id)
+		})
+
+	}
 }]);
 
 // ==================================================
@@ -94,11 +126,33 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
 // ==================================================
 // GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ==
 // ==================================================
-app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", function ($scope, $location, $http, $rootScope){
+app.controller("GlobalController", ["$scope", "$location", "User","$rootScope", function ($scope, $location, User, $rootScope){
+	
+	//Listen for successful login and then redirect
 	$rootScope.$on('auth:login-success', function(ev, user) {
-		console.log(ev);
-		console.log(user);
-		$location.path("/users/" + user.id + "/additional_info");
+		// console.log(ev);
+		// console.log(user);
+
+		// Find the user in the database to check if they're new or already have an account
+		User.get({id: user.id})
+			.$promise.then(function(loggedInUser){
+	//Set user on rootScope for access everywhere
+				console.log($rootScope)
+				$rootScope.user_id = user.id
+				console.log($rootScope)
+				// If the user is new...
+				if(loggedInUser.isNewUser) {
+					$location.path("/users/" + user.id + "/additional_info");	
+					//Redirect additional info page
+				} else {
+				// If not, send them to their dashboard
+					$location.path("/users/" + user.id)
+					
+				}
+			})
+		
+		
+		
 	});
 
 	//TODO handle auth:login-failure gracefully
