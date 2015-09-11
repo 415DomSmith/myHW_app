@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :update, :destroy]
+	# before_action :authenticate_user!
 
 # CRUD on users
 
@@ -8,6 +9,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		# binding.pry
 		render json: @user, status: :ok   
 	end
 
@@ -17,6 +19,9 @@ class UsersController < ApplicationController
 
 	def update
 		# binding.pry
+		@school = School.find(params["school"])
+		@user.schools << @school
+		@user.isNewUser = false
 		if @user.update(user_params)
 		  render json: @user, status: :ok
 		else
@@ -36,6 +41,6 @@ private
 		end
 
 		def user_params
-		  params.permit(:isTeacher)
+		  params.permit(:isTeacher, :isFemale)
 		end
 end
