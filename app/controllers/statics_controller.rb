@@ -3,4 +3,9 @@ class StaticsController < ApplicationController
 
   def index
   end
+
+  def additional_info
+  	binding.pry
+  	
+  end
 end
