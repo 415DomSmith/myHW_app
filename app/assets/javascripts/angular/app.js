@@ -1,4 +1,4 @@
-var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth']);
+var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth', 'ngFileUpload']);
 
 app.config(["$authProvider", function($authProvider) {
     $authProvider.configure({
@@ -23,6 +23,10 @@ app.config(["$routeProvider", function ($routeProvider){
 	.when('/login', {
 		templateUrl: 'partials/studentLogin.html',
 		controller: 'StudentLoginController'
+	})
+	.when('/upload', {
+		templateUrl: 'partials/upload.html',
+		controller: 'LocalUploadController'
 	})
 	.otherwise({ redirectTo: '/'})
 }]);
