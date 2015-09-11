@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
 
   	root 'statics#index'
+  	get "/additional_info" => "statics#additional_info"
     # get "/omniauth/:provider/callback" => 'sessions#create'
 end

@@ -5,7 +5,8 @@ app.config(["$authProvider", function($authProvider) {
       // apiUrl: 'http://localhost:3000',
       authProviderPaths: {
       google_oauth2: '/auth/google_oauth2' // <-- note that this is different than what was set with github
-      }
+      },
+      omniauthWindowType:      'newWindow',
     });
   }]);
 
@@ -24,5 +25,21 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/login.html',
 		controller: 'LoginController'
 	})
+	.when('/users/:id/additional_info', {
+		templateUrl: 'partials/additionalInfo.html',
+		controller: 'AdditionalInfoController'
+	})
 	.otherwise({ redirectTo: '/'})
 }]);
+
+
+//Redirect after Login
+app.run(['$rootScope', '$location', function($rootScope, $location) {
+
+}]);
+
+
+
+
+
+
