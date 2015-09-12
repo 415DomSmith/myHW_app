@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   	get "/additional_info" => "statics#additional_info"
 
   	
-  	# resources :documents, only: [:new, :show, :create, :update, :destroy] 
     
 
 
@@ -21,7 +20,7 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show, :create, :update, :destroy]
       resources :schools, only: [:index]
 
-      resources :documents, only: [:new, :show, :create, :update, :destroy] 
+      resources :documents, only: [:new, :show, :create, :update, :destroy] #####TODO -- DOCUMENTS NEED TO BE NESTED UNDER USER#####
 
       resources :courses, only: [:create]
 

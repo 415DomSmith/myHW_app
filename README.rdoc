@@ -1,5 +1,54 @@
 == README
 
+Name: Dominic Smith and Parker Lewis
+Date: 9/8/15
+Description:
+A platform for students and teachers to interact digitally online. Teachers assign homework through our app or by posting electronic documents, either uploaded to our app or pulled down from google drive. Teachers can track and grade assignments, and maintain a classroom grade book for each student. Also, teachers and students will be able to chat via a Firebase/Angular chat feature.
+
+Technologies:
+- Rails for back-end
+- Paperclip for local file storage
+- Angular for front-end
+Twitter Bootstrap for reactivity
+Firebase or socket.io for chat
+
+
+APIs:
+Google drive api
+Google OAuth
+Stretch API's:
+Google calendar for custom class-room calendars
+aeries gradebook API integration
+
+Roadmap:
+
+By Monday (14th):
+Base / MVP features:
+oAuth / Google log-in only
+File upload with paperclip for local storage
+Google drive integration (get all of teachers docs)
+Score tracking / Grade books
+Students submit links to work or submit a form
+Students and teachers can see individual students grades
+
+By Monday (21th)
+Firebase chat
+Classroom Announcements 
+Some styling with nice animations
+ChartJs or D3 for classroom and individual student analytics (for teachers and students)
+
+By Monday(28th)
+Discussion boards for assignments and classrooms
+Google Calendar integration for scheduling assignments and classroom events
+Nice styling (jQuery dragging)
+
+
+Stretch Goals:
+Scheduled emails to students (and possibly parents)
+Classroom photo album
+Chat teacher for staff (only teachers of the same school)
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

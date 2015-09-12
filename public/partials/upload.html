@@ -20,10 +20,9 @@
     border: 5px dashed blue;
 }</style>
 
-<div ng-controller="LocalUploadController"><!-- Username
-    <input type="text" ng-model="username"></br></br> -->
+<div ng-controller="LocalUploadController">
   
-    <div class="button" ngf-select ng-model="file" ngf-multiple="true">Select File</div>
+    <div class="button" ngf-select ng-model="files" ngf-multiple="true">Select File</div>
     
     Drop File:
     <div ngf-drop ngf-select ng-model="files" class="drop-box" 
