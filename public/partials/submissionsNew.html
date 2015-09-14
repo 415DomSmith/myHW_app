@@ -1,0 +1,16 @@
+<form ng-submit="createSubmission()">
+	<label for="score">Score Points</label>
+	<input type="number" ng-model="submissionData.score" id="score">
+
+	<label for="max">Maximum Points Possible</label>
+	<input type="number" ng-model="submissionData.max" id="max">
+
+	<label for="answer">Answer</label>
+	<textarea id="answer" ng-model="submissionData.answer" cols="30" rows="10"></textarea>
+
+	<label for="submission_link">Your google drive link to answer</label>
+	<input type="text" ng-model="submissionData.submission_link" id="submission_link">
+
+	<input type="submit" value="Submit your answer">
+	
+</form>
