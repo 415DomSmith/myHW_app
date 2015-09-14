@@ -165,10 +165,33 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
 // ASSIGNMENTS SHOW CONTROLLER ==
 // ==================================================
 
-app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", function ($scope, $location, $rootScope, Assignment, $routeParams){
+app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Course", function ($scope, $location, $rootScope, Assignment, $routeParams, Course){
   
+      
+    $scope.assignment = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
+        console.log($scope.assignment)    
+    })
+    $scope.courseObj = Course.get({id: $routeParams.course_id}, function(){
+        $scope.course = $scope.courseObj.course
+    })
     
+}]);
 
+// ==================================================
+// SUBMISSIONS NEW CONTROLLER ==
+// ==================================================
+
+app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
+  $scope.createSubmission = function(){
+    console.log($scope.submissionData)
+    var submission = $scope.submissionData
+    var newSubmission = new Submission(submission)
+    console.log(submission)
+    newSubmission.$save({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function(){
+        $location.path("/users/" + $rootScope.user_id)
+    })
+  }
+    
 }]);
 
 // ==================================================

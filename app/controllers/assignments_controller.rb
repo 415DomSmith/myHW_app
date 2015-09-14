@@ -1,5 +1,5 @@
 class AssignmentsController < ApplicationController
-
+	before_action :set_assignment, only: [:show, :edit, :update, :destroy]
 	def create
 		
 		@course = Course.find(params["course_id"])
@@ -13,6 +13,12 @@ class AssignmentsController < ApplicationController
 		
 	end
 
+
+	def show
+		# binding.pry
+		render json: @assignment, status: :ok
+		
+	end
 
 private
 	def set_assignment

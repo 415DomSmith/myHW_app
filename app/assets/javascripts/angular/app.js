@@ -79,6 +79,12 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/assignmentsShow.html',
 		controller: 'AssignmentsShowController'
 	})
+
+	//Submission New Template
+	.when('/courses/:course_id/assignments/:assignment_id/submissions/new', {
+		templateUrl: 'partials/submissionsNew.html',
+		controller: 'SubmissionsNewController'
+	})
 	.otherwise({ redirectTo: '/'})
 }]);
 
