@@ -16,6 +16,15 @@ app.service('Course', ['$resource', function($resource) {
   );
 }]);
 
+// Resource for Course model
+app.service('Assignment', ['$resource', function($resource) {
+  return $resource(
+    "/api/courses/:course_id/assignments/:assignment_id.json",
+    {course_id: "@course_id", assignment_id: "@assignment_id"},
+    {update: {method: "PUT"}} 
+  );
+}]);
+
 // Resource for School model
 app.service('School', ['$resource', function($resource) {
   return $resource(

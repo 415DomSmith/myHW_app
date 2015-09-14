@@ -97,14 +97,19 @@ app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Cou
 // ==================================================
 
 app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Course", "$routeParams", function ($scope, $location, $rootScope, Course, $routeParams){
-    $scope.course = Course.get({id: $routeParams.id});
+    $scope.courseObj = Course.get({id: $routeParams.id}, function(){
+      $scope.course = $scope.courseObj.course;
+      $scope.assignments = $scope.courseObj.assignments  
+    });
+    // console.log($scope.courseObj)
+    
 }]);
 
 // ==================================================
 // COURSES EDIT CONTROLLER ==
 // ==================================================
 
-app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Course", "$routeParams", function ($scope, $location, $rootScope, Course, $routeParams){
+app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Course", "$routeParams","$rootScope", function ($scope, $location, $rootScope, Course, $routeParams, $rootScope){
     $scope.courseData = Course.get({id: $routeParams.id});
     $scope.updateCourse = function(){
         $scope.course = $scope.courseData;
@@ -112,14 +117,57 @@ app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Co
             $location.path('/courses/' + $routeParams.id);
         });
     };
+    $scope.deleteCourse = function() {
+        $scope.courseData.$delete({id: $routeParams.id}, function(){
+            $location.path("/users/" + $rootScope.user_id)
+        })
+    }
+
+
 }]);
 
 // ==================================================
 // ASSIGNMENTS NEW CONTROLLER ==
 // ==================================================
 
-app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", "Course", function ($scope, $location, $rootScope, Course){
+app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", function ($scope, $location, $rootScope, Assignment, $routeParams){
+    $scope.createAssignment = function(){
+        console.log($scope.assignmentData);
+        var assignment = $scope.assignmentData;
+        //Assign the correct category to the object before sending it off
+        if(assignment.category === "class_participation"){
+            assignment.class_participation = true;
+        } else if(assignment.category === "classwork"){
+            assignment.classwork = true;
+        } else if(assignment.category === "homework") {
+            assignment.homework = true;
+        } else if (assignment.category === "project") {
+            assignment.project = true;
+        } else if (assignment.category === "quiz") {
+            assignment.quiz = true;
+        } else if (assignment.category === "reading") {
+            assignment.reading = true;
+        } else if (assignment.category === "test") {
+            assignment.test = true;
+        } else if (assignment.category === "miscellaneous") {
+            assignment.miscellaneous = true;
+        }
 
+        var newAssignment = new Assignment(assignment)
+        newAssignment.$save({course_id: $routeParams.course_id}).then(function(){
+            $location.path("/courses/" + $routeParams.course_id)
+        })
+    };
+
+}]);
+
+// ==================================================
+// ASSIGNMENTS SHOW CONTROLLER ==
+// ==================================================
+
+app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", function ($scope, $location, $rootScope, Assignment, $routeParams){
+  
+    
 
 }]);
 
@@ -337,15 +385,17 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
                .$promise.then(function(loggedInUser){
 //Set user on rootScope for access everywhere
                        // console.log($rootScope)
-                       $rootScope.user_id = user.id
+                       $rootScope.user_id = loggedInUser.user.id
                        // console.log($rootScope)
                        // If the user is new...
-                       if(loggedInUser.isNewUser) {
-                           $location.path("/users/" + user.id + "/additional_info");       
+                       if(loggedInUser.user.isNewUser) {
+                               $location.path("/users/" + loggedInUser.user.id + "/additional_info");  
+                       } else if(loggedInUser.isNewUser) {
+                           $location.path("/users/" + loggedInUser.user.id + "/additional_info");       
                                //Redirect additional info page
                        } else {
                        // If not, send them to their dashboard
-                           $location.path("/users/" + user.id)
+                           $location.path("/users/" + loggedInUser.user.id)
                                
                        }
                })
