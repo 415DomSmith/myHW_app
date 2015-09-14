@@ -48,10 +48,15 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/dashboard.html',
 		controller: 'DashboardController'
 	})
-	//New Courses Template
+	//Courses New Template
 	.when('/courses/new', {
 		templateUrl: 'partials/coursesNew.html',
 		controller: 'CoursesNewController'
+	})
+	//Assignments New Template
+	.when('/assignments/new', {
+		templateUrl: 'partials/assignmentsNew.html',
+		controller: 'AssignmentsNewController'
 	})
 	.otherwise({ redirectTo: '/'})
 }]);

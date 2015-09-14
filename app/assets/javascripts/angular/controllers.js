@@ -49,6 +49,45 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 }]);
 
 // ==================================================
+<<<<<<< Updated upstream
+=======
+// DASHBOARD (USER SHOW) CONTROLLER ==
+// ==================================================
+
+app.controller("DashboardController", ["$scope", "$location", "User", "$routeParams", "School", function ($scope, $location, User, $routeParams, School){
+	$scope.user = User.get({id: $routeParams.id});
+	$scope.toCoursesNew = function(){
+		$location.path("/courses/new")
+	}
+}]);
+
+// ==================================================
+// COURSES NEW CONTROLLER ==
+// ==================================================
+
+app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Course", function ($scope, $location, $rootScope, Course){
+	$scope.createCourse = function(){
+		var course = $scope.courseData
+		course.teacherId = parseInt($rootScope.user_id);
+		var newCourse = new Course(course)
+		newCourse.$save().then(function(){
+			$location.path("/users/" + $rootScope.user_id)
+		})
+
+	}
+}]);
+
+// ==================================================
+// ASSIGNMENTS NEW CONTROLLER ==
+// ==================================================
+
+app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", "Course", function ($scope, $location, $rootScope, Course){
+
+
+}]);
+
+// ==================================================
+>>>>>>> Stashed changes
 // LOCAL UPLOAD (PAPERCLIP) FOR DOCUMENTS CONTROLLER=
 // ==================================================
 
