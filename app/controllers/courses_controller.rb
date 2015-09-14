@@ -2,7 +2,9 @@ class CoursesController < ApplicationController
 	before_action :set_course, only: [:show, :edit, :update, :destroy]
 	def show
 		# binding.pry
-		render json: @course, status: :ok
+		@assignments = @course.assignments
+
+		render json: {:course => @course, :assignments => @assignments}, status: :ok
 	end
 
 	def update

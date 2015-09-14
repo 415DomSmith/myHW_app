@@ -69,7 +69,7 @@ app.config(["$routeProvider", function ($routeProvider){
 		controller: 'CoursesEditController'
 	})
 	//Assignments New Template
-	.when('/assignments/new', {
+	.when('/courses/:course_id/assignments/new', {
 		templateUrl: 'partials/assignmentsNew.html',
 		controller: 'AssignmentsNewController'
 	})

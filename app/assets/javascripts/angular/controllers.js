@@ -97,7 +97,12 @@ app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Cou
 // ==================================================
 
 app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Course", "$routeParams", function ($scope, $location, $rootScope, Course, $routeParams){
-    $scope.course = Course.get({id: $routeParams.id});
+    $scope.courseObj = Course.get({id: $routeParams.id}, function(){
+      $scope.course = $scope.courseObj.course;
+      $scope.assignments = $scope.courseObj.assignments  
+    });
+    // console.log($scope.courseObj)
+    
 }]);
 
 // ==================================================
@@ -125,8 +130,34 @@ app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Co
 // ASSIGNMENTS NEW CONTROLLER ==
 // ==================================================
 
-app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", "Course", function ($scope, $location, $rootScope, Course){
+app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", function ($scope, $location, $rootScope, Assignment, $routeParams){
+    $scope.createAssignment = function(){
+        console.log($scope.assignmentData);
+        var assignment = $scope.assignmentData;
+        //Assign the correct category to the object before sending it off
+        if(assignment.category === "class_participation"){
+            assignment.class_participation = true;
+        } else if(assignment.category === "classwork"){
+            assignment.classwork = true;
+        } else if(assignment.category === "homework") {
+            assignment.homework = true;
+        } else if (assignment.category === "project") {
+            assignment.project = true;
+        } else if (assignment.category === "quiz") {
+            assignment.quiz = true;
+        } else if (assignment.category === "reading") {
+            assignment.reading = true;
+        } else if (assignment.category === "test") {
+            assignment.test = true;
+        } else if (assignment.category === "miscellaneous") {
+            assignment.miscellaneous = true;
+        }
 
+        var newAssignment = new Assignment(assignment)
+        newAssignment.$save({course_id: $routeParams.course_id}).then(function(){
+            $location.path("/courses/" + $routeParams.course_id)
+        })
+    };
 
 }]);
 
@@ -134,7 +165,7 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
 // LOCAL UPLOAD (PAPERCLIP) FOR DOCUMENTS CONTROLLER=
 // ==================================================
 
-app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootScope", "$routeParams", "$location", function ($scope, Upload, $timeout, $rootScope, $routeParams, $location) {
 //========== SETS A $WATCH ON UPLOAD DROP AND UPLOAD CLICK, CURRENTLY ONLY USING 'FILES' SCOPE VAR    
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
@@ -171,7 +202,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
         }
     };
     $scope.toFileLibrary = function() {
-        $location.path("/users/" + $rootScope.user_id + "/documentLibrary" );
+        $location.path("/users/" + $routeParams.id + "/documentLibrary" );
     };
 }]);
 
@@ -179,7 +210,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
 // DOCUMENT LIBRARY CONTROLLER ======================
 // ==================================================
 
-app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", function ($scope, $location, $http, $rootScope){
+app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", function ($scope, $location, $http, $rootScope, $routeParams){
 // ===== SENDS GET REQUEST TO DOCUMENT CONTROLLER ON BACKEND, RESPONSE IS LIST OF USERS DOCS   
     $scope.getUsersDocuments = function () {
         $http.get('/api/users/:user_id/documents').then(function (res) {
@@ -190,23 +221,23 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
             $scope.userDocs = "Sorry, an error occurred. Please try again.";
         });
     }();
-
+// === TO UPLOAD LOCAL FILES VIEW ===
     $scope.toNewUpload = function(){
-        $location.path("/users/" + $rootScope.user_id + "/upload");
+        $location.path("/users/" + $routeParams.id + "/upload");
     };
-
+// === TO SELECT GOOGLE FILES VIEW ===
     $scope.toGooglePicker = function(){
-        $location.path("/users/" + $rootScope.user_id + "/drivePicker");
+        $location.path("/users/" + $routeParams.id + "/drivePicker");
     };
 
 }]);
 
 
 // ==================================================
-// DOCUMENT LIBRARY CONTROLLER ======================
+// GOOGLE DRIVE CONTROLLER ======================
 // ==================================================
 
-app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootScope", function ($scope, $location, $http, $rootScope){
+app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", function ($scope, $location, $http, $rootScope, $routeParams){
     
     var clientId = '605204229077-4vs3h126rq01capco35b045nlf09vs36.apps.googleusercontent.com';
     var developerKey = 'AIzaSyBTEWsJ4aXdoOzB4ey81eX9-ja7HejL4Qc';
@@ -218,6 +249,7 @@ app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootS
     }();
 
     $scope.setupPicker = function () {
+        $scope.onApiLoad();
         var picker = new google.picker.PickerBuilder()
         .setOAuthToken(accessToken)
         .setDeveloperKey(developerKey)
@@ -237,7 +269,7 @@ app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootS
         }, handleAuthentication);
     }
 
-     function handleAuthentication(result) {
+    function handleAuthentication(result) {
         if(result && !result.error) {
             accessToken = result.access_token;
             $scope.setupPicker();
@@ -251,6 +283,7 @@ app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootS
             alert('goodbye');
         }
     }
+
 }]);
 
 
@@ -265,15 +298,17 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
                .$promise.then(function(loggedInUser){
 //Set user on rootScope for access everywhere
                        // console.log($rootScope)
-                       $rootScope.user_id = user.id
+                       $rootScope.user_id = loggedInUser.user.id
                        // console.log($rootScope)
                        // If the user is new...
                        if(loggedInUser.user.isNewUser) {
-                               $location.path("/users/" + user.id + "/additional_info");       
+                               $location.path("/users/" + loggedInUser.user.id + "/additional_info");  
+                       } else if(loggedInUser.isNewUser) {
+                           $location.path("/users/" + loggedInUser.user.id + "/additional_info");       
                                //Redirect additional info page
                        } else {
                        // If not, send them to their dashboard
-                               $location.path("/users/" + user.id)
+                           $location.path("/users/" + loggedInUser.user.id)
                                
                        }
                })
