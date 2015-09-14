@@ -43,11 +43,6 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/upload.html',
 		controller: 'LocalUploadController'
 	})
-	//Google Drive Upload
-	.when ('/users/:id/gDrive', {
-		templateUrl: 'partials/drivePicker.html',
-		controller: 'GoogleDriveController'
-	})
 	//Dashboard (user show)
 	.when('/users/:id', {
 		templateUrl: 'partials/dashboard.html',

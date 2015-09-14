@@ -220,7 +220,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootS
 // DOCUMENT LIBRARY CONTROLLER ======================
 // ==================================================
 
-app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", function ($scope, $location, $http, $rootScope, $routeParams){
+app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", "Document", function ($scope, $location, $http, $rootScope, $routeParams, Document){
 // ===== SENDS GET REQUEST TO DOCUMENT CONTROLLER ON BACKEND, RESPONSE IS LIST OF USERS DOCS   
     $scope.getUsersDocuments = function () {
         $http.get('/api/users/:user_id/documents').then(function (res) {
@@ -239,7 +239,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
     $scope.toGooglePicker = function(){
         $location.path("/users/" + $routeParams.id + "/gDrive");
     };
-
+//========TODO -- MOVE API KEYS==============
     var clientId = '605204229077-4vs3h126rq01capco35b045nlf09vs36.apps.googleusercontent.com';
     var developerKey = 'AIzaSyD_QG50mpCMVrp0m5oMHY2UHL62G2Qj0-I';
     var clientSecret = 'H71cfMHC9ejDfp9c4S-bOEsC';
@@ -275,7 +275,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
         }
     }
 
-    // Create and render a Picker object for picking user Photos.
+    // Create and render a Picker object for picking user files.
     function createPicker() {
         if (pickerApiLoaded && oauthToken) {
             var picker = new google.picker.PickerBuilder()
@@ -288,91 +288,42 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
             picker.setVisible(true);
         }
     }
-    // A simple callback implementation.
+    // callback implementation to post to back-end.
     function pickerCallback(data) {
-        var url = 'nothing';
+        var url, description, gId, fileType, name, parentId;
         if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
             var doc = data[google.picker.Response.DOCUMENTS][0];
-            url = doc[google.picker.Document.URL];
+            url = data.docs[0].url;
+            description = data.docs[0].url;
+            gId = data.docs[0].id;
+            fileType = data.docs[0].mimeType;
+            name = data.docs[0].name;
+            parentId = data.docs[0].parentId;
+
+            var file = {
+                google_drive_id: gId,
+                description: description,
+                google_drive_url: url,
+                file_type: fileType,
+                google_doc_name: name,
+                drive_parent_id: parentId,
+            };
+
+            var newDriveFile = new Document(file);
+                newDriveFile.$save().then(function(){
+                    console.log("File Saved Locally");
+                    $scope.getUsersDocuments();
+            });
+            // console.log(data.docs[0]);
+
+
         }
-        var message = 'You picked: ' + url;
-        console.log(data.docs);
+        var message = 'You picked: ' + fileType;
+       
         document.getElementById('result').innerHTML = message;
     }
 
 }]);
-
-
-// ==================================================
-// GOOGLE DRIVE CONTROLLER ======================
-// ==================================================
-
-app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", function ($scope, $location, $http, $rootScope, $routeParams){
-    $scope.testing = "THIS IS FROM THE CONTROLLER";
-    console.log = "FROM THE CONTROLLER";
-    
-    // var clientId = '605204229077-4vs3h126rq01capco35b045nlf09vs36.apps.googleusercontent.com';
-    // var developerKey = 'AIzaSyD_QG50mpCMVrp0m5oMHY2UHL62G2Qj0-I';
-    // var clientSecret = 'H71cfMHC9ejDfp9c4S-bOEsC';
-    // var oauthToken;
-    // var pickerApiLoaded = false;
-    // var scope = ['https://www.googleapis.com/auth/drive.file'];
-
-    // $scope.onApiLoad = function () {
-    //     gapi.load('auth', {'callback': onAuthApiLoad});
-    //     gapi.load('picker', {'callback': onPickerApiLoad});
-    // };
-
-    // $scope.onApiLoad();
-    
-    // function onAuthApiLoad() {
-    //     window.gapi.auth.authorize(
-    //         {
-    //           'client_id': clientId,
-    //           'scope': scope,
-    //           'immediate': false
-    //         },
-    //         handleAuthResult);
-    // }
-
-    // function onPickerApiLoad() {
-    //     pickerApiLoaded = true;
-    //     createPicker();
-    // }
-
-    // function handleAuthResult(authResult) {
-    //     if (authResult && !authResult.error) {
-    //       oauthToken = authResult.access_token;
-    //       createPicker();
-    //     }
-    // }
-
-    // // Create and render a Picker object for picking user Photos.
-    // function createPicker() {
-    //     if (pickerApiLoaded && oauthToken) {
-    //         var picker = new google.picker.PickerBuilder()
-    //         .setOAuthToken(oauthToken)
-    //         .setDeveloperKey(developerKey)
-    //         .addView(new google.picker.DocsView())
-    //         .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
-    //         .setCallback(pickerCallback)
-    //         .build();
-    //         picker.setVisible(true);
-    //     }
-    // }
-    // // A simple callback implementation.
-    // function pickerCallback(data) {
-    //     var url = 'nothing';
-    //     if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
-    //         var doc = data[google.picker.Response.DOCUMENTS][0];
-    //         url = doc[google.picker.Document.URL];
-    //     }
-    //     var message = 'You picked: ' + url;
-    //     document.getElementById('result').innerHTML = message;
-    // }
-
-}]);
-
 
 
 // ==================================================

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914200911) do
+ActiveRecord::Schema.define(version: 20150914221646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,12 @@ ActiveRecord::Schema.define(version: 20150914200911) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.text     "description"
+    t.string   "google_drive_Id"
+    t.string   "file_type"
+    t.string   "google_doc_name"
+    t.string   "drive_parent_id"
+    t.boolean  "isDriveDoc"
   end
 
   create_table "school_users", force: :cascade do |t|
