@@ -127,7 +127,7 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
 // LOCAL UPLOAD (PAPERCLIP) FOR DOCUMENTS CONTROLLER=
 // ==================================================
 
-app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootScope", "$routeParams", "$location", function ($scope, Upload, $timeout, $rootScope, $routeParams, $location) {
 //========== SETS A $WATCH ON UPLOAD DROP AND UPLOAD CLICK, CURRENTLY ONLY USING 'FILES' SCOPE VAR    
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
@@ -164,7 +164,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
         }
     };
     $scope.toFileLibrary = function() {
-        $location.path("/users/" + $rootScope.user_id + "/documentLibrary" );
+        $location.path("/users/" + $routeParams.id + "/documentLibrary" );
     };
 }]);
 
@@ -172,7 +172,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
 // DOCUMENT LIBRARY CONTROLLER ======================
 // ==================================================
 
-app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", function ($scope, $location, $http, $rootScope){
+app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", function ($scope, $location, $http, $rootScope, $routeParams){
 // ===== SENDS GET REQUEST TO DOCUMENT CONTROLLER ON BACKEND, RESPONSE IS LIST OF USERS DOCS   
     $scope.getUsersDocuments = function () {
         $http.get('/api/users/:user_id/documents').then(function (res) {
@@ -183,23 +183,23 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
             $scope.userDocs = "Sorry, an error occurred. Please try again.";
         });
     }();
-
+// === TO UPLOAD LOCAL FILES VIEW ===
     $scope.toNewUpload = function(){
-        $location.path("/users/" + $rootScope.user_id + "/upload");
+        $location.path("/users/" + $routeParams.id + "/upload");
     };
-
+// === TO SELECT GOOGLE FILES VIEW ===
     $scope.toGooglePicker = function(){
-        $location.path("/users/" + $rootScope.user_id + "/drivePicker");
+        $location.path("/users/" + $routeParams.id + "/drivePicker");
     };
 
 }]);
 
 
 // ==================================================
-// DOCUMENT LIBRARY CONTROLLER ======================
+// GOOGLE DRIVE CONTROLLER ======================
 // ==================================================
 
-app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootScope", function ($scope, $location, $http, $rootScope){
+app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", function ($scope, $location, $http, $rootScope, $routeParams){
     
     var clientId = '605204229077-4vs3h126rq01capco35b045nlf09vs36.apps.googleusercontent.com';
     var developerKey = 'AIzaSyBTEWsJ4aXdoOzB4ey81eX9-ja7HejL4Qc';
@@ -211,6 +211,7 @@ app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootS
     }();
 
     $scope.setupPicker = function () {
+        $scope.onApiLoad();
         var picker = new google.picker.PickerBuilder()
         .setOAuthToken(accessToken)
         .setDeveloperKey(developerKey)
@@ -230,7 +231,7 @@ app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootS
         }, handleAuthentication);
     }
 
-     function handleAuthentication(result) {
+    function handleAuthentication(result) {
         if(result && !result.error) {
             accessToken = result.access_token;
             $scope.setupPicker();
@@ -244,6 +245,7 @@ app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootS
             alert('goodbye');
         }
     }
+
 }]);
 
 
@@ -262,11 +264,11 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
                        // console.log($rootScope)
                        // If the user is new...
                        if(loggedInUser.isNewUser) {
-                               $location.path("/users/" + user.id + "/additional_info");       
+                           $location.path("/users/" + user.id + "/additional_info");       
                                //Redirect additional info page
                        } else {
                        // If not, send them to their dashboard
-                               $location.path("/users/" + user.id)
+                           $location.path("/users/" + user.id)
                                
                        }
                })

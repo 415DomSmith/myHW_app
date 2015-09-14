@@ -11,20 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911220949) do
+ActiveRecord::Schema.define(version: 20150914200911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "assignment_courses", force: :cascade do |t|
-    t.integer  "assignment_id"
-    t.integer  "course_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "assignment_courses", ["assignment_id"], name: "index_assignment_courses_on_assignment_id", using: :btree
-  add_index "assignment_courses", ["course_id"], name: "index_assignment_courses_on_course_id", using: :btree
 
   create_table "assignment_documents", force: :cascade do |t|
     t.integer  "assignment_id"
@@ -50,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150911220949) do
     t.boolean  "reading"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "course_id"
   end
 
   create_table "course_schools", force: :cascade do |t|
@@ -163,8 +154,6 @@ ActiveRecord::Schema.define(version: 20150911220949) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
-  add_foreign_key "assignment_courses", "assignments"
-  add_foreign_key "assignment_courses", "courses"
   add_foreign_key "assignment_documents", "assignments"
   add_foreign_key "assignment_documents", "documents"
   add_foreign_key "course_schools", "courses"
