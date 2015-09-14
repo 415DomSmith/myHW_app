@@ -49,7 +49,7 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 
 		$scope.user.$update({id: $routeParams.id}).then(function() {
         	$location.path('/users/' + $routeParams.id);
-      });
+        });
 	};
 }]);
 
@@ -58,7 +58,15 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 // ==================================================
 
 app.controller("DashboardController", ["$scope", "$location", "User", "$routeParams", "School", function ($scope, $location, User, $routeParams, School){
-	$scope.user = User.get({id: $routeParams.id});
+	// $scope.courses = {}
+    // $scope.user = {}
+    $scope.userObj = User.get({id: $routeParams.id}, function(){
+        $scope.courses = $scope.userObj.courses
+        $scope.user = $scope.userObj.user
+        console.log($scope.user)
+    });
+    // $scope.user = "blah"
+    console.log($scope.courses)
 	$scope.toCoursesNew = function(){
 		$location.path("/courses/new");
 	};
@@ -72,15 +80,38 @@ app.controller("DashboardController", ["$scope", "$location", "User", "$routePar
 // ==================================================
 
 app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Course", function ($scope, $location, $rootScope, Course){
-	$scope.createCourse = function(){
-		var course = $scope.courseData;
-		course.teacherId = parseInt($rootScope.user_id);
-		var newCourse = new Course(course);
-		newCourse.$save().then(function(){
-			$location.path("/users/" + $rootScope.user_id);
-		});
 
-	};
+    $scope.createCourse = function(){
+        var course = $scope.courseData
+        course.teacherId = parseInt($rootScope.user_id);
+        var newCourse = new Course(course)
+        newCourse.$save().then(function(){
+            $location.path("/users/" + $rootScope.user_id)
+        })
+
+    }
+}]);
+
+// ==================================================
+// COURSES SHOW CONTROLLER ==
+// ==================================================
+
+app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Course", "$routeParams", function ($scope, $location, $rootScope, Course, $routeParams){
+    $scope.course = Course.get({id: $routeParams.id});
+}]);
+
+// ==================================================
+// COURSES EDIT CONTROLLER ==
+// ==================================================
+
+app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Course", "$routeParams", function ($scope, $location, $rootScope, Course, $routeParams){
+    $scope.courseData = Course.get({id: $routeParams.id});
+    $scope.updateCourse = function(){
+        $scope.course = $scope.courseData;
+        $scope.course.$update({id: $routeParams.id}).then(function() {
+            $location.path('/courses/' + $routeParams.id);
+        });
+    };
 }]);
 
 // ==================================================
@@ -220,11 +251,25 @@ app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootS
 // ==================================================
 // GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ==
 // ==================================================
-app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", function ($scope, $location, $http, $rootScope){
+app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User", function ($scope, $location, $http, $rootScope, User){
 	$rootScope.$on('auth:login-success', function(ev, user) {
-		console.log(ev);
-		console.log(user);
-		$location.path("/users/" + user.id + "/additional_info");
+              // Find the user in the database to check if they're new or already have an account
+       User.get({id: user.id})
+               .$promise.then(function(loggedInUser){
+//Set user on rootScope for access everywhere
+                       // console.log($rootScope)
+                       $rootScope.user_id = user.id
+                       // console.log($rootScope)
+                       // If the user is new...
+                       if(loggedInUser.isNewUser) {
+                               $location.path("/users/" + user.id + "/additional_info");       
+                               //Redirect additional info page
+                       } else {
+                       // If not, send them to their dashboard
+                               $location.path("/users/" + user.id)
+                               
+                       }
+               })
 	});
 
 	//TODO handle auth:login-failure gracefully
