@@ -33,24 +33,27 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 		// Check if they are student or teacher
 		if($scope.formData.teacher) {
 			$scope.user.isTeacher = true;
-		} else {
+		} else if ($scope.formData.student){
 			$scope.user.isTeacher = false;
 		}
 
-		//Update the user with new information from formData
+        //Check if they are male or female
+        if($scope.formData.female) {
+            $scope.user.isFemale = true;
+        } else if ($scope.formData.male) {
+            $scope.user.isFemale = false;
+        }
 
-		console.log($scope.formData.school)
-
+		// Choose the school the teacher/student is a part of.
+        $scope.user.school = $scope.formData.school
 
 		$scope.user.$update({id: $routeParams.id}).then(function() {
-        	$location.path('/');
+        	$location.path('/users/' + $routeParams.id);
       });
 	};
 }]);
 
 // ==================================================
-<<<<<<< Updated upstream
-=======
 // DASHBOARD (USER SHOW) CONTROLLER ==
 // ==================================================
 
@@ -87,7 +90,6 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
 }]);
 
 // ==================================================
->>>>>>> Stashed changes
 // LOCAL UPLOAD (PAPERCLIP) FOR DOCUMENTS CONTROLLER=
 // ==================================================
 
