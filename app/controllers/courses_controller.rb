@@ -1,19 +1,15 @@
 class CoursesController < ApplicationController
-	# def create
-	#   @contact = Contact.new(contact_params)
-
-	#   if @contact.save
-	#     render json: @contact, status: :created
-	#   else
-	#     render json: @contact.errors, status: :unprocessable_entity
-	#   end
-	# end
-
+	
 	def create
+		# Make a new instance of a course
 		@course = Course.new(course_params)
+
+		# Set teacher, add it to user's courses, put it into a school
 		@course.teacherId = current_user.id
 		current_user.courses << @course
-		binding.pry
+		@course.schools << current_user.schools[0]
+
+		# Save the course
 		if @course.save
 		  render json: @course, status: :created
 		else
