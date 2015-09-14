@@ -250,7 +250,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise_token_auth
   dotenv-rails
-  google-api-client (= 0.9.pre2)
+  google-api-client
   jbuilder (~> 2.0)
   jquery-rails
   json

@@ -1,0 +1,28 @@
+<style>.button {
+    -moz-appearance: button;
+    /* Firefox */
+    -webkit-appearance: button;
+    /* Safari and Chrome */
+    padding: 10px;
+    margin: 10px;
+    width: 70px;
+    text-align: center;
+  }
+</style>
+
+<a href="/#/upload"><div class = "button">New Upload</div></a>
+
+<h1>DOCUMENT LIBRARY</h1>
+
+<h4>TODO - Get google drive docs. </h4>
+<h4>TODO - Display users google drive docs. </h4>
+<h4>TODO - Render document in new tab, window, or overlaying element.</h4>
+<h4>TODO - Build icons for files.</h4>
+<h4>TODO - Make icons sortable / build persistent file structure. </h4>
+<h4>TODO - Make it pretty.</h4>
+
+
+<div>
+	<li ng-repeat="doc in userDocs"><a  href="{{doc.local_file_url}}">{{doc.attachment_file_name}}</a></li>
+
+</div>

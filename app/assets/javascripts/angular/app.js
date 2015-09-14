@@ -33,6 +33,11 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/additionalInfo.html',
 		controller: 'AdditionalInfoController'
 	})
+	//Document Library
+	.when('/users/:id/documentLibrary', {
+		templateUrl: 'partials/documentLibrary.html',
+		controller: 'DocumentLibraryController'
+	})
 	//Upload
 	.when('/upload', {
 		templateUrl: 'partials/upload.html',

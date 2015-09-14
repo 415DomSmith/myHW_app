@@ -53,7 +53,7 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 // ==================================================
 
 app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
-//========== SETS A WATCH ON UPLOAD DROP AND UPLOAD CLICK, CURRENTLY ONLY USING 'FILES' SCOPE VAR    
+//========== SETS A $WATCH ON UPLOAD DROP AND UPLOAD CLICK, CURRENTLY ONLY USING 'FILES' SCOPE VAR    
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });
@@ -70,7 +70,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
               var file = files[i];
               if (!file.$error) { //TODO -- .$ERROR IS TRIGGERING ERRORS IN THE CONSOLE (not breaking anything). MAKE THE RED GO AWAY.
                 Upload.upload({
-                    url: 'http://localhost:3000/api/documents',
+                    url: 'http://localhost:3000/api/users/:user_id/documents',
                     method: 'POST',
                     fields: {},
                     file: file,
@@ -90,6 +90,25 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
     };
 }]);
 
+// ==================================================
+// DOCUMENT LIBRARY CONTROLLER ======================
+// ==================================================
+
+app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", function ($scope, $location, $http, $rootScope){
+// ===== SENDS GET REQUEST TO DOCUMENT CONTROLLER ON BACKEND, RESPONSE IS LIST OF USERS DOCS   
+    $scope.getUsersDocuments = function () {
+        $http.get('/api/users/:user_id/documents').then(function (res) {
+            $scope.userDocs = res.data;
+            console.log($scope.userDocs);
+        }, function (res) {
+            console.log (res);
+            $scope.userDocs = "Sorry, an error occurred. Please try again.";
+        });
+    }();
+}]);
+
+
+
 
 // ==================================================
 // GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ==
@@ -103,3 +122,12 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
 
 	//TODO handle auth:login-failure gracefully
 }]);
+
+
+
+
+
+// Link local uploads to logged in user
+// Display local files in users file library
+// Get google drive docs
+// Display users google drive docs 

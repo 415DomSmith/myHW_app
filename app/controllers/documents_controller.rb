@@ -2,11 +2,12 @@ class DocumentsController < ApplicationController
 
 	
   def index
-		@documents = Document.all
+		@documents = current_user.documents #### ONLY GETTING CURRENT USERS DOCUMENTS ###
 		render json: @documents, status: :ok
   end
 
-	def show
+	def show ### NOT SURE WE NEED SHOW ###
+    @documents = current_user.documents
 		render json: @documents, status: :ok
 	end
 
@@ -15,18 +16,18 @@ class DocumentsController < ApplicationController
 	end
 
 	def create
-		binding.pry
+		# binding.pry
 
     @document = Document.new(document_params)
-
+    @document.user_id = current_user.id ### SETTING OWNERSHIP OF CREATED DOC TO CURRENT USER ###
     if @document.save
-      render json: @documents, status: :created 
+      render json: @documents, status: :created ### TODO - SEND BACK AND DISPLAY AN 'UPLOAD COMPLETED' MSG ###
     else
       render json: @document.errors, status: :unprocessable_entity 
     end
 	end
 
-	def update
+	def update ### NOT SURE HOW UPDATE WILL WORK ###
     if @document.update(document_params)
       render json: @document, status: :ok
     else
@@ -34,7 +35,7 @@ class DocumentsController < ApplicationController
     end
 	end
 
-  def destroy
+  def destroy ### TODO - FIGURE OUT DESTROY FOR PAPECLIP FILES... AND GOOGLE DRIVE FILES... SEPARATELY ###
     @document.destroy
     respond_to do |format|
       format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }

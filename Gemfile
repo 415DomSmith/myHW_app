@@ -18,7 +18,6 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'devise_token_auth'
 
 
-
 # Gems for google authentication
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
@@ -41,7 +40,7 @@ gem 'paperclip', '~> 4.3'
 #replaces defult rails server
 gem 'puma'
 #for google API, not sure what 0.9.pre2 is
-gem 'google-api-client', '0.9.pre2'
+gem 'google-api-client' #, '0.9.pre2'
 
 #brings in bootstrap
 gem 'bootstrap-sass'
