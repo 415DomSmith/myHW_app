@@ -1,3 +1,4 @@
+
 <style>.button {
     -moz-appearance: button;
     /* Firefox */
@@ -10,7 +11,8 @@
   }
 </style>
 
-<a href="/#/upload"><div class = "button">New Upload</div></a>
+<div ng-click = "toNewUpload()" class = "button">Upload a New File</div>
+<div ng-click= "toGooglePicker()" class= "button"> Add Google Drive Files </div>
 
 <h1>DOCUMENT LIBRARY</h1>
 
@@ -24,5 +26,5 @@
 
 <div>
 	<li ng-repeat="doc in userDocs"><a  href="{{doc.local_file_url}}">{{doc.attachment_file_name}}</a></li>
-
 </div>
+

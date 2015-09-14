@@ -60,8 +60,11 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 app.controller("DashboardController", ["$scope", "$location", "User", "$routeParams", "School", function ($scope, $location, User, $routeParams, School){
 	$scope.user = User.get({id: $routeParams.id});
 	$scope.toCoursesNew = function(){
-		$location.path("/courses/new")
-	}
+		$location.path("/courses/new");
+	};
+    $scope.toFileLibrary = function() {
+        $location.path("/users/" + $routeParams.id + "/documentLibrary" );
+    };
 }]);
 
 // ==================================================
@@ -70,14 +73,14 @@ app.controller("DashboardController", ["$scope", "$location", "User", "$routePar
 
 app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Course", function ($scope, $location, $rootScope, Course){
 	$scope.createCourse = function(){
-		var course = $scope.courseData
+		var course = $scope.courseData;
 		course.teacherId = parseInt($rootScope.user_id);
-		var newCourse = new Course(course)
+		var newCourse = new Course(course);
 		newCourse.$save().then(function(){
-			$location.path("/users/" + $rootScope.user_id)
-		})
+			$location.path("/users/" + $rootScope.user_id);
+		});
 
-	}
+	};
 }]);
 
 // ==================================================
@@ -129,6 +132,9 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', functio
             }
         }
     };
+    $scope.toFileLibrary = function() {
+        $location.path("/users/" + $rootScope.user_id + "/documentLibrary" );
+    };
 }]);
 
 // ==================================================
@@ -147,10 +153,44 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
         });
     }();
 
-    function onApiLoad() {
+    $scope.toNewUpload = function(){
+        $location.path("/users/" + $rootScope.user_id + "/upload");
+    };
+
+    $scope.toGooglePicker = function(){
+        $location.path("/users/" + $rootScope.user_id + "/drivePicker");
+    };
+
+}]);
+
+
+// ==================================================
+// DOCUMENT LIBRARY CONTROLLER ======================
+// ==================================================
+
+app.controller("GoogleDriveController", ["$scope", "$location", "$http", "$rootScope", function ($scope, $location, $http, $rootScope){
+    
+    var clientId = '605204229077-4vs3h126rq01capco35b045nlf09vs36.apps.googleusercontent.com';
+    var developerKey = 'AIzaSyBTEWsJ4aXdoOzB4ey81eX9-ja7HejL4Qc';
+    var accessToken;
+
+    $scope.onApiLoad = function () {
         gapi.load('auth', authenticateWithGoogle);
         gapi.load('picker');
-    }
+    }();
+
+    $scope.setupPicker = function () {
+        var picker = new google.picker.PickerBuilder()
+        .setOAuthToken(accessToken)
+        .setDeveloperKey(developerKey)
+        .addView(new google.picker.DocsUploadView())
+        .addView(new google.picker.DocsView())
+        .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+        .enableFeature(google.picker.Feature.NAV_HIDDEN)
+        .setCallback(pickerCallback)
+        .build();
+        picker.setVisible(true);
+    };
 
     function authenticateWithGoogle() {
         window.gapi.auth.authorize({
@@ -162,25 +202,18 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
      function handleAuthentication(result) {
         if(result && !result.error) {
             accessToken = result.access_token;
-            setupPicker();
+            $scope.setupPicker();
         }
     }
 
-    function setupPicker() {
-        var picker = new google.picker.PickerBuilder()
-        .setOAuthToken(accessToken)
-        .setDeveloperKey(developerKey)
-        .addView(new google.picker.DocsUploadView())
-        .addView(new google.picker.DocsView())
-        .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
-        .enableFeature(google.picker.Feature.NAV_HIDDEN)
-        .setCallback(pickerCallback)
-        .build();
-        picker.setVisible(true);
+    function pickerCallback(data) {
+        if (data.action == google.picker.Action.PICKED) {
+            alert('URL:' + data.docs[0].url);
+        } else if (data.action == google.picker.Action.CANCEL) {
+            alert('goodbye');
+        }
     }
-
 }]);
-
 
 
 

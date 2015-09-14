@@ -39,9 +39,14 @@ app.config(["$routeProvider", function ($routeProvider){
 		controller: 'DocumentLibraryController'
 	})
 	//Upload
-	.when('/upload', {
+	.when('/users/:id/upload', {
 		templateUrl: 'partials/upload.html',
 		controller: 'LocalUploadController'
+	})
+	//Google Drive Upload
+	.when ('/users/:id/drivePicker', {
+		templateUrl: 'partials/drivePicker.html',
+		controler: 'GoogleDriveController'
 	})
 	//Dashboard (user show)
 	.when('/users/:id', {
