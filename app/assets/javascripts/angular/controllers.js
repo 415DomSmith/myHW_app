@@ -104,7 +104,7 @@ app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Co
 // COURSES EDIT CONTROLLER ==
 // ==================================================
 
-app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Course", "$routeParams", function ($scope, $location, $rootScope, Course, $routeParams){
+app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Course", "$routeParams","$rootScope", function ($scope, $location, $rootScope, Course, $routeParams, $rootScope){
     $scope.courseData = Course.get({id: $routeParams.id});
     $scope.updateCourse = function(){
         $scope.course = $scope.courseData;
@@ -112,6 +112,13 @@ app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Co
             $location.path('/courses/' + $routeParams.id);
         });
     };
+    $scope.deleteCourse = function() {
+        $scope.courseData.$delete({id: $routeParams.id}, function(){
+            $location.path("/users/" + $rootScope.user_id)
+        })
+    }
+
+
 }]);
 
 // ==================================================
@@ -261,7 +268,7 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
                        $rootScope.user_id = user.id
                        // console.log($rootScope)
                        // If the user is new...
-                       if(loggedInUser.isNewUser) {
+                       if(loggedInUser.user.isNewUser) {
                                $location.path("/users/" + user.id + "/additional_info");       
                                //Redirect additional info page
                        } else {

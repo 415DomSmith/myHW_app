@@ -32,6 +32,13 @@ class CoursesController < ApplicationController
 		end
 	end
 
+	def destroy
+		# binding.pry
+		@course.destroy
+		render json: @course, status: :ok
+		
+	end
+
 private
 
 	def course_params

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     scope '/api' do
       resources :schools, only: [:index]
 
-      resources :courses, only: [:create, :show,:update]
+      resources :courses, only: [:create, :show, :update, :destroy]
 
       resources :users, only: [:index, :show, :create, :update, :destroy] do
         resources :documents, only: [:index, :new, :show, :create, :update, :destroy], shallow: true
