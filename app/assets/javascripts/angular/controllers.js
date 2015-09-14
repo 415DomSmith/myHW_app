@@ -105,6 +105,39 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
             $scope.userDocs = "Sorry, an error occurred. Please try again.";
         });
     }();
+
+    function onApiLoad() {
+        gapi.load('auth', authenticateWithGoogle);
+        gapi.load('picker');
+    }
+
+    function authenticateWithGoogle() {
+        window.gapi.auth.authorize({
+            'client_id': clientId,
+            'scope': ['https://www.googleapis.com/auth/drive']
+        }, handleAuthentication);
+    }
+
+     function handleAuthentication(result) {
+        if(result && !result.error) {
+            accessToken = result.access_token;
+            setupPicker();
+        }
+    }
+
+    function setupPicker() {
+        var picker = new google.picker.PickerBuilder()
+        .setOAuthToken(accessToken)
+        .setDeveloperKey(developerKey)
+        .addView(new google.picker.DocsUploadView())
+        .addView(new google.picker.DocsView())
+        .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+        .enableFeature(google.picker.Feature.NAV_HIDDEN)
+        .setCallback(pickerCallback)
+        .build();
+        picker.setVisible(true);
+    }
+
 }]);
 
 
