@@ -63,7 +63,7 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/coursesShow.html',
 		controller: 'CoursesShowController'
 	})
-	//Courses Show Template
+	//Courses Edit Template
 	.when('/courses/:id/edit', {
 		templateUrl: 'partials/coursesEdit.html',
 		controller: 'CoursesEditController'
@@ -72,6 +72,12 @@ app.config(["$routeProvider", function ($routeProvider){
 	.when('/courses/:course_id/assignments/new', {
 		templateUrl: 'partials/assignmentsNew.html',
 		controller: 'AssignmentsNewController'
+	})
+
+	//Assignments Show Template
+	.when('/courses/:course_id/assignments/:assignment_id', {
+		templateUrl: 'partials/assignmentsShow.html',
+		controller: 'AssignmentsShowController'
 	})
 	.otherwise({ redirectTo: '/'})
 }]);

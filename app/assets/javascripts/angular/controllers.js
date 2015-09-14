@@ -162,6 +162,16 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
 }]);
 
 // ==================================================
+// ASSIGNMENTS SHOW CONTROLLER ==
+// ==================================================
+
+app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", function ($scope, $location, $rootScope, Assignment, $routeParams){
+  
+    
+
+}]);
+
+// ==================================================
 // LOCAL UPLOAD (PAPERCLIP) FOR DOCUMENTS CONTROLLER=
 // ==================================================
 
