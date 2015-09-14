@@ -53,6 +53,16 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/coursesNew.html',
 		controller: 'CoursesNewController'
 	})
+	//Courses Show Template
+	.when('/courses/:id', {
+		templateUrl: 'partials/coursesShow.html',
+		controller: 'CoursesShowController'
+	})
+	//Courses Show Template
+	.when('/courses/:id/edit', {
+		templateUrl: 'partials/coursesEdit.html',
+		controller: 'CoursesEditController'
+	})
 	//Assignments New Template
 	.when('/assignments/new', {
 		templateUrl: 'partials/assignmentsNew.html',

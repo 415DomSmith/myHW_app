@@ -9,8 +9,12 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		@courses = @user.courses
 		# binding.pry
-		render json: @user, status: :ok   
+		render json: {
+						:user => @user,
+						:courses => @courses
+					}, status: :ok   
 	end
 
 	# def create

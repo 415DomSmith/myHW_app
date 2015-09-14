@@ -1,2 +1,9 @@
 <button ng-click="toCoursesNew()">Creat a new course Page</button>
 {{user}}
+{{courses}}
+
+<div ng-repeat="course in courses">
+	<a ng-href="/#/courses/{{course.id}}">{{course.name}}</a>
+	
+
+</div>
