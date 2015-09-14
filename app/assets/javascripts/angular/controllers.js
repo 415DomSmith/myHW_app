@@ -358,7 +358,7 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
        User.get({id: user.id})
                .$promise.then(function(loggedInUser){
 //Set user on rootScope for access everywhere
-                       // console.log($rootScope)
+                       console.log($rootScope)
                        $rootScope.user_id = loggedInUser.user.id
                        // console.log($rootScope)
                        // If the user is new...
@@ -374,7 +374,15 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
                        }
                })
 	});
+    
+    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+        console.log(current);
+        if (!$rootScope.user_id) {
+            $location.url("/login/");
+        }
+        
 
+    });
 	//TODO handle auth:login-failure gracefully
 }]);
 

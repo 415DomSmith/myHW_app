@@ -43,9 +43,9 @@ app.service('School', ['$resource', function($resource) {
 }]);
 
 // Resource for Documents model
-app.service('Document', ['$resource', function ($resource) {
+app.service('Document', ['$resource', '$rootScope', function ($resource, $rootScope) {
   return $resource(
     "/api/users/:user_id/documents",
-    {user_id: "@id"}
+    {user_id: $rootScope.user_id }
   );
 }]);
