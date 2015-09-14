@@ -12,7 +12,8 @@
 </style>
 
 <div ng-click = "toNewUpload()" class = "button">Upload a New File</div>
-<div ng-click= "toGooglePicker()" class= "button"> Add Google Drive Files </div>
+<div ng-click= "onApiLoad()" class= "button"> Add A File From Your Google Drive </div>
+<div id="result"></div>
 
 <h1>DOCUMENT LIBRARY</h1>
 
@@ -27,4 +28,6 @@
 <div>
 	<li ng-repeat="doc in userDocs"><a  href="{{doc.local_file_url}}">{{doc.attachment_file_name}}</a></li>
 </div>
+
+
 
