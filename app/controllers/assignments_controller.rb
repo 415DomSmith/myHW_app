@@ -1,9 +1,20 @@
 class AssignmentsController < ApplicationController
 	before_action :set_assignment, only: [:show, :edit, :update, :destroy]
+	
 	def create
 		
 		@course = Course.find(params["course_id"])
 		@assignment = @course.assignments.new(assignment_params)
+	
+
+		params["documents"].each do |key, value|
+			binding.pry
+			if value != false
+				@document = Document.find(value)
+				@assignment.documents << @document
+			end
+		end	
+		
 		# binding.pry
 		if @assignment.save
 		  render json: @assignment, status: :created

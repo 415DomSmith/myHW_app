@@ -23,11 +23,13 @@
 	
 	<div> Select Files to Add to the Assignment
 		<div ng-repeat="doc in userDocs">
-			<input type="checkbox" name="file" value="{{doc.id}}"> {{doc.attachment_file_name}}{{doc.google_doc_name}}		
+			<input type="checkbox" ng-model="assignmentData.documents[doc.id]" ng-true-value="{{doc.id}}" name="{{doc.id}}"> {{doc.attachment_file_name}}{{doc.google_doc_name}}		
 		</div>
 
 	<input type="submit" value="Create an Assignment">
 	</div>
 </form>
 
-<p>TODO - Build a scrollable DIV to hold all of the assignments. Maybe put assignment and select box in to table.</p>
+
+{{assignmentData}}
+<p>TODO - Build a scrollable DIV to hold all of the documents. Maybe put assignment and select box in to table.</p>

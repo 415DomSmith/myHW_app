@@ -134,8 +134,15 @@ app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Co
 
 
 app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Document", function ($scope, $location, $rootScope, Assignment, $routeParams, Document){
+//Get users documents to be attached to an assignment    
+    $scope.getUsersDocuments = Document.query(function(){
+        $scope.userDocs = $scope.getUsersDocuments;
+        console.log($scope.userDocs);
+    });
+    $scope.assignmentData = {}
+    $scope.assignmentData.documents = {};
     $scope.createAssignment = function(){
-        // console.log($scope.assignmentData);
+        // console.log($scope.assignmentData);   
         var assignment = $scope.assignmentData;
         //Assign the correct category to the object before sending it off
         if(assignment.category === "class_participation"){
@@ -156,16 +163,14 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
             assignment.miscellaneous = true;
         }
 
+        console.log(assignment.documents);
+
         var newAssignment = new Assignment(assignment);
         newAssignment.$save({course_id: $routeParams.course_id}).then(function(){
             $location.path("/courses/" + $routeParams.course_id);
         });
     };
 
-     $scope.getUsersDocuments = Document.query(function(){
-        $scope.userDocs = $scope.getUsersDocuments;
-        console.log($scope.userDocs);
-    });
      
 }]);
 

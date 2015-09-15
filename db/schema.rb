@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150915165804) do
 
   create_table "assignments", force: :cascade do |t|
     t.string   "title"
-    t.datetime "due_date"
+    t.date     "due_date"
     t.text     "description"
     t.boolean  "homework"
     t.boolean  "classwork"
