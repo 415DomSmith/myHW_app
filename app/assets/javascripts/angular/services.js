@@ -42,6 +42,7 @@ app.service('School', ['$resource', function($resource) {
   );
 }]);
 
+
 // Resource for Documents model
 app.service('Document', ['$resource', '$rootScope', function ($resource, $rootScope) {
   return $resource(

@@ -6,10 +6,10 @@ class DocumentsController < ApplicationController
 		render json: @documents, status: :ok
   end
 
-	def show ### NOT SURE WE NEED SHOW ###
-    @documents = current_user.documents
-		render json: @documents, status: :ok
-	end
+	# def show ### NOT SURE WE NEED SHOW ###
+ #    @documents = current_user.documents
+	# 	render json: @documents, status: :ok
+	# end
 
 	def new
 		@document = Document.new

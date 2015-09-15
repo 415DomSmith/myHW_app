@@ -7,3 +7,11 @@ class Assignment < ActiveRecord::Base
 
 	has_many :submissions
 end
+
+
+##TODO - Teachers can assign homework to a class. 
+
+## Match students to a course
+## Teachers can attach a document to an asssignment
+## Go through each user in a course and put the assignment ID in the student.assignments 
+## 

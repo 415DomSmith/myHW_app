@@ -17,6 +17,15 @@
 		<option value="miscellaneous">Miscellaneous</option>
 	</select>
 
-	<input type="submit" value="Create an Assignment">
+	
+	
+	<div> Select Files to Add to the Assignment
+		<div ng-repeat="doc in userDocs">
+			<input type="checkbox" name="file" value="{{doc.id}}"> {{doc.attachment_file_name}}{{doc.google_doc_name}}		
+		</div>
 
+	<input type="submit" value="Create an Assignment">
+	</div>
 </form>
+
+<p>TODO - Build a scrollable DIV to hold all of the assignments. Maybe put assignment and select box in to table.</p>

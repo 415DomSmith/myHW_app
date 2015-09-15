@@ -97,9 +97,10 @@ app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Cou
 // ==================================================
 
 app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Course", "$routeParams", function ($scope, $location, $rootScope, Course, $routeParams){
+    //Getting course and assignment back from active record
     $scope.courseObj = Course.get({id: $routeParams.id}, function(){
       $scope.course = $scope.courseObj.course;
-      $scope.assignments = $scope.courseObj.assignments  
+      $scope.assignments = $scope.courseObj.assignments;  
     });
     // console.log($scope.courseObj)
     
@@ -127,12 +128,12 @@ app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Co
 }]);
 
 // ==================================================
-// ASSIGNMENTS NEW CONTROLLER ==
+// ASSIGNMENTS NEW CONTROLLER ======================
 // ==================================================
 
-app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", function ($scope, $location, $rootScope, Assignment, $routeParams){
+app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Document", function ($scope, $location, $rootScope, Assignment, $routeParams, Document){
     $scope.createAssignment = function(){
-        console.log($scope.assignmentData);
+        // console.log($scope.assignmentData);
         var assignment = $scope.assignmentData;
         //Assign the correct category to the object before sending it off
         if(assignment.category === "class_participation"){
@@ -153,12 +154,17 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
             assignment.miscellaneous = true;
         }
 
-        var newAssignment = new Assignment(assignment)
+        var newAssignment = new Assignment(assignment);
         newAssignment.$save({course_id: $routeParams.course_id}).then(function(){
-            $location.path("/courses/" + $routeParams.course_id)
-        })
+            $location.path("/courses/" + $routeParams.course_id);
+        });
     };
 
+     $scope.getUsersDocuments = Document.query(function(){
+        $scope.userDocs = $scope.getUsersDocuments;
+        console.log($scope.userDocs);
+    });
+     
 }]);
 
 // ==================================================
@@ -209,7 +215,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootS
         }
     });
     $scope.log = '';
-//======================= .UPLOAD BROUGHT IN FROM NG-FILE-UPLOAD || FIELDS {} CURRENTLY EMPTY BUT CAN BE USED TO PASS DATA IN THE FUTURE (FILE CREATOR?)
+//======================= .UPLOAD BROUGHT IN FROM NG-FILE-UPLOAD | FIELDS {} CURRENTLY EMPTY BUT CAN BE USED TO PASS DATA IN THE FUTURE (FILE CREATOR?)
     $scope.upload = function (files) {
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
@@ -245,6 +251,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootS
 
 app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", "Document", function ($scope, $location, $http, $rootScope, $routeParams, Document){
 // ===== SENDS GET REQUEST TO DOCUMENT CONTROLLER ON BACKEND, RESPONSE IS LIST OF USERS DOCS   
+   
     $scope.getUsersDocuments = function () {
         $http.get('/api/users/:user_id/documents').then(function (res) {
             $scope.userDocs = res.data;
@@ -305,7 +312,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
             .setOAuthToken(oauthToken)
             .setDeveloperKey(developerKey)
             .addView(new google.picker.DocsView())
-            .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+            // .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
             .setCallback(pickerCallback)
             .build();
             picker.setVisible(true);
@@ -341,6 +348,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
 
 
         }
+//TODO - BUILD A WIDGET OR SOMETHING TO NOTIFY USER WHAT FILE WAS BROUGHT IN AND IF IT WAS SUCCESSFUL
         var message = 'You picked: ' + fileType;
        
         document.getElementById('result').innerHTML = message;

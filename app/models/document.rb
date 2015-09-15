@@ -13,6 +13,7 @@ class Document < ActiveRecord::Base
 ### FORMATS THE JSON FROM OUR BACK END TO ALLOW PAPERCLIPS URL PROPERTY TO BE ADDED AND SENT TO OUR ANGULAR FRONT-END. MORE JSON KEY's CAN BE CREATED / ADDED IF NEED BE. ###
 	def as_json (options={})
 		{
+		 id: self.id,	
 		 user_id:  self.user_id, 
 		 local_file_url: self.attachment.url,
 		 attachment_file_name: self.attachment_file_name, 
