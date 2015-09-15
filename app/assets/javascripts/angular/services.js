@@ -28,7 +28,7 @@ app.service('Assignment', ['$resource', function($resource) {
 // Resource for Submission model
 app.service('Submission', ['$resource', function($resource) {
   return $resource(
-    "/api/courses/:course_id/assignments/:assignment_id/submissions/:submission:id.json",
+    "/api/courses/:course_id/assignments/:assignment_id/submissions/:submission_id:id.json",
     {course_id: "@course_id", assignment_id: "@assignment_id", submission_id: "@submission_id"},
     {update: {method: "PUT"}} 
   );

@@ -63,7 +63,8 @@ app.controller("DashboardController", ["$scope", "$location", "User", "$routePar
     $scope.userObj = User.get({id: $routeParams.id}, function(){
         $scope.courses = $scope.userObj.courses
         $scope.user = $scope.userObj.user
-        console.log($scope.user)
+        $scope.submissions = $scope.userObj.submissions
+        // console.log($scope.user)
     });
     // $scope.user = "blah"
     console.log($scope.courses)
@@ -237,6 +238,54 @@ app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", 
     })
   }
     
+}]);
+
+// ==================================================
+// SUBMISSIONS NEW CONTROLLER ==
+// ==================================================
+
+app.controller("SubmissionsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
+
+    $scope.submission = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id})
+
+    $scope.deleteSubmission = function(){
+        $scope.submission.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}, function(){
+            $location.path("/users/" + $rootScope.user_id)
+        })
+    }
+
+}]);
+
+// ==================================================
+// SUBMISSIONS EDIT (FOR STUDENTS) CONTROLLER ==
+// ==================================================
+
+app.controller("SubmissionsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
+
+    $scope.submissionData = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id})
+    $scope.updateSubmission = function() {
+        var submission = $scope.submissionData
+        submission.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}).then(function(){
+            $location.path("/users/" + $rootScope.user_id)
+        })
+    }
+
+}]);
+
+// ==================================================
+// SUBMISSIONS SCORE (FOR TEACHERS) CONTROLLER ==
+// ==================================================
+
+app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
+    $scope.submissionData = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id})
+    $scope.scoreSubmission = function() {
+        var submission = $scope.submissionData
+        submission.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}).then(function(){
+            $location.path("/users/" + $rootScope.user_id)
+        })
+    }
+
+
 }]);
 
 // ==================================================

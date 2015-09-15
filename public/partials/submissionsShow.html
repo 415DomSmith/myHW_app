@@ -1,0 +1,15 @@
+<h1>Submission Show Page</h1>
+
+{{submission}}
+
+<a ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}/edit">Edit this submission</a>
+
+
+<br>
+<br>
+<a ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}/score">Score this submission</a>
+
+<br>
+<br>
+
+<a ng-click="deleteSubmission()">Delete this submission</a>
