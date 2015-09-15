@@ -75,6 +75,12 @@ app.config(["$routeProvider", function ($routeProvider){
 		controller: 'AssignmentsShowController'
 	})
 
+	//Assignments Edit Template
+	.when('/courses/:course_id/assignments/:assignment_id/edit', {
+		templateUrl: 'partials/assignmentsEdit.html',
+		controller: 'AssignmentsEditController'
+	})
+
 	//Submission New Template
 	.when('/courses/:course_id/assignments/:assignment_id/submissions/new', {
 		templateUrl: 'partials/submissionsNew.html',
