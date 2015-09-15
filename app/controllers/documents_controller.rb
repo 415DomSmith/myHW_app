@@ -51,7 +51,7 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:attachment)
+      params.require(:document).permit(:attachment, :description, :drive_parent_id, :file_type, :google_doc_name, :google_drive_id, :google_drive_url)
     end
 
 

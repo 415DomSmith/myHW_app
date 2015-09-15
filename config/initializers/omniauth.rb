@@ -1,8 +1,8 @@
 options = {
-  scope: ['email','profile','https://www.googleapis.com/auth/drive'],
-  approval_prompt:"force",
-  access_type:'offline',
-  prompt:'consent'
+  scope: ['email','profile','https://www.googleapis.com/auth/drive']
+  # approval_prompt:"force",
+  # access_type:'offline',
+  # prompt:'consent'
 }
 
 

@@ -7,12 +7,25 @@ class Document < ActiveRecord::Base
 
 #### PAPERCLIP STUFF #####
 	has_attached_file :attachment
-	validates_attachment_content_type :attachment, :content_type => "application/pdf" 
+	validates_attachment_content_type :attachment, :content_type => "application/pdf", :default_url => 
 ### TODO- ADD MORE ACCEPTED FILE TYPES ###	
 
 ### FORMATS THE JSON FROM OUR BACK END TO ALLOW PAPERCLIPS URL PROPERTY TO BE ADDED AND SENT TO OUR ANGULAR FRONT-END. MORE JSON KEY's CAN BE CREATED / ADDED IF NEED BE. ###
 	def as_json (options={})
-		{local_file_url: self.attachment.url,  google_drive_url: self.google_drive_url, user_id:  self.user_id, attachment_file_name: self.attachment_file_name, attachment_content_type: self.attachment_content_type, attachment_file_size: self.attachment_file_size, attachment_updated_at: self.attachment_updated_at }
+		{
+		 user_id:  self.user_id, 
+		 local_file_url: self.attachment.url,
+		 attachment_file_name: self.attachment_file_name, 
+		 attachment_content_type: self.attachment_content_type, 
+		 attachment_file_size: self.attachment_file_size, 
+		 attachment_updated_at: self.attachment_updated_at,
+		 google_drive_url: self.google_drive_url,
+		 google_drive_Id: self.google_drive_Id,
+		 google_doc_name: self.google_doc_name,
+		 drive_parent_id: self.drive_parent_id,
+		 file_type: self.file_type,
+		 description: self.description 
+		}
 	end
 
 
