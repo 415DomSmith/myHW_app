@@ -2,6 +2,8 @@ class SubmissionsController < ApplicationController
 	def create
 		@assignment = Assignment.find(params["assignment_id"])
 		@submission = @assignment.submissions.new(submission_params)
+		current_user.submissions << @submission
+
 		binding.pry
 		if @submission.save
 		  render json: @submission, status: :created

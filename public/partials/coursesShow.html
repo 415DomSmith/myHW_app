@@ -1,4 +1,4 @@
-
+<h1>Courses Show Page</h1>
 <!-- {{course}} <-->
 
 <a ng-href="/#/courses/{{course.id}}/edit">Update course</a>
@@ -6,6 +6,7 @@
 
 <!-- {{assignments}} -->
 
+<h3>Assignments for this course</h3>
 <div ng-repeat="assignment in assignments">
 	<a ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}">{{assignment.title}}</a>
 </div>

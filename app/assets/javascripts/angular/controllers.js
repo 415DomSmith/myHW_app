@@ -131,6 +131,7 @@ app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Co
 // ASSIGNMENTS NEW CONTROLLER ======================
 // ==================================================
 
+
 app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Document", function ($scope, $location, $rootScope, Assignment, $routeParams, Document){
     $scope.createAssignment = function(){
         // console.log($scope.assignmentData);
@@ -181,6 +182,49 @@ app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope",
         $scope.course = $scope.courseObj.course
     })
     
+}]);
+
+// ==================================================
+// ASSIGNMENTS EDIT CONTROLLER ==
+// ==================================================
+// TODO: Look up how to refactor new and edits so code is DRYer
+app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Course", function ($scope, $location, $rootScope, Assignment, $routeParams, Course){
+      
+    // $scope.courseData = Course.get({id: $routeParams.id});
+    $scope.assignmentData = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id})
+
+    $scope.updateAssignment = function(){
+        console.log($scope.assignmentData);
+        var assignment = $scope.assignmentData;
+        //Assign the correct category to the object before sending it off
+        if(assignment.category === "class_participation"){
+            assignment.class_participation = true;
+        } else if(assignment.category === "classwork"){
+            assignment.classwork = true;
+        } else if(assignment.category === "homework") {
+            assignment.homework = true;
+        } else if (assignment.category === "project") {
+            assignment.project = true;
+        } else if (assignment.category === "quiz") {
+            assignment.quiz = true;
+        } else if (assignment.category === "reading") {
+            assignment.reading = true;
+        } else if (assignment.category === "test") {
+            assignment.test = true;
+        } else if (assignment.category === "miscellaneous") {
+            assignment.miscellaneous = true;
+        }
+
+        assignment.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function() {
+            $location.path('/courses/' + $routeParams.course_id) + "/assignments/" + $routeParams.assignment_id;
+        });
+    };
+
+    $scope.deleteAssignment = function(){
+        $scope.assignmentData.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
+            $location.path("/users/" + $rootScope.user_id)
+        })
+    }
 }]);
 
 // ==================================================

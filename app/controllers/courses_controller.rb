@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
 	end
 
 	def update
-		binding.pry
+		# binding.pry
 		if @course.update(course_params)
 		  render json: @course, status: :ok
 		else
