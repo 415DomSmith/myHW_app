@@ -7,7 +7,7 @@ class Document < ActiveRecord::Base
 
 #### PAPERCLIP STUFF #####
 	has_attached_file :attachment
-	validates_attachment_content_type :attachment, :content_type => "application/pdf", :default_url => 
+	validates_attachment_content_type :attachment, :content_type => "application/pdf", :default_url => ""
 ### TODO- ADD MORE ACCEPTED FILE TYPES ###	
 
 ### FORMATS THE JSON FROM OUR BACK END TO ALLOW PAPERCLIPS URL PROPERTY TO BE ADDED AND SENT TO OUR ANGULAR FRONT-END. MORE JSON KEY's CAN BE CREATED / ADDED IF NEED BE. ###
