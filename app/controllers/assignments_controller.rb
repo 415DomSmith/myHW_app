@@ -20,6 +20,19 @@ class AssignmentsController < ApplicationController
 		
 	end
 
+	def update
+		if @assignment.update(assignment_params)
+			render json: @assignment, status: :ok
+		else
+			render json: @assignment.errors, status: :unprocessable_entity
+		end
+	end
+
+	def destroy
+		@assignment.destroy
+		render json: @assignment, status: :ok
+	end
+
 private
 	def set_assignment
 		@assignment = Assignment.find(params["id"])

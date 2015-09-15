@@ -1,10 +1,16 @@
+<h1>Dashboard</h1>
+
 <button ng-click="toCoursesNew()">Creat a new course Page</button>
 <button ng-click="toFileLibrary()">View Your File Library</button>
 {{user}}
 {{courses}}
 
+<h3>Courses</h3>
 <div ng-repeat="course in courses">
 	<a ng-href="/#/courses/{{course.id}}">{{course.name}}</a>
 	
 
 </div>
+
+
+

@@ -1,6 +1,6 @@
-<h1>New Assignments Page</h1>
+{{hello}}
 
-<form ng-submit="createAssignment()" >
+<form ng-submit="updateAssignment()" >
 	<label for="title">Title</label>
 	<input type="text" ng-model="assignmentData.title" id="title">
 	<label for="description">Description</label>
@@ -22,3 +22,5 @@
 	<input type="submit" value="Create an Assignment">
 
 </form>
+
+<a ng-click="deleteAssignment()">Delete this Assignment</a>
