@@ -1,0 +1,12 @@
+<h1>Student Edit Submission Page</h1>
+
+<form ng-submit="updateSubmission()">
+	<label for="answer">Answer</label>
+	<textarea id="answer" ng-model="submissionData.answer" cols="30" rows="10"></textarea>
+
+	<label for="submission_link">Your google drive link to answer</label>
+	<input type="text" ng-model="submissionData.submission_link" id="submission_link">
+
+	<input type="submit" value="Edit your submission">
+	
+</form>

@@ -2,12 +2,19 @@
 
 <button ng-click="toCoursesNew()">Creat a new course Page</button>
 <button ng-click="toFileLibrary()">View Your File Library</button>
-{{user}}
-{{courses}}
+<!-- {{user}}
+{{courses}} -->
 
 <h3>Courses</h3>
 <div ng-repeat="course in courses">
 	<a ng-href="/#/courses/{{course.id}}">{{course.name}}</a>
+
+</div>
+
+<h3>Submissions</h3>
+
+<div ng-repeat = "submission in submissions">
+	<a ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}">Submission: {{submission.id}} for Course {{submission.course_id}}</a>
 	
 
 </div>

@@ -86,6 +86,24 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/submissionsNew.html',
 		controller: 'SubmissionsNewController'
 	})
+
+	//Submission Show Template
+	.when('/courses/:course_id/assignments/:assignment_id/submissions/:submission_id', {
+		templateUrl: 'partials/submissionsShow.html',
+		controller: 'SubmissionsShowController'
+	})
+
+	//Submission Edit (for students) Template
+	.when('/courses/:course_id/assignments/:assignment_id/submissions/:submission_id/edit', {
+		templateUrl: 'partials/submissionsEdit.html',
+		controller: 'SubmissionsEditController'
+	})
+
+	//Submission Score (for teachers) Template
+	.when('/courses/:course_id/assignments/:assignment_id/submissions/:submission_id/score', {
+		templateUrl: 'partials/submissionsScore.html',
+		controller: 'SubmissionsScoreController'
+	})
 	.otherwise({ redirectTo: '/'})
 }]);
 
