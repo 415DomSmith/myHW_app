@@ -514,17 +514,16 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
     });
 
 
-    //Loggin someone out
+    //Logging someone out
 
     $scope.logout = function() {
-        console.log("hello")
         $auth.signOut()
-        .then(function(res) {
-            console.log("goodbye")
-        })
-        .catch(function(res) {
-            console.log("ldasjkd")
-        })
+        // .then(function(res) {
+        //     console.log("goodbye")
+        // })
+        // .catch(function(res) {
+        //     console.log("ldasjkd")
+        // })
     }
 
     $rootScope.$on("auth:logout-success", function(ev, user) {
