@@ -513,6 +513,9 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
         }
     });
 
+    $scope.dashboard = function() {
+      $location.path("/users/" + $rootScope.user_id)
+    }
 
     //Logging someone out
 

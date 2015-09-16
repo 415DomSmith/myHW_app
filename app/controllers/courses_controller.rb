@@ -46,7 +46,7 @@ class CoursesController < ApplicationController
 		@course.teacherId = current_user.id
 		current_user.courses << @course
 		@course.schools << current_user.schools[0]
-		binding.pry
+		# binding.pry
 		# Save the course
 		if @course.save
 		  render json: @course, status: :created

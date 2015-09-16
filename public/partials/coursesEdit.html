@@ -1,35 +1,35 @@
-<h1>Edit courses page</h1>
-
-<form ng-submit="updateCourse()">
-	<label for="name">Name of Course</label>
-	<input type="text" id="name" ng-model="courseData.name">
-	
-	<br>
-	<br>
-
-	<label for="subject">Subject</label>
-	<input type="text" id="subject" ng-model="courseData.subject">
-	
-	<br>
-	<br>
-
-	<div ng-repeat="student in students">
-		<label for="{{student.id}}">
-		    <input type="checkbox" ng-model="courseData.ids[student.id]" name="students" id="{{student.id}}" ng-true-value="{{student.id}}"/>{{courseData.ids[student.id]}}, {{student.id}} 
-		    {{student.name}}
-		</label>
+<div class="col-md-6">
+	<div class="box box-primary">
 		
+			<h1>Edit {{courseData.name}}</h1>
+			<p>Students will see changes to the name and subject of the course.</p>
+		</div>
+		<form ng-submit="updateCourse()">
+			<label for="name">Period, Block, or Name of Course</label>
+			<input class="form-control" type="text" id="name" ng-model="courseData.name">
+		<br>
+			<label  for="subject">Subject</label>
+			<input class="form-control" type="text" id="subject" ng-model="courseData.subject">
+		<br>
+		<br>
+		<div class="box-footer">
+			<div class="box-header">
+				Students in the course:
+			</div>	
+			<div ng-repeat="student in students">
+			<label for="{{student.id}}">
+			    <input type="checkbox" ng-model="courseData.ids[student.id]" name="students" id="{{student.id}}" ng-true-value="{{student.id}}"/>{{courseData.ids[student.id]}}, {{student.id}} 
+			    {{student.name}}
+			</label>
+		</div>	
 	</div>
+		<input type="submit" class="btn btn-lg btn-info" value="Create New Course">
+		</form>
+		<a class="btn btn-lg btn-info" ng-click="deleteCourse()">Delete course</a>
+</div>
 
-	<br>
-	<br>
-	
-	<input type="submit" value="Create New Course">
-	
 
-</form>
 
 <!-- {{students}} -->
 
 
-<a ng-click="deleteCourse()">Delete course</a>

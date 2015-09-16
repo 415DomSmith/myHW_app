@@ -14,6 +14,11 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'less-rails', '~> 2.7.0'
+gem 'therubyracer'
+
+gem 'adminlte2-rails'
+gem 'less-rails-bootstrap'
 #Devise gem for authentication
 gem 'devise_token_auth'
 

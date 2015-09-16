@@ -1,15 +1,6 @@
 
-<style> .button {
-    -moz-appearance: button;
-    /* Firefox */
-    -webkit-appearance: button;
-    /* Safari and Chrome */
-    padding: 10px;
-    margin: 10px;
-    width: 70px;
-    text-align: center;
-}
-.drop-box {
+<style> 
+.drop-in-box {
     background: #F8F8F8;
     border: 5px dashed #DDD;
     width: 200px;
@@ -18,17 +9,17 @@
     padding-top: 25px;
     margin: 10px;
 }
-.dragover {
+.dragover-here {
     border: 5px dashed blue;
 }</style>
 
 <div ng-controller="LocalUploadController">
   
-    <div class="button" ngf-select ng-model="files" ngf-multiple="true">Select File</div>
+    <div class="btn btn-lg btn-info" ngf-select ng-model="files" ngf-multiple="true">Select File</div>
     
     Drop File:
-    <div ngf-drop ngf-select ng-model="files" class="drop-box" 
-        ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+    <div ngf-drop ngf-select ng-model="files" class="drop-in-box" 
+        ngf-drag-over-class="dragover-here" ngf-multiple="true" ngf-allow-dir="true"
         accept="application/pdf" 
         ngf-pattern="'application/pdf'">Drop files here or click to upload</div>
     <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
@@ -42,4 +33,4 @@
 </div>
 
 
- <div class="button" ng-click= "toFileLibrary()">Document Library</div>
+ <div class="btn btn-lg btn-info" ng-click= "toFileLibrary()">Document Library</div>

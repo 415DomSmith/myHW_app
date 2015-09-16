@@ -1,14 +1,19 @@
-<h1>New Courses Page</h1>
-<form ng-submit="createCourse()">
-	<label for="name">Name of Course</label>
-	<input type="text" id="name" ng-model="courseData.name">
-<br>
-	<label for="subject">Subject</label>
-	<input type="text" id="subject" ng-model="courseData.subject">
-	<br>
-	<br>
-	
-	<input type="submit" value="Create New Course">
-	
 
-</form>
+<div class="col-md-6">
+	<div class="box box-primary">
+		<div class="box-header">
+			<h1>Create a New Course</h1>
+			<p>Students will see the name and subject of the course created.</p>
+		</div>
+		<form ng-submit="createCourse()">
+			<label for="name">Period, Block, or Name of Course</label>
+			<input class="form-control" type="text" id="name" ng-model="courseData.name">
+		<br>
+			<label  for="subject">Subject</label>
+			<input class="form-control" type="text" id="subject" ng-model="courseData.subject">
+		<br>
+		<br>
+			<input type="submit" class="btn btn-lg btn-info" value="Create New Course">
+		</form>
+	</div>
+</div>

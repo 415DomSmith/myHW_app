@@ -2,15 +2,101 @@
 <html>
 <head>
   <title>MyHWApp</title>
+  <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
   <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 </head>
-<body ng-app="myHWApp" ng-controller="GlobalController">
-<h1 ng-click="logout()">Logout</h1>
-	<div ng-view></div>
+<body ng-app="myHWApp" ng-controller="GlobalController" class="skin-blue">
+<!-- header logo: style can be found in header.less -->
+  <header class="header">
+    <a href="" class="logo">
+<!-- Add the class icon to your logo image or logo icon to add the margining -->
+     	my_HW
+    </a>
+<!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+<!-- Sidebar toggle button-->
+      
+      <div class="navbar-right">
+        <ul class="nav navbar-nav">
+<!-- Messages: style can be found in dropdown.less-->
+          <li class="dropdown messages-menu">
+            <a href="" ng-click="logout()" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-sign-out pointer"></i> Sign Out
+            </a>
+          </li>
+<!-- Notifications: style can be found in dropdown.less -->
+          <li class="dropdown notifications-menu">
+            <a href="" ng-click="dashboard()" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-tachometer"></i> Dashboard
+            </a>
+ 					</li>
+<!-- Tasks: style can be found in dropdown.less -->
+          <li class="dropdown tasks-menu">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-tasks"></i>
+            </a>
+      		</li> <!--END TASKS -->
+<!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              <i class=""></i>
+              <span>USER NAME <i class="caret"></i></span>
+            </a>
+            <ul class="dropdown-menu">
+          <!-- User image -->
+              <li class="user-header bg-light-blue">
+                <img src="" class="img-circle" alt="User Image" />
+                <p> Jane Doe - Web Developer</p>
+              </li>
+        	<!-- Menu Body -->
+              <li class="user-body">
+                <div class="col-xs-4 text-center">
+                  <a href="">Followers</a>
+                </div>
+                <div class="col-xs-4 text-center">
+                  <a href="">Sales</a>
+                </div>
+                <div class="col-xs-4 text-center">
+                  <a href="">Friends</a>
+                </div>
+              </li>
+          <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="" class="btn btn-default btn-flat">Profile</a>
+                </div>
+              	<div class="pull-right">
+                  <a href="" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="wrapper row-offcanvas row-offcanvas-left">
+<!-- Left side column. contains the logo and sidebar -->
+
+
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">                
+        <!-- Main content -->
+    	<section class="content">
+       
+				<div ng-view></div>
+			</section><!-- /.content -->
+    </aside><!-- /.right-side -->
+</div><!-- ./wrapper -->
+
+
+
+
 
 </body>
 </html>
