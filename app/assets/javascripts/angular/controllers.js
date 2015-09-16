@@ -473,7 +473,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
 // ==================================================
 // GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ==
 // ==================================================
-app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User", function ($scope, $location, $http, $rootScope, User){
+app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User","$auth", function ($scope, $location, $http, $rootScope, User, $auth){
 	
 
 //TODO handle auth:login-failure gracefully    
@@ -503,6 +503,23 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
         }
     });
 
+
+    //Loggin someone out
+
+    $scope.logout = function() {
+        console.log("hello")
+        $auth.signOut()
+        .then(function(res) {
+            console.log("goodbye")
+        })
+        .catch(function(res) {
+            console.log("ldasjkd")
+        })
+    }
+
+    $rootScope.$on("auth:logout-success", function(ev, user) {
+        $location.path("/")
+    })
 
 
 
