@@ -5,6 +5,9 @@ class Assignment < ActiveRecord::Base
 	has_many :assignment_documents, dependent: :destroy
 	has_many :documents, through: :assignment_documents
 
+	has_many :assignment_users, dependent: :destroy
+	has_many :users, through: :assignment_users
+
 	has_many :submissions
 end
 

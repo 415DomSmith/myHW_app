@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
 
 	has_many :school_users, dependent: :destroy
 	has_many :schools, through: :school_users
+
+  	has_many :assignment_users, dependent: :destroy
+	has_many :assignments, through: :assignment_users
   
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
