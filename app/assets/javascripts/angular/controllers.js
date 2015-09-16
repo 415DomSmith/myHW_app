@@ -202,12 +202,16 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
 app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Course", function ($scope, $location, $rootScope, Assignment, $routeParams, Course){
   
       
-    $scope.assignment = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
-        console.log($scope.assignment)    
-    })
+    $scope.assignmentObj = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
+        $scope.documents = $scope.assignmentObj.documents;
+        $scope.assignment = $scope.assignmentObj.assignment;
+        // console.log($scope.assignmentObj);
+    });
+
     $scope.courseObj = Course.get({id: $routeParams.course_id}, function(){
-        $scope.course = $scope.courseObj.course
-    })
+        $scope.course = $scope.courseObj.course;
+        // console.log($scope.course);
+    });
     
 }]);
 
@@ -218,7 +222,7 @@ app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope",
 app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Course", function ($scope, $location, $rootScope, Assignment, $routeParams, Course){
       
     // $scope.courseData = Course.get({id: $routeParams.id});
-    $scope.assignmentData = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id})
+    $scope.assignmentData = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id});
 
     $scope.updateAssignment = function(){
         var assignment = $scope.assignmentData;
@@ -368,8 +372,9 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootS
 // ==================================================
 
 app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", "Document", function ($scope, $location, $http, $rootScope, $routeParams, Document){
-// ===== SENDS GET REQUEST TO DOCUMENT CONTROLLER ON BACKEND, RESPONSE IS LIST OF USERS DOCS   
-   
+
+    $scope.userDocs = "";   
+// ===== SENDS GET REQUEST TO DOCUMENT CONTROLLER ON BACKEND, RESPONSE IS LIST OF USERS DOCS     
     $scope.getUsersDocuments = function () {
         $http.get('/api/users/:user_id/documents').then(function (res) {
             $scope.userDocs = res.data;
@@ -400,7 +405,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
         gapi.load('picker', {'callback': onPickerApiLoad});
     };
 
-    
+// Private Functions 
     function onAuthApiLoad() {
         window.gapi.auth.authorize(
             {

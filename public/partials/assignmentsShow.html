@@ -1,8 +1,23 @@
 <h1>Assignments Show Page</h1>
 
+<h2>Title: {{assignment.title}}</h2>
 
-<h3>Todo: Edit and delete and assignment</h3>
+<h5>Description: {{assignment.description}}</h5>
+
+<h5>Due: {{assignment.due_date}}</h5>
+
+<div>
+	<h4>Documents attached to this Assignment</h4>
+	<li ng-repeat="doc in documents"><a target="_blank" href="{{doc.google_drive_url}}">{{doc.attachment_file_name}}{{doc.google_doc_name}}</a></li>
+</div>
+
+
+
+
 
 
 <a ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}/submissions/new">Submit an answer to this assignment</a>
 <a ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}/edit">Edit this assignment</a>
+
+
+<h3>Todo: Edit and delete and assignment</h3>

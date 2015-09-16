@@ -16,6 +16,12 @@ class AssignmentsController < ApplicationController
 		
 		# binding.pry
 		if @assignment.save
+			@course.users.each do |r|
+				if r.isTeacher != true
+					@user = User.find(r.id)
+					# @user.assignments << @assignment
+				end
+			end
 		  render json: @assignment, status: :created
 		else
 		  render json: @assignment.errors, status: :unprocessable_entity
@@ -26,7 +32,8 @@ class AssignmentsController < ApplicationController
 
 	def show
 		# binding.pry
-		render json: @assignment, status: :ok
+		@documents = @assignment.documents
+		render json: {:assignment => @assignment, :documents => @documents}, status: :ok
 		
 	end
 
