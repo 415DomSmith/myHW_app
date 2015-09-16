@@ -1,9 +1,50 @@
 <h3>Assigmnets for the course widget</h3>
-<div ng-repeat="assignment in assignments">
-	{{assignment.title}}
-</div>
-
-
+<section class="content">
+	<div class="row">
+		<div class="col-sm-4 col-xs-12"> <!-- ASSIGNMENT BOX -->
+			<div class="box box-solid box-warning assignment-box-outer">
+				<div class="box-header">  Assignments</div>
+				<div class="assignment-box-inner">
+					<div class="inner">
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th class="assign-title">Title</th>
+										<th>Due Date</th>
+									</tr>
+									
+								</thead>		
+								<tbody>	
+									<tr ng-repeat="assignment in assignments">
+										<td>{{assignment.title}}</td>
+										<td>{{assignment.due_date}}</td>
+									</tr>
+								</tbody>	
+							</table>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div> <!-- END ASSIGNMENT BOX -->
+		<div class="col-sm-4 col-xs-12"> <!-- GRAPH1 BOX -->
+			<div class="box box-solid box-info">
+				<div class="box-header">  Graph 1</div>
+					<div class="inner">
+						<!-- PUT STUFF HERE -->
+					</div>
+			</div>
+		</div> <!-- END GRAPH1 BOX -->
+		<div class="col-sm-4 col-xs-12"> <!-- GRAPH2 BOX -->
+			<div class="box box-solid box-success">
+				<div class="box-header">  Graph 2</div>
+					<div class="inner">
+						<!-- PUT STUFF HERE -->
+					</div>
+			</div>
+		</div> <!-- END GRAPH2 BOX -->
+	</div> <!-- END ROW -->
+</section>
 
         Titles: {{assignmentTitles}}
         <br>

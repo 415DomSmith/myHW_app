@@ -12,9 +12,9 @@
 {{courses}} -->
 
 <h3>Courses</h3>
+<div class="row">
 
-<div class="col-md-3">
-	<a ng-repeat="course in courses" ng-href="/#/courses/{{course.id}}">
+	<a class="col-md-3 col-xs-6" ng-repeat="course in courses" ng-href="/#/courses/{{course.id}}">
 		<div class="box small-box box-solid bg-blue">
 			<div class="box-header">
 				<h3>{{course.name}}</h3>
@@ -23,26 +23,29 @@
 				{{course.subject}}
 			</div>
 			<div class="small-box-footer">
-				More Info <i class="fa fa-arrow-circle-right"></i>
+				Class Page   <i class="fa fa-arrow-circle-right"></i>
 			</div>
 		</div>
 	</a>
-
-
-<div class="col-md-3">
-	<h3>Submissions</h3>
 </div>
-<div ng-repeat = "submission in submissions">
-	<a ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}">Submission: {{submission.id}} for Course {{submission.course_id}}</a>
-</div>
-
-<h3>Assignments</h3>
-
-<div ng-repeat="assignment in assignments">
-	<a ng-href="/#/courses/{{assignment.course_id}}/assignments/{{assignment.id}}">{{assignment.title}}</a>
+<h3>Submissions</h3>
+<div class="row">
+	<div class="box-header">
 	
+	</div>
+	<div ng-repeat = "submission in submissions" class="col-md-3">
+		<a ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}">Submission: {{submission.id}} for Course {{submission.course_id}}</a>
+	</div>
 </div>
+<h3>Assignments</h3>
+<div class="row">
+	<div class="box-header">
 
+	</div>
+	<div class="col-md-3" ng-repeat="assignment in assignments">
+		<a ng-href="/#/courses/{{assignment.course_id}}/assignments/{{assignment.id}}">{{assignment.title}}</a>
+	</div>
+</div>
 
 <div ng-repeat="course in courses">
 	<a ng-href="/#/courses/{{course.id}}/commandcenter">Command Center for {{course.name}}</a>

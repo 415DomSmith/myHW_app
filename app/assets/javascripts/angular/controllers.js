@@ -600,7 +600,8 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
     }
 
     $rootScope.$on("auth:logout-success", function(ev, user) {
-        $location.path("/")
+        $rootScope.user_id = null;
+        $location.path("/");
     })
 
 

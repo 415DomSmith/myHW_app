@@ -13,7 +13,7 @@
 <body ng-app="myHWApp" ng-controller="GlobalController" class="skin-blue">
 <!-- header logo: style can be found in header.less -->
   <header class="header">
-    <a href="" class="logo">
+    <a href="" ng-click="dashboard()" class="logo">
 <!-- Add the class icon to your logo image or logo icon to add the margining -->
      	my_HW
     </a>
@@ -31,7 +31,7 @@
           </li>
 <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
-            <a href="" ng-click="dashboard()" class="dropdown-toggle" data-toggle="dropdown">
+            <a href=""  class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-tachometer"></i> Dashboard
             </a>
  					</li>
@@ -80,19 +80,19 @@
       </div>
     </nav>
   </header>
-  <div class="wrapper row-offcanvas row-offcanvas-left">
+
 <!-- Left side column. contains the logo and sidebar -->
 
 
     <!-- Right side column. Contains the navbar and content of the page -->
-    <aside class="right-side">                
+              
         <!-- Main content -->
     	<section class="content">
        
 				<div ng-view></div>
 			</section><!-- /.content -->
-    </aside><!-- /.right-side -->
-</div><!-- ./wrapper -->
+
+
 
 
 

@@ -1,0 +1,22 @@
+.driveIcon {
+  height: 20px;
+  width: 20px;
+  margin-top: -5px;
+}
+
+
+.assignment-box-inner {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 3000px;
+}
+
+.assignment-box-outer {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 250px;
+}
+
+.assign-title {
+	
+}
