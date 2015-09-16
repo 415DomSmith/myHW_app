@@ -11,7 +11,11 @@ class CoursesController < ApplicationController
 
 
 
-		render json: {:course => @course, :assignments => @assignments, :students => @students, :enrolled_students => @enrolled_students}, status: :ok
+		render json: { 	:course => @course, 
+						:assignments => @assignments, 
+						:students => @students, 
+						:enrolled_students => @enrolled_students
+						}, status: :ok
 	end
 
 	def update

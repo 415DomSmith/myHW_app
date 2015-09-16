@@ -62,17 +62,14 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 // ==================================================
 
 app.controller("DashboardController", ["$scope", "$location", "User", "$routeParams", "School", function ($scope, $location, User, $routeParams, School){
-	// $scope.courses = {}
-    // $scope.user = {}
+    // Get all info about the user to display it in dashboard
     $scope.userObj = User.get({id: $routeParams.id}, function(){
-        $scope.courses = $scope.userObj.courses
-        console.log($scope.courses, "courses")
-        $scope.user = $scope.userObj.user
-        $scope.submissions = $scope.userObj.submissions
-        // console.log($scope.user)
+        $scope.user = $scope.userObj.user;
+        $scope.courses = $scope.userObj.courses;
+        $scope.submissions = $scope.userObj.submissions;
+        $scope.assignments = $scope.userObj.assignments;
     });
-    // $scope.user = "blah"
-    console.log($scope.courses)
+
 	$scope.toCoursesNew = function(){
 		$location.path("/courses/new");
 	};
@@ -88,9 +85,9 @@ app.controller("DashboardController", ["$scope", "$location", "User", "$routePar
 app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Course", function ($scope, $location, $rootScope, Course){
 
     $scope.createCourse = function(){
-        var course = $scope.courseData
+        var course = $scope.courseData;
         course.teacherId = parseInt($rootScope.user_id);
-        var newCourse = new Course(course)
+        var newCourse = new Course(course);
         newCourse.$save().then(function(){
             $location.path("/users/" + $rootScope.user_id)
         })
@@ -108,7 +105,6 @@ app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Co
       $scope.course = $scope.courseObj.course;
       $scope.assignments = $scope.courseObj.assignments;  
     });
-    // console.log($scope.courseObj)
     
 }]);
 
@@ -222,36 +218,38 @@ app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope",
 app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Course", function ($scope, $location, $rootScope, Assignment, $routeParams, Course){
       
     // $scope.courseData = Course.get({id: $routeParams.id});
-    $scope.assignmentData = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id});
+    $scope.assignmentObj = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
+        $scope.assignmentData = $scope.assignmentObj.assignment
+    });
 
     $scope.updateAssignment = function(){
-        var assignment = $scope.assignmentData;
+        $scope.assignmentObj.assignment = $scope.assignmentData;
         //Assign the correct category to the object before sending it off
-        if(assignment.category === "class_participation"){
-            assignment.class_participation = true;
-        } else if(assignment.category === "classwork"){
-            assignment.classwork = true;
-        } else if(assignment.category === "homework") {
-            assignment.homework = true;
-        } else if (assignment.category === "project") {
-            assignment.project = true;
-        } else if (assignment.category === "quiz") {
-            assignment.quiz = true;
-        } else if (assignment.category === "reading") {
-            assignment.reading = true;
-        } else if (assignment.category === "test") {
-            assignment.test = true;
-        } else if (assignment.category === "miscellaneous") {
-            assignment.miscellaneous = true;
+        if($scope.assignmentObj.assignment.category === "class_participation"){
+            $scope.assignmentObj.assignment.class_participation = true;
+        } else if($scope.assignmentObj.assignment.category === "classwork"){
+            $scope.assignmentObj.assignment.classwork = true;
+        } else if($scope.assignmentObj.assignment.category === "homework") {
+            $scope.assignmentObj.assignment.homework = true;
+        } else if ($scope.assignmentObj.assignment.category === "project") {
+            $scope.assignmentObj.assignment.project = true;
+        } else if ($scope.assignmentObj.assignment.category === "quiz") {
+            $scope.assignmentObj.assignment.quiz = true;
+        } else if ($scope.assignmentObj.assignment.category === "reading") {
+            $scope.assignmentObj.assignment.reading = true;
+        } else if ($scope.assignmentObj.assignment.category === "test") {
+            $scope.assignmentObj.assignment.test = true;
+        } else if ($scope.assignmentObj.assignment.category === "miscellaneous") {
+            $scope.assignmentObj.assignment.miscellaneous = true;
         }
 
-        assignment.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function() {
+        $scope.assignmentObj.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function() {
             $location.path('/courses/' + $routeParams.course_id) + "/assignments/" + $routeParams.assignment_id;
         });
     };
 
     $scope.deleteAssignment = function(){
-        $scope.assignmentData.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
+        $scope.assignmentObj.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
             $location.path("/users/" + $rootScope.user_id)
         })
     }
@@ -311,13 +309,85 @@ app.controller("SubmissionsEditController", ["$scope", "$location","$rootScope",
 // ==================================================
 
 app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
-    $scope.submissionData = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id})
+    $scope.submissionData = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id});
     $scope.scoreSubmission = function() {
         var submission = $scope.submissionData
         submission.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}).then(function(){
-            $location.path("/users/" + $rootScope.user_id)
+            $location.path("/users/" + $rootScope.user_id);
         })
     }
+
+
+}]);
+
+// ==================================================
+// COMMAND CENTER CONTROLLER ==
+// ==================================================
+
+app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course){
+    // Get all the info about the course
+    $scope.courseObj = Course.get({id: $routeParams.id}, function(){
+        //Set all of the data recieved to variables on the scope to access later in callback and on view
+        // $scope.course = $scope.courseObj.course;
+        $scope.assignments = $scope.courseObj.assignments;  
+        //_______________________________________________________________________________________________
+
+    // AVERAGE SCORE FOR EACH ASSIGNMENT CHART LOGIC
+
+        $scope.assignmentTitles = [] //An array to hold all assignment titles for the charts
+        $scope.averagesArr =[] // Array to be used in Chart (averages of assignment submission totals)
+        $scope.maxArr =[] // Array to be used in Chart ()
+
+        // Find all info about each assignment in the course to display in charts
+        
+        $scope.assignmentsWithSubmissionsArr = [] //An array to hold all of the assignment objects (which contain an array of submissions)
+        $scope.assignments.forEach(function(assignment){
+            $scope.assignmentTitles.push(assignment.title) //To be used for both charts to populate x axis
+            Assignment.get({course_id: $routeParams.id, assignment_id: assignment.id}, function(a){
+                // console.log(a)
+                $scope.assignmentsWithSubmissionsArr.push(a) //To be used to get averages
+                // console.log(a)
+
+                // Initial values to then find averages
+                var scoreSum = 0
+                var max = 0
+                var counter = 0
+
+                console.log($scope.assignmentsWithSubmissionsArr)
+                //Loop over array holding assignments with submissions nested
+                $scope.assignmentsWithSubmissionsArr.forEach(function(assignment){
+                    // Loop over the submissions in the assignment to get average
+                    assignment.submissions.forEach(function(submission){
+                        // Add up all the data from each submission for the assignment
+                        scoreSum += submission.score;
+                        max = submission.max;
+                        counter ++;
+                        // console.log(scoreSum)
+                    })
+
+                    // console.log(scoreSum, "outside")
+                    console.log(max)
+                    $scope.maxArr.push(max); //Push the max to the array that will be used by the chart
+                    $scope.averagesArr.push( scoreSum / counter ); // Push the average to the array used by the chart
+
+                    // Reset values for next assignment
+                    scoreSum = 0
+                    max = 0
+                    counter = 0
+
+                })
+                $scope.assignmentsWithSubmissionsArr =[] // Reset array so it will only do magic on the following one the next time through
+            })
+
+        })
+       
+    //____________________________________________________________________________________________________
+
+    }); // End of Get on courses and all of its callbacks
+
+
+    
+
 
 
 }]);

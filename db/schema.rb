@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915165804) do
+ActiveRecord::Schema.define(version: 20150916165311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20150915165804) do
 
   add_index "assignment_documents", ["assignment_id"], name: "index_assignment_documents_on_assignment_id", using: :btree
   add_index "assignment_documents", ["document_id"], name: "index_assignment_documents_on_document_id", using: :btree
+
+  create_table "assignment_users", force: :cascade do |t|
+    t.integer  "assignment_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "assignment_users", ["assignment_id"], name: "index_assignment_users_on_assignment_id", using: :btree
+  add_index "assignment_users", ["user_id"], name: "index_assignment_users_on_user_id", using: :btree
 
   create_table "assignments", force: :cascade do |t|
     t.string   "title"
@@ -66,7 +76,6 @@ ActiveRecord::Schema.define(version: 20150915165804) do
   create_table "courses", force: :cascade do |t|
     t.string   "name"
     t.string   "subject"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "teacherId"
@@ -163,6 +172,8 @@ ActiveRecord::Schema.define(version: 20150915165804) do
 
   add_foreign_key "assignment_documents", "assignments"
   add_foreign_key "assignment_documents", "documents"
+  add_foreign_key "assignment_users", "assignments"
+  add_foreign_key "assignment_users", "users"
   add_foreign_key "course_schools", "courses"
   add_foreign_key "course_schools", "schools"
   add_foreign_key "course_users", "courses"
