@@ -328,32 +328,42 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
     // Get all the info about the course
     $scope.courseObj = Course.get({id: $routeParams.id}, function(){
         //Set all of the data recieved to variables on the scope to access later in callback and on view
-        // $scope.course = $scope.courseObj.course;
         $scope.assignments = $scope.courseObj.assignments;  
-        //_______________________________________________________________________________________________
+        $scope.enrolled_students = $scope.courseObj.enrolled_students
 
-    // AVERAGE SCORE FOR EACH ASSIGNMENT CHART LOGIC
+    // CHART LOGIC
 
-        $scope.assignmentTitles = [] //An array to hold all assignment titles for the charts
-        $scope.averagesArr =[] // Array to be used in Chart (averages of assignment submission totals)
-        $scope.maxArr =[] // Array to be used in Chart ()
+        //Chart 1 Arrays (average vs max per assignment)
+        $scope.assignmentTitles = []; //An array to hold all assignment titles for the Chart1 ("chart-labels" in the directive)
+        $scope.averagesArr =[]; // Array to be used in Chart1 (averages of assignment submission totals)
+        $scope.maxArr =[]; // Array to be used in Chart1 ()
+        $scope.seriesOne = ["Average Points", "Maximum Points"]; // ("chart-series")
+        $scope.chartOneColors = []; // ("chart-colours")
 
-        // Find all info about each assignment in the course to display in charts
+        //Chart2 Arrays (total submissions per assignment)
+
+        $scope.chartTwoX = ["Total Students"]; // (chart-labels)
+        $scope.chartTwoY = [$scope.enrolled_students.length -1]; //(chart-data)
+
         
-        $scope.assignmentsWithSubmissionsArr = [] //An array to hold all of the assignment objects (which contain an array of submissions)
+        $scope.assignmentsWithSubmissionsArr = []; //An array to hold all of the assignment objects (which contain an array of submissions)
+        
+
         $scope.assignments.forEach(function(assignment){
-            $scope.assignmentTitles.push(assignment.title) //To be used for both charts to populate x axis
+
+            $scope.assignmentTitles.push(assignment.title); //To be used for chart1 x axis
+            $scope.chartTwoX.push(assignment.title); //To be used for chart2 to populate x axis
+
             Assignment.get({course_id: $routeParams.id, assignment_id: assignment.id}, function(a){
-                // console.log(a)
-                $scope.assignmentsWithSubmissionsArr.push(a) //To be used to get averages
-                // console.log(a)
+
+                $scope.assignmentsWithSubmissionsArr.push(a); //To be used to get averages
 
                 // Initial values to then find averages
-                var scoreSum = 0
-                var max = 0
-                var counter = 0
+                var scoreSum = 0;
+                var max = 0;
+                var averageCounter = 0;
+                var submissionCounter = 0;
 
-                console.log($scope.assignmentsWithSubmissionsArr)
                 //Loop over array holding assignments with submissions nested
                 $scope.assignmentsWithSubmissionsArr.forEach(function(assignment){
                     // Loop over the submissions in the assignment to get average
@@ -361,34 +371,34 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                         // Add up all the data from each submission for the assignment
                         scoreSum += submission.score;
                         max = submission.max;
-                        counter ++;
+                        averageCounter ++;
+                        submissionCounter ++;
+
                         // console.log(scoreSum)
                     })
 
                     // console.log(scoreSum, "outside")
-                    console.log(max)
                     $scope.maxArr.push(max); //Push the max to the array that will be used by the chart
-                    $scope.averagesArr.push( scoreSum / counter ); // Push the average to the array used by the chart
+                    $scope.averagesArr.push( scoreSum / averageCounter ); // Push the average to the array used by the chart
 
                     // Reset values for next assignment
-                    scoreSum = 0
-                    max = 0
-                    counter = 0
+                    scoreSum = 0;
+                    max = 0;
+                    averageCounter = 0;
 
                 })
-                $scope.assignmentsWithSubmissionsArr =[] // Reset array so it will only do magic on the following one the next time through
+                $scope.chartTwoY.push(submissionCounter); // Push in the amount of submissions for an assignment
+                submissionCounter = 0; // Now that all of the submissions for an assignment have been counted, reset them
+                $scope.assignmentsWithSubmissionsArr =[]; // Reset array so it will only do magic on the following one the next time through
             })
 
         })
        
     //____________________________________________________________________________________________________
 
-    }); // End of Get on courses and all of its callbacks
-
+    }); // End of Get on courses for charts logic and all of its callbacks
 
     
-
-
 
 }]);
 
