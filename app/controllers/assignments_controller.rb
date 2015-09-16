@@ -6,9 +6,8 @@ class AssignmentsController < ApplicationController
 		@course = Course.find(params["course_id"])
 		@assignment = @course.assignments.new(assignment_params)
 	
-
 		params["documents"].each do |key, value|
-			binding.pry
+			# binding.pry
 			if value != false
 				@document = Document.find(value)
 				@assignment.documents << @document
