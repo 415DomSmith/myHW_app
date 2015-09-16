@@ -27,7 +27,7 @@
 
 
 <div>
-	<li ng-repeat="doc in userDocs"><a target="_blank" href="{{doc.google_drive_url}}">{{doc.attachment_file_name}}{{doc.google_doc_name}}</a></li>
+	<li ng-repeat="doc in userDocs"><a target="_blank" ng-href="{{doc.google_drive_url}}{{doc.local_file_url}}">{{doc.attachment_file_name}}{{doc.google_doc_name}}</a></li>
 </div>
 
 
