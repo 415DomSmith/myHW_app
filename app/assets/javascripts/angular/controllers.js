@@ -17,6 +17,10 @@ app.controller("LoginController", ["$scope", "$location", "$http", "$auth", func
 // ADDITIONAL INFO CONTROLLER ==
 // ==================================================
 
+
+//TODO -- Fix the get on the user (need userObj now. search it for examples)
+
+
 app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$routeParams", "School", function ($scope, $location, User, $routeParams, School){
 
 	//Find user to update
@@ -62,6 +66,7 @@ app.controller("DashboardController", ["$scope", "$location", "User", "$routePar
     // $scope.user = {}
     $scope.userObj = User.get({id: $routeParams.id}, function(){
         $scope.courses = $scope.userObj.courses
+        console.log($scope.courses, "courses")
         $scope.user = $scope.userObj.user
         $scope.submissions = $scope.userObj.submissions
         // console.log($scope.user)
@@ -112,15 +117,31 @@ app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Co
 // ==================================================
 
 app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Course", "$routeParams","$rootScope", function ($scope, $location, $rootScope, Course, $routeParams, $rootScope){
-    $scope.courseData = Course.get({id: $routeParams.id});
+    $scope.courseObj = Course.get({id: $routeParams.id},function(){
+        $scope.courseData = $scope.courseObj.course
+        // debugger;
+        $scope.students = $scope.courseObj.students
+        $scope.enrolledStudents = $scope.courseObj.enrolled_students
+        $scope.courseData.ids = [];
+
+        $scope.enrolledStudents.forEach(function(student){
+            $scope.courseData.ids[student.id] = student.id
+        });
+
+
+    });
     $scope.updateCourse = function(){
-        $scope.course = $scope.courseData;
-        $scope.course.$update({id: $routeParams.id}).then(function() {
+        $scope.courseObj.course = $scope.courseData;
+
+        // console.log($scope.courseObj)
+        // console.log($scope.courseData)
+        // console.log(course)
+        $scope.courseObj.$update({id: $routeParams.id}).then(function() {
             $location.path('/courses/' + $routeParams.id);
         });
     };
     $scope.deleteCourse = function() {
-        $scope.courseData.$delete({id: $routeParams.id}, function(){
+        $scope.courseObj.$delete({id: $routeParams.id}, function(){
             $location.path("/users/" + $rootScope.user_id)
         })
     }
@@ -200,7 +221,6 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
     $scope.assignmentData = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id})
 
     $scope.updateAssignment = function(){
-        console.log($scope.assignmentData);
         var assignment = $scope.assignmentData;
         //Assign the correct category to the object before sending it off
         if(assignment.category === "class_participation"){
@@ -458,20 +478,20 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
 // ==================================================
 // GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ==
 // ==================================================
-app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User", function ($scope, $location, $http, $rootScope, User){
-	$rootScope.$on('auth:login-success', function(ev, user) {
+app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User","$auth", function ($scope, $location, $http, $rootScope, User, $auth){
+	
+
+//TODO handle auth:login-failure gracefully    
+    //Function to check when someone is logged in and redirect them to the appopriate place
+    $rootScope.$on('auth:login-success', function(ev, user) {
               // Find the user in the database to check if they're new or already have an account
        User.get({id: user.id})
                .$promise.then(function(loggedInUser){
-//Set user on rootScope for access everywhere
-                       console.log($rootScope)
+                 //Set user on rootScope for access everywhere
                        $rootScope.user_id = loggedInUser.user.id
-                       // console.log($rootScope)
                        // If the user is new...
                        if(loggedInUser.user.isNewUser) {
-                               $location.path("/users/" + loggedInUser.user.id + "/additional_info");  
-                       } else if(loggedInUser.isNewUser) {
-                           $location.path("/users/" + loggedInUser.user.id + "/additional_info");       
+                               $location.path("/users/" + loggedInUser.user.id + "/additional_info");       
                                //Redirect additional info page
                        } else {
                        // If not, send them to their dashboard
@@ -481,15 +501,35 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
                })
 	});
     
+    // Function to redirect back to login after a refresh
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
-        console.log(current);
         if (!$rootScope.user_id) {
             $location.url("/login/");
         }
-        
-
     });
-	//TODO handle auth:login-failure gracefully
+
+
+    //Loggin someone out
+
+    $scope.logout = function() {
+        console.log("hello")
+        $auth.signOut()
+        .then(function(res) {
+            console.log("goodbye")
+        })
+        .catch(function(res) {
+            console.log("ldasjkd")
+        })
+    }
+
+    $rootScope.$on("auth:logout-success", function(ev, user) {
+        $location.path("/")
+    })
+
+
+
+
+
 }]);
 
 

@@ -3,9 +3,24 @@
 <form ng-submit="updateCourse()">
 	<label for="name">Name of Course</label>
 	<input type="text" id="name" ng-model="courseData.name">
-<br>
+	
+	<br>
+	<br>
+
 	<label for="subject">Subject</label>
 	<input type="text" id="subject" ng-model="courseData.subject">
+	
+	<br>
+	<br>
+
+	<div ng-repeat="student in students">
+		<label for="{{student.id}}">
+		    <input type="checkbox" ng-model="courseData.ids[student.id]" name="students" id="{{student.id}}" ng-true-value="{{student.id}}"/>{{courseData.ids[student.id]}}, {{student.id}} 
+		    {{student.name}}
+		</label>
+		
+	</div>
+
 	<br>
 	<br>
 	
@@ -13,6 +28,8 @@
 	
 
 </form>
+
+<!-- {{students}} -->
 
 
 <a ng-click="deleteCourse()">Delete course</a>
