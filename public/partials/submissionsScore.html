@@ -1,5 +1,8 @@
 <h1>New Submission Page</h1>
 
+<p>{{submissionData.answer}}</p>
+<p>{{submissionData.submission_link}}</p>
+
 <form ng-submit="scoreSubmission()">
 	<label for="score">Score Points</label>
 	<input type="number" ng-model="submissionData.score" id="score">

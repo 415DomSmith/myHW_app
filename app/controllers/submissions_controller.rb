@@ -6,7 +6,7 @@ class SubmissionsController < ApplicationController
 		@submission.course_id = @assignment.course.id
 		current_user.submissions << @submission
 
-		binding.pry
+		# binding.pry
 		if @submission.save
 		  render json: @submission, status: :created
 		else

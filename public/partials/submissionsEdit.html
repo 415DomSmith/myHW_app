@@ -1,5 +1,8 @@
 <h1>Student Edit Submission Page</h1>
 
+<p>{{submissionData.max}}</p>
+<p>{{submissionData.score}}</p>
+
 <form ng-submit="updateSubmission()">
 	<label for="answer">Answer</label>
 	<textarea id="answer" ng-model="submissionData.answer" cols="30" rows="10"></textarea>
