@@ -6,6 +6,7 @@ class AssignmentsController < ApplicationController
 		@course = Course.find(params["course_id"])
 		@assignment = @course.assignments.new(assignment_params)
 	
+
 		params["documents"].each do |key, value|
 			# binding.pry
 			if value != false
@@ -15,12 +16,12 @@ class AssignmentsController < ApplicationController
 		end	
 		
 		# binding.pry
+
+		# gives all users of the class the assignment
 		if @assignment.save
 			@course.users.each do |r|
-				if r.isTeacher != true
-					@user = User.find(r.id)
-					# @user.assignments << @assignment
-				end
+				# @user = User.find(r.id)
+				r.assignments << @assignment
 			end
 		  render json: @assignment, status: :created
 		else
@@ -33,11 +34,13 @@ class AssignmentsController < ApplicationController
 	def show
 		# binding.pry
 		@documents = @assignment.documents
-		render json: {:assignment => @assignment, :documents => @documents}, status: :ok
+		@submissions = @assignment.submissions
+		render json: {:assignment => @assignment, :documents => @documents, :submissions => @submissions}, status: :ok
 		
 	end
 
 	def update
+
 		if @assignment.update(assignment_params)
 			render json: @assignment, status: :ok
 		else

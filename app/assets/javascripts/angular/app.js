@@ -104,6 +104,12 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/submissionsScore.html',
 		controller: 'SubmissionsScoreController'
 	})
+
+	//Command Center
+	.when('/courses/:id/commandcenter', {
+		templateUrl: 'partials/commandCenter.html',
+		controller: 'CommandCenterController'
+	})
 	.otherwise({ redirectTo: '/'})
 }]);
 
