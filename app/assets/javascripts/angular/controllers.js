@@ -70,12 +70,6 @@ app.controller("DashboardController", ["$scope", "$location", "User", "$routePar
         $scope.assignments = $scope.userObj.assignments;
     });
 
-	$scope.toCoursesNew = function(){
-		$location.path("/courses/new");
-	};
-    $scope.toFileLibrary = function() {
-        $location.path("/users/" + $routeParams.id + "/documentLibrary" );
-    };
 }]);
 
 // ==================================================
@@ -114,33 +108,31 @@ app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Co
 
 app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Course", "$routeParams","$rootScope", function ($scope, $location, $rootScope, Course, $routeParams, $rootScope){
     $scope.courseObj = Course.get({id: $routeParams.id},function(){
-        $scope.courseData = $scope.courseObj.course
-        // debugger;
-        $scope.students = $scope.courseObj.students
-        $scope.enrolledStudents = $scope.courseObj.enrolled_students
+        $scope.courseData = $scope.courseObj.course;
+        $scope.students = $scope.courseObj.students;
+        $scope.enrolledStudents = $scope.courseObj.enrolled_students;
         $scope.courseData.ids = [];
 
         $scope.enrolledStudents.forEach(function(student){
-            $scope.courseData.ids[student.id] = student.id
+            $scope.courseData.ids[student.id] = student.id;
         });
 
 
     });
+
     $scope.updateCourse = function(){
         $scope.courseObj.course = $scope.courseData;
 
-        // console.log($scope.courseObj)
-        // console.log($scope.courseData)
-        // console.log(course)
         $scope.courseObj.$update({id: $routeParams.id}).then(function() {
-            $location.path('/courses/' + $routeParams.id);
+            $location.path('/courses/' + $routeParams.id + "/commandcenter");
         });
     };
+
     $scope.deleteCourse = function() {
         $scope.courseObj.$delete({id: $routeParams.id}, function(){
-            $location.path("/users/" + $rootScope.user_id)
-        })
-    }
+            $location.path("/users/" + $rootScope.user_id);
+        });
+    };
 
 
 }]);
@@ -178,13 +170,11 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
             assignment.test = true;
         } else if (assignment.category === "miscellaneous") {
             assignment.miscellaneous = true;
-        }
-
-        console.log(assignment.documents);
+        };
 
         var newAssignment = new Assignment(assignment);
         newAssignment.$save({course_id: $routeParams.course_id}).then(function(){
-            $location.path("/courses/" + $routeParams.course_id);
+            $location.path("/courses/" + $routeParams.course_id + "/commandcenter");
         });
     };
 
@@ -208,12 +198,10 @@ app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope",
     $scope.assignmentObj = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
         $scope.documents = $scope.assignmentObj.documents;
         $scope.assignment = $scope.assignmentObj.assignment;
-        // console.log($scope.assignmentObj);
     });
 
     $scope.courseObj = Course.get({id: $routeParams.course_id}, function(){
         $scope.course = $scope.courseObj.course;
-        // console.log($scope.course);
     });
     
 }]);
@@ -232,6 +220,7 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
     $scope.getUsersDocuments = Document.query(function(){
         $scope.userDocs = $scope.getUsersDocuments;
         console.log($scope.userDocs);
+
     });
 
     $scope.updateAssignment = function(){
@@ -253,7 +242,7 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
             $scope.assignmentObj.assignment.test = true;
         } else if ($scope.assignmentObj.assignment.category === "miscellaneous") {
             $scope.assignmentObj.assignment.miscellaneous = true;
-        }
+        };
 
         $scope.assignmentObj.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function() {
             $location.path('/courses/' + $routeParams.course_id) + "/assignments/" + $routeParams.assignment_id;
@@ -262,9 +251,9 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
 
     $scope.deleteAssignment = function(){
         $scope.assignmentObj.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
-            $location.path("/users/" + $rootScope.user_id)
-        })
-    }
+            $location.path("/users/" + $rootScope.user_id);
+        });
+    };
 }]);
 
 // ==================================================
@@ -307,12 +296,12 @@ app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", 
 app.controller("SubmissionsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
 
     $scope.submission = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id})
-    console.log($scope.submission.answer);
+
     $scope.deleteSubmission = function(){
         $scope.submission.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}, function(){
             $location.path("/users/" + $rootScope.user_id)
         })
-    }
+    };
 
      $scope.tinymceOptions = {
         inline: false,
@@ -331,13 +320,13 @@ app.controller("SubmissionsShowController", ["$scope", "$location","$rootScope",
 
 app.controller("SubmissionsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
 
-    $scope.submissionData = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id})
+    $scope.submissionData = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id});
     $scope.updateSubmission = function() {
-        var submission = $scope.submissionData
+        var submission = $scope.submissionData;
         submission.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}).then(function(){
-            $location.path("/users/" + $rootScope.user_id)
-        })
-    }
+            $location.path("/users/" + $rootScope.user_id);
+        });
+    };
 
 }]);
 
@@ -348,11 +337,11 @@ app.controller("SubmissionsEditController", ["$scope", "$location","$rootScope",
 app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
     $scope.submissionData = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id});
     $scope.scoreSubmission = function() {
-        var submission = $scope.submissionData
+        var submission = $scope.submissionData;
         submission.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}).then(function(){
             $location.path("/users/" + $rootScope.user_id);
-        })
-    }
+        });
+    };
 
 
 }]);
@@ -362,6 +351,15 @@ app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope"
 // ==================================================
 
 app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", 'SubmissionsForCourse', function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course, SubmissionsForCourse){
+    
+    $scope.toNewAssignment = function(){
+        $location.path("/courses/" + $routeParams.id + "/assignments/new");
+    };
+
+    $scope.toEditCourse = function(){
+        $location.path("/courses/" + $routeParams.id + "/edit")
+    };
+
     // Get all the info about the course for charts
     $scope.courseObj = Course.get({id: $routeParams.id}, function(){
         //Set all of the data recieved to variables on the scope to access later in callback and on view
@@ -445,7 +443,9 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         var studentChartLabels = [],
             studentChartTotalPoints = [],
             studentChartMaxPoints = [],
-            studentChartData = [];
+            studentChartData = [],
+            max = 0,
+            points = 0;    
 
         course.enrolled_students.forEach(function(student){
 
@@ -459,12 +459,17 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                         studentChartLabels.push(assignment.assignment.title);
                     })
                     //Submission Data
-                    console.log(submission)
-                    console.log(submission.max)
-                    console.log(submission.score)
                     studentChartMaxPoints.push(submission.max);
                     studentChartTotalPoints.push(submission.score);
+                    max += submission.max;
+                    points += submission.score;
+                    // console.log(max)
+                    // console.log(points)
                 });
+                student.max = max;
+                student.points = points;
+                max = 0;
+                points = 0;
 
             })
 
@@ -473,8 +478,13 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
             //assign data to student
             student.studentChartLabels = studentChartLabels;
             student.studentChartSeries = ["Student's Points", "Max Points"];
-            student.studentChartData = [studentChartTotalPoints, studentChartMaxPoints]
-            student.courseId = $routeParams.id
+            student.studentChartData = [studentChartTotalPoints, studentChartMaxPoints];
+            student.courseId = $routeParams.id;
+            // student.max = max;
+            // student.points = points;
+            // console.log(max)
+            // console.log(points)
+            // console.log(student)
 
             //push student to students
             $scope.students.push(student);
