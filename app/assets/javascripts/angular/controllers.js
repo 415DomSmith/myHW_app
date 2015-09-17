@@ -329,7 +329,11 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
     $scope.courseObj = Course.get({id: $routeParams.id}, function(){
         //Set all of the data recieved to variables on the scope to access later in callback and on view
         $scope.assignments = $scope.courseObj.assignments;  
-        $scope.enrolled_students = $scope.courseObj.enrolled_students
+        $scope.enrolled_students = $scope.courseObj.enrolled_students;
+        console.log($scope.enrolled_students);
+        // var arr = Object.keys(obj).map(function(k) { return obj[k] });
+        var arr = Object.keys($scope.enrolled_students).map(function(k){ return $scope.enrolled_students[k]})
+        console.log(arr)
 
     // CHART LOGIC
 
@@ -338,12 +342,14 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         $scope.averagesArr =[]; // Array to be used in Chart1 (averages of assignment submission totals)
         $scope.maxArr =[]; // Array to be used in Chart1 ()
         $scope.seriesOne = ["Average Points", "Maximum Points"]; // ("chart-series")
+        $scope.chartOneData = [$scope.averagesArr, $scope.maxArr];
         $scope.chartOneColors = []; // ("chart-colours")
 
         //Chart2 Arrays (total submissions per assignment)
 
         $scope.chartTwoX = ["Total Students"]; // (chart-labels)
-        $scope.chartTwoY = [$scope.enrolled_students.length -1]; //(chart-data)
+        $scope.chartTwoY = [[arr.length - 1 ]];//[arr.length - 1]; //(chart-data)
+        // $scope.seriesTwo = ["Number of Students"]
 
         
         $scope.assignmentsWithSubmissionsArr = []; //An array to hold all of the assignment objects (which contain an array of submissions)
@@ -387,7 +393,7 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                     averageCounter = 0;
 
                 })
-                $scope.chartTwoY.push(submissionCounter); // Push in the amount of submissions for an assignment
+                $scope.chartTwoY[0].push(submissionCounter); // Push in the amount of submissions for an assignment
                 submissionCounter = 0; // Now that all of the submissions for an assignment have been counted, reset them
                 $scope.assignmentsWithSubmissionsArr =[]; // Reset array so it will only do magic on the following one the next time through
             })

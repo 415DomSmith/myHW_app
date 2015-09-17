@@ -18,7 +18,7 @@
 								<tbody>	
 									<tr ng-repeat="assignment in assignments">
 										<td>{{assignment.title}}</td>
-										<td>{{assignment.due_date}}</td>
+										<td>{{assignment.due_date | date:'fullDate'}}</td>
 									</tr>
 								</tbody>	
 							</table>
@@ -32,6 +32,9 @@
 				<div class="box-header">  Graph 1</div>
 					<div class="inner">
 						<!-- PUT STUFF HERE -->
+
+						<canvas id="bar" class="chart chart-bar" chart-data="chartOneData" chart-labels="assignmentTitles" chart-series="seriesOne"></canvas>
+				
 					</div>
 			</div>
 		</div> <!-- END GRAPH1 BOX -->
@@ -40,6 +43,9 @@
 				<div class="box-header">  Graph 2</div>
 					<div class="inner">
 						<!-- PUT STUFF HERE -->
+
+						<canvas id="bar" class="chart chart-bar" chart-data="chartTwoY" chart-labels="chartTwoX"></canvas>
+
 					</div>
 			</div>
 		</div> <!-- END GRAPH2 BOX -->
