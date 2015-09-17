@@ -325,15 +325,12 @@ app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope"
 // ==================================================
 
 app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course){
-    // Get all the info about the course
+    // Get all the info about the course for charts
     $scope.courseObj = Course.get({id: $routeParams.id}, function(){
         //Set all of the data recieved to variables on the scope to access later in callback and on view
         $scope.assignments = $scope.courseObj.assignments;  
         $scope.enrolled_students = $scope.courseObj.enrolled_students;
-        console.log($scope.enrolled_students);
-        // var arr = Object.keys(obj).map(function(k) { return obj[k] });
-        var arr = Object.keys($scope.enrolled_students).map(function(k){ return $scope.enrolled_students[k]})
-        console.log(arr)
+        var arr = Object.keys($scope.enrolled_students).map(function(k){ return $scope.enrolled_students[k]});
 
     // CHART LOGIC
 
@@ -381,7 +378,7 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                         submissionCounter ++;
 
                         // console.log(scoreSum)
-                    })
+                    });
 
                     // console.log(scoreSum, "outside")
                     $scope.maxArr.push(max); //Push the max to the array that will be used by the chart
@@ -392,17 +389,54 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                     max = 0;
                     averageCounter = 0;
 
-                })
+                });
                 $scope.chartTwoY[0].push(submissionCounter); // Push in the amount of submissions for an assignment
                 submissionCounter = 0; // Now that all of the submissions for an assignment have been counted, reset them
                 $scope.assignmentsWithSubmissionsArr =[]; // Reset array so it will only do magic on the following one the next time through
-            })
+            });
 
-        })
-       
+        });
+    }); // End of Get on courses for charts logic and all of its callbacks
+
     //____________________________________________________________________________________________________
 
-    }); // End of Get on courses for charts logic and all of its callbacks
+    // STUDENT LOGIC
+    Course.get({id: $routeParams.id}, function(course){
+
+        // Arrays to populate with student data
+        $scope.students = [];
+        var studentChartLabels = [];
+
+        // var enrolled_students = course.enrolled_students;
+        console.log(course.enrolled_students)
+        console.log(course)
+        course.enrolled_students.forEach(function(student){
+
+            // // Construct array of assignment titles
+            // // var assignments = course.assignments;
+            // course.assignments.forEach(function(assignment){
+            //     studentChartLabels.push(assignment.title);
+            // })
+
+            // Find score data and assignment titles
+            student.submissions.forEach(function(submission){
+                
+                Assignment.get({course_id: $routeParams.course_id, assignment_id: submission.assignment_id}, function(assignment){
+                    studentChartLabels.push(assignment.title)
+                })
+            })
+
+            //assign data to student
+            student.studentChartLabels = studentChartLabels;
+            student.studentChartSeries = ["Student's Points", "Total Points"];
+            //push student to students
+            $scope.students.push(student);
+
+        });
+
+
+    });
+
 
     
 

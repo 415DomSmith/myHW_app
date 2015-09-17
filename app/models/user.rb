@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
 	has_many :course_users, dependent: :destroy
 	has_many :courses, through: :course_users
 
-	has_many :submission_users, dependent: :destroy
-	has_many :submissions, through: :submission_users
+	has_many :submissions
 
 	has_many :school_users, dependent: :destroy
 	has_many :schools, through: :school_users
