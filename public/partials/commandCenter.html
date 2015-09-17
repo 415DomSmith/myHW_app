@@ -1,4 +1,14 @@
-<h3>Teacher Command Center</h3>
+<div class="row">
+	<div class="col-sm-8 col-xs-12">
+		<h3>Teacher Command Center for {{courseObj.course.name}} - {{courseObj.course.subject}}</h3>
+	</div>
+	<div class="col-sm-4 col-xs-12">
+		<button ng-click="toNewAssignment()" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> New Assignment</button>
+		<button ng-click="toEditCourse()" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Edit Course</button>
+	</div>
+
+
+</div>
 <section class="content">
 	<div class="row">
 		<div class="col-sm-4 col-xs-12"> <!-- ASSIGNMENT BOX -->
@@ -35,7 +45,6 @@
 			<div class="box box-solid box-danger">
 				<div class="box-header text-center">Assignments vs. Average and Max Scores</div>
 					<div class="inner">
-						<!-- PUT STUFF HERE -->
 
 						<canvas id="bar" class="chart chart-bar" chart-data="chartOneData" chart-labels="assignmentTitles" chart-series="seriesOne"  chart-colours='[{
          "fillColor": "rgba(224, 108, 112, .5)",
@@ -60,7 +69,6 @@
 			<div class="box box-solid box-success">
 				<div class="box-header text-center">Submissions per Assignment</div>
 					<div class="inner">
-						<!-- PUT STUFF HERE -->
 
 						<canvas id="bar" class="chart chart-bar" chart-data="chartTwoY" chart-labels="chartTwoX" chart-colours='[{
          "fillColor": "rgba(51, 153, 86, .2)",
@@ -87,6 +95,12 @@
 						<div class="row"><!-- ROW FOR GRADE GAUGE AND SUBMISSION TABLE -->
 							<div class="col-sm-5 col-xs-5"> <!-- BOX FOR GRADE GAUGE -->
 								<p>custom directive</p>
+								<h3>Grade: {{student.points / student.max | percentage:2}}</h3>
+
+
+								<hw-grade-box max="student.max" points="student.points"></hw-grade-box>
+
+								
 							</div>
 							<div class="col-sm-7 col-xs-7"> <!-- BOX FOR SUBMISSION TABLE -->
 

@@ -32,3 +32,65 @@
 .assign-title {
 	
 }
+
+
+/*Grade Box Custom Directive Gauge Styling*/
+
+
+
+.mask {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  width: 12.5rem;
+  height: 6.25rem;
+  margin: 1.25rem;
+}
+
+.semi-circle {
+  position: relative;
+  display: block;
+  width: 12.5rem;
+  height: 6.25rem;
+  background: linear-gradient(to right, #c0392b 0%, #f1c40f 50%, #1abc9c 100%);
+  border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
+}
+.semi-circle::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 2;
+  display: block;
+  width: 8.75rem;
+  height: 4.375rem;
+  margin-left: -4.375rem;
+  background: #fff;
+  border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
+}
+
+.semi-circle--mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12.5rem;
+  height: 12.5rem;
+  background: transparent;
+  transform: rotate(120deg) translate3d(0, 0, 0);
+  transform-origin: center center;
+  backface-visibility: hidden;
+  transition: all .3s ease-in-out;
+}
+.semi-circle--mask::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0%;
+  z-index: 2;
+  display: block;
+  width: 12.625rem;
+  height: 6.375rem;
+  margin: -1px 0 0 -1px;
+  background: #f2f2f2;
+  border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
+}
