@@ -1,4 +1,4 @@
-var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth', 'ngFileUpload', "ngResource", 'chart.js']);
+var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth', 'ngFileUpload', "ngResource", 'chart.js', 'ui.tinymce']);
 
 // Config of Google Oauth
 app.config(["$authProvider", function($authProvider) {
@@ -110,7 +110,7 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/commandCenter.html',
 		controller: 'CommandCenterController'
 	})
-	.otherwise({ redirectTo: '/'})
+	.otherwise({ redirectTo: '/'});
 }]);
 
 

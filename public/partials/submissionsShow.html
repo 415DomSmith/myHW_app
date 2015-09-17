@@ -1,6 +1,13 @@
-<h1>Submission Show Page</h1>
 
-{{submission}}
+<h1>Submission Show Page</h1>
+<div style="z-index: 2; pointer-events: none;">
+<textarea ui-tinymce="tinymceOptions" class="mceNonEditable" ng-model="submission.answer" rows="30">
+			
+
+</textarea>
+</div>
+
+
 
 <a ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}/edit">Edit this submission</a>
 

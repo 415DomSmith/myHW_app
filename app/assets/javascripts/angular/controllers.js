@@ -260,31 +260,49 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
 // ==================================================
 
 app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
-  $scope.createSubmission = function(){
-    console.log($scope.submissionData)
-    var submission = $scope.submissionData
-    var newSubmission = new Submission(submission)
-    console.log(submission)
-    newSubmission.$save({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function(){
-        $location.path("/users/" + $rootScope.user_id)
-    })
-  }
+    $scope.createSubmission = function(){
+        // console.log($scope.submissionData)
+        var submission = $scope.submissionData;
+        var newSubmission = new Submission(submission);
+        console.log(submission);
+        newSubmission.$save({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function(){
+            $location.path("/users/" + $rootScope.user_id);
+        });
+    };
+
+    $scope.tinymceOptions = {
+        inline: false,
+        plugins: 'autolink colorpicker save autosave image link paste print spellchecker table textcolor wordcount',
+        skin: 'lightgray',
+        theme: 'modern'
+    };
+
+
     
 }]);
 
 // ==================================================
-// SUBMISSIONS NEW CONTROLLER ==
+// SUBMISSIONS SHOW CONTROLLER ==
 // ==================================================
 
 app.controller("SubmissionsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
 
     $scope.submission = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id})
-
+    console.log($scope.submission.answer);
     $scope.deleteSubmission = function(){
         $scope.submission.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}, function(){
             $location.path("/users/" + $rootScope.user_id)
         })
     }
+
+     $scope.tinymceOptions = {
+        inline: false,
+        toolbar: false,
+        menubar: false,
+        plugins: 'autolink noneditable colorpicker image link paste print spellchecker table textcolor wordcount',
+        skin: 'lightgray',
+        theme: 'modern'
+    };
 
 }]);
 

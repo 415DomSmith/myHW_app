@@ -22,7 +22,6 @@ gem 'less-rails-bootstrap'
 #Devise gem for authentication
 gem 'devise_token_auth'
 
-
 # Gems for google authentication
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
@@ -30,6 +29,8 @@ gem 'json'
 
 # Rewrites paths for routing
 gem 'rack-rewrite'
+
+gem 'tinymce-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
