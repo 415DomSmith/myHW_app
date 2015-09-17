@@ -156,7 +156,7 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
         $scope.userDocs = $scope.getUsersDocuments;
         console.log($scope.userDocs);
     });
-    $scope.assignmentData = {}
+    $scope.assignmentData = {};
     $scope.assignmentData.documents = {};
     $scope.createAssignment = function(){
         // console.log($scope.assignmentData);   
@@ -188,6 +188,13 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
         });
     };
 
+    $scope.tinymceOptions = {
+        inline: false,
+        plugins: 'autolink colorpicker save autosave image link paste print spellchecker table textcolor',
+        skin: 'lightgray',
+        theme: 'modern'
+    };
+
      
 }]);
 
@@ -215,11 +222,16 @@ app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope",
 // ASSIGNMENTS EDIT CONTROLLER ==
 // ==================================================
 // TODO: Look up how to refactor new and edits so code is DRYer
-app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Course", function ($scope, $location, $rootScope, Assignment, $routeParams, Course){
+app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Course", "Document", function ($scope, $location, $rootScope, Assignment, $routeParams, Course, Document){
       
     // $scope.courseData = Course.get({id: $routeParams.id});
     $scope.assignmentObj = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
-        $scope.assignmentData = $scope.assignmentObj.assignment
+        $scope.assignmentData = $scope.assignmentObj.assignment;
+    });
+
+    $scope.getUsersDocuments = Document.query(function(){
+        $scope.userDocs = $scope.getUsersDocuments;
+        console.log($scope.userDocs);
     });
 
     $scope.updateAssignment = function(){
@@ -256,15 +268,22 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
 }]);
 
 // ==================================================
-// SUBMISSIONS NEW CONTROLLER ==
+// SUBMISSIONS NEW CONTROLLER =======================
 // ==================================================
 
 app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
+        
+    $scope.assignmentObj = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function () {
+         $scope.assignment = $scope.assignmentObj.assignment;
+     });
+    
+   
+
     $scope.createSubmission = function(){
         // console.log($scope.submissionData)
         var submission = $scope.submissionData;
         var newSubmission = new Submission(submission);
-        console.log(submission);
+        // console.log(submission);
         newSubmission.$save({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function(){
             $location.path("/users/" + $rootScope.user_id);
         });

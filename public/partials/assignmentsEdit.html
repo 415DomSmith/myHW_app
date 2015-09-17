@@ -19,7 +19,13 @@
 		<option value="miscellaneous">Miscellaneous</option>
 	</select>
 
-	<input type="submit" value="Create an Assignment">
+
+	<div> Select Files to Add to the Assignment
+		<div ng-repeat="doc in userDocs">
+			<input type="checkbox" ng-model="assignmentData.documents[doc.id]" ng-true-value="{{doc.id}}" name="{{doc.id}}"> {{doc.attachment_file_name}}{{doc.google_doc_name}}		
+		</div>
+
+	<input type="submit" value="Update an Assignment">
 
 </form>
 

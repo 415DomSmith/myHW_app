@@ -1,35 +1,72 @@
-<h1>New Assignments Page</h1>
+<h1>Create A New Assignment:</h1>
+<div class="box box-primary">
+	<div class="box-header">
+		<p>Enter the title, description and due date of the assignment. The category of the assignment determines what type of assignment it is, and how it will categorized in your gradebook. </p>
+	</div>	
+	<form ng-submit="createAssignment()" >
+		<div class="assign-category">
+			<label for="category">Category:</label>
+			<select ng-model="assignmentData.category" id="category">
+				<option value="class_participation">Class Participation</option>
+				<option value="classwork">Classwork</option>
+				<option value="homework">Homework</option>
+				<option value="project">Project</option>
+				<option value="quiz">Quiz</option>
+				<option value="reading">Reading</option>
+				<option value="test">Test</option>
+				<option value="miscellaneous">Miscellaneous</option>
+			</select>
+		</div>
+		<div class="assign-title">
+			<label for="title">Title of Assignment:</label>
+			<input class="form-control" type="text" ng-model="assignmentData.title" id="title">
+		</div>
+		
+		<label for="description">Description of Assignment:</label>
+		<textarea ng-model="assignmentData.description" ui-tinymce="tinymceOptions" cols="30" rows="10"></textarea>
 
-<form ng-submit="createAssignment()" >
-	<label for="title">Title</label>
-	<input type="text" ng-model="assignmentData.title" id="title">
-	<label for="description">Description</label>
-	<textarea ng-model="assignmentData.description" cols="30" rows="10"></textarea>
-	<label for="due_date">Due Date</label>
-	<input type="date" ng-model="assignmentData.due_date" id="due_date">
-	<label for="category">Category</label>
-	<select ng-model="assignmentData.category" id="category">
-		<option value="class_participation">Class Participation</option>
-		<option value="classwork">Classwork</option>
-		<option value="homework">Homework</option>
-		<option value="project">Project</option>
-		<option value="quiz">Quiz</option>
-		<option value="reading">Reading</option>
-		<option value="test">Test</option>
-		<option value="miscellaneous">Miscellaneous</option>
-	</select>
-
-	
-	
-	<div> Select Files to Add to the Assignment
-		<div ng-repeat="doc in userDocs">
-			<input type="checkbox" ng-model="assignmentData.documents[doc.id]" ng-true-value="{{doc.id}}" name="{{doc.id}}"> {{doc.attachment_file_name}}{{doc.google_doc_name}}		
+		<div class="assign-due">
+			<label for="due_date">Due Date</label>
+			<input type="date" ng-model="assignmentData.due_date" id="due_date">
 		</div>
 
-	<input type="submit" value="Create an Assignment">
-	</div>
-</form>
+		<div class="box box-primary">
+		<div class="box-header">
+			<p> If you would like to attach a file to the assignment, select one or more files in your file library to attach to this assignment. </p> 
+			<p> You can always update this assignment with a file later if your attachment isn't in your file library yet.  </p>
+		</div>
+		
+		<div> 
+			<div class="box box-solid box-info assignment-box-outer">
+				<div class="box-header">Currently in your file libray:</div>
+				<div class="document-assignment-box-inner">
+					<div class="inner">
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th class="assign-title">Document Name</th>
+										<th>Add File</th>
+									</tr>	
+								</thead>		
+								<tbody>	
+									<tr ng-repeat="doc in userDocs">				
+											<td><a ng-href="">{{doc.attachment_file_name}}{{doc.google_doc_name}}</a></td>
+											<td><input type="checkbox" ng-model="assignmentData.documents[doc.id]" ng-true-value="{{doc.id}}" name="{{doc.id}}"></td>
+									</tr>
+								</tbody>	
+							</table>
+						</div>
+					</div>
+				</div>	
+			</div>
+			<!-- <div ng-repeat="doc in userDocs">
+				<input type="checkbox" ng-model="assignmentData.documents[doc.id]" ng-true-value="{{doc.id}}" name="{{doc.id}}"> {{doc.attachment_file_name}}{{doc.google_doc_name}}		
+			</div> -->
+		</div>
+		<input type="submit" class="btn btn-lg btn-info" value="Create an Assignment">
+		</div>
+	</form>
+</div>
 
-
-{{assignmentData}}
 <p>TODO - Build a scrollable DIV to hold all of the documents. Maybe put assignment and select box in to table.</p>

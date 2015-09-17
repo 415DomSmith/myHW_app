@@ -38,7 +38,7 @@ a:focus {
 }
 /* Header */
 body > .header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -126,6 +126,9 @@ h6,
   font-family: 'Source Sans Pro', sans-serif;
 }
 /* Page Header */
+
+
+
 .page-header {
   margin: 10px 0 20px 0;
   font-size: 22px;
@@ -326,7 +329,7 @@ table.text-center th {
 -------------------------------------------------
 */
 body > .header {
-  position: relative;
+  position: fixed;
   max-height: 100px;
   z-index: 1030;
 }
@@ -3398,4 +3401,7 @@ fieldset[disabled] .btn-vk.active {
   background-color: #ffffff;
 }
 
+.fixed-header {
+  position: fixed;
+}
 
