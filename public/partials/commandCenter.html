@@ -1,9 +1,9 @@
-<h3>Assigmnets for the course widget</h3>
+<h3>Teacher Command Center</h3>
 <section class="content">
 	<div class="row">
 		<div class="col-sm-4 col-xs-12"> <!-- ASSIGNMENT BOX -->
 			<div class="box box-solid box-warning assignment-box-outer">
-				<div class="box-header">  Assignments</div>
+				<div class="box-header text-center">Assignments</div>
 				<div class="assignment-box-inner">
 					<div class="inner">
 						<div class="box-body table-responsive no-padding">
@@ -12,6 +12,7 @@
 									<tr>
 										<th class="assign-title">Title</th>
 										<th>Due Date</th>
+										<th>Edit</th>
 									</tr>
 									
 								</thead>		
@@ -20,6 +21,7 @@
 									
 											<td>{{assignment.title}}</td>
 											<td>{{assignment.due_date | date:'fullDate'}}</td>
+											<td><a class="btn btn-xs btn-warning" ng-href="/#/courses/{{assignment.course_id}}/assignments/{{assignment.id}}/edit">Edit</a></td>
 											
 									</tr>
 								</tbody>	
@@ -30,50 +32,122 @@
 			</div>
 		</div> <!-- END ASSIGNMENT BOX -->
 		<div class="col-sm-4 col-xs-12"> <!-- GRAPH1 BOX -->
-			<div class="box box-solid box-info">
-				<div class="box-header">  Graph 1</div>
+			<div class="box box-solid box-danger">
+				<div class="box-header text-center">Assignments vs. Average and Max Scores</div>
 					<div class="inner">
 						<!-- PUT STUFF HERE -->
 
-						<canvas id="bar" class="chart chart-bar" chart-data="chartOneData" chart-labels="assignmentTitles" chart-series="seriesOne"></canvas>
+						<canvas id="bar" class="chart chart-bar" chart-data="chartOneData" chart-labels="assignmentTitles" chart-series="seriesOne"  chart-colours='[{
+         "fillColor": "rgba(224, 108, 112, .5)",
+         "strokeColor": "rgba(207,100,103,.5)",
+         "pointColor": "rgba(220,220,220,1)",
+         "pointStrokeColor": "#fff",
+         "pointHighlightFill": "#fff",
+         "pointHighlightStroke": "rgba(151,187,205,0.8)"
+       }, {
+         "fillColor": "rgba(0, 0, 0, .3)",
+         "strokeColor": "rgba(0,0,0,.3)",
+         "pointColor": "rgba(0,0,0,1)",
+         "pointStrokeColor": "#fff",
+         "pointHighlightFill": "#fff",
+         "pointHighlightStroke": "rgba(151,187,205,0.8)"
+       }]'></canvas>
 				
 					</div>
 			</div>
 		</div> <!-- END GRAPH1 BOX -->
 		<div class="col-sm-4 col-xs-12"> <!-- GRAPH2 BOX -->
 			<div class="box box-solid box-success">
-				<div class="box-header">  Graph 2</div>
+				<div class="box-header text-center">Submissions per Assignment</div>
 					<div class="inner">
 						<!-- PUT STUFF HERE -->
 
-						<canvas id="bar" class="chart chart-bar" chart-data="chartTwoY" chart-labels="chartTwoX"></canvas>
+						<canvas id="bar" class="chart chart-bar" chart-data="chartTwoY" chart-labels="chartTwoX" chart-colours='[{
+         "fillColor": "rgba(51, 153, 86, .2)",
+         "strokeColor": "rgba(51,153,86,.5)",
+         "pointColor": "rgba(51,153,86,1)",
+         "pointStrokeColor": "#fff",
+         "pointHighlightFill": "#fff",
+         "pointHighlightStroke": "rgba(151,187,205,0.8)"
+       }]' ></canvas>
 
 					</div>
 			</div>
 		</div> <!-- END GRAPH2 BOX -->
 	</div> <!-- END ROW -->
-</section>
 
-<!-- STUDENTS SECTION -->
+<!-- STUDENTS BOXES -->
 
-<section class="content">
 	<div class="row">
 
-		<div class="col-sm-6 col-xs-12"> <!-- GRAPH2 BOX -->
-			<div class="box box-solid box-success">
-				<div class="box-header">  Graph 2</div>
-					<div class="inner">
-						<!-- PUT STUFF HERE -->
+		<div class="col-sm-6 col-xs-12" ng-repeat="student in students"> <!-- STUDENT BOX -->
+			<div class="box box-solid box-info">
+				<div class="box-header text-center">{{student.name}}</div>
+					<div class="inner"> <!-- STUDENT INNER BOX BEGIN-->
+						<div class="row"><!-- ROW FOR GRADE GAUGE AND SUBMISSION TABLE -->
+							<div class="col-sm-5 col-xs-5"> <!-- BOX FOR GRADE GAUGE -->
+								<p>custom directive</p>
+							</div>
+							<div class="col-sm-7 col-xs-7"> <!-- BOX FOR SUBMISSION TABLE -->
 
-						<canvas id="bar" class="chart chart-bar" chart-data="chartTwoY" chart-labels="chartTwoX"></canvas>
+								<div class="submission-box-outer">
+									<div class="submission-box-inner">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th class="assign-title">Submission For:</th>
+													<th>Score</th>
+													<th>Grade It</th>
+												</tr>
+												
+											</thead>		
+											<tbody>	
+												<tr ng-repeat="submission in studentSubmissions">
+												
+														<td>{{student.studentChartLabels[$index]}}</td>
+														<td>{{submission.score}} / {{submission.max}}</td>
+														<td><a class="btn btn-xs btn-info" ng-href="/#/courses/{{student.courseId}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}/score">Grade</a></td>
+														
+												</tr>
+											</tbody>	
+										</table>
+									</div>
+								</div>
 
-					</div>
+							</div>
+						</div>
+					<!-- ROW FOR CHART (AND MAYBE CHAT) -->
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<p>Scores per Assignment</p>
+								<canvas id="line" class="chart chart-line" chart-data="student.studentChartData" chart-labels="student.studentChartLabels" chart-series="student.studentChartSeries" chart-colours='[{
+         "fillColor": "rgba(51, 153, 86, .2)",
+         "strokeColor": "rgba(51,153,86,.5)",
+         "pointColor": "rgba(51,153,86,1)",
+         "pointStrokeColor": "#fff",
+         "pointHighlightFill": "#fff",
+         "pointHighlightStroke": "rgba(151,187,205,0.8)"
+       }, {
+         "fillColor": "rgba(0, 0, 0, .1)",
+         "strokeColor": "rgba(0,0,0,.1)",
+         "pointColor": "rgba(0,0,0,.5)",
+         "pointStrokeColor": "#fff",
+         "pointHighlightFill": "#fff",
+         "pointHighlightStroke": "rgba(151,187,205,0.8)"
+       }]' >
+								</canvas> 
+								
+							</div>
+						</div>
+	
+
+					<!-- </div> STUDENT INNER BOX END -->
 			</div>
-		</div> <!-- END GRAPH2 BOX -->
+		</div> <!-- END STUDENT BOX -->
 	</div> <!-- END ROW -->
 </section>
 
-{{students}}
+{{studentSubmissions}}
 <!-- 
         Titles: {{assignmentTitles}}
         <br>

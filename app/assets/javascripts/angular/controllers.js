@@ -342,7 +342,7 @@ app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope"
 // COMMAND CENTER CONTROLLER ==
 // ==================================================
 
-app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course){
+app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", 'SubmissionsForCourse', function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course, SubmissionsForCourse){
     // Get all the info about the course for charts
     $scope.courseObj = Course.get({id: $routeParams.id}, function(){
         //Set all of the data recieved to variables on the scope to access later in callback and on view
@@ -423,30 +423,40 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
 
         // Arrays to populate with student data
         $scope.students = [];
-        var studentChartLabels = [];
+        var studentChartLabels = [],
+            studentChartTotalPoints = [],
+            studentChartMaxPoints = [],
+            studentChartData = [];
 
-        // var enrolled_students = course.enrolled_students;
-        console.log(course.enrolled_students)
-        console.log(course)
         course.enrolled_students.forEach(function(student){
 
-            // // Construct array of assignment titles
-            // // var assignments = course.assignments;
-            // course.assignments.forEach(function(assignment){
-            //     studentChartLabels.push(assignment.title);
-            // })
+            SubmissionsForCourse.query({course_id: $routeParams.id, user_id: student.id}, function(submissions){
+                $scope.studentSubmissions = submissions
+                // Find score data and assignment titles
+                submissions.forEach(function(submission){
+                    //Assignment titles
+                    Assignment.get({course_id: $routeParams.id, assignment_id: submission.assignment_id}, function(assignment){
 
-            // Find score data and assignment titles
-            student.submissions.forEach(function(submission){
-                
-                Assignment.get({course_id: $routeParams.course_id, assignment_id: submission.assignment_id}, function(assignment){
-                    studentChartLabels.push(assignment.title)
-                })
+                        studentChartLabels.push(assignment.assignment.title);
+                    })
+                    //Submission Data
+                    console.log(submission)
+                    console.log(submission.max)
+                    console.log(submission.score)
+                    studentChartMaxPoints.push(submission.max);
+                    studentChartTotalPoints.push(submission.score);
+                });
+
             })
+
+           
 
             //assign data to student
             student.studentChartLabels = studentChartLabels;
-            student.studentChartSeries = ["Student's Points", "Total Points"];
+            student.studentChartSeries = ["Student's Points", "Max Points"];
+            student.studentChartData = [studentChartTotalPoints, studentChartMaxPoints]
+            student.courseId = $routeParams.id
+
             //push student to students
             $scope.students.push(student);
 

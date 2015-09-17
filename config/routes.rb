@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   	#Route for additional info path
   	get "/additional_info" => "statics#additional_info"
-
+    get "/api/users/:user_id/courses/:course_id/assignments" => "statics#submissions_for_course"
   	
     
 
