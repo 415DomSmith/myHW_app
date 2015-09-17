@@ -1,4 +1,4 @@
-var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth', 'ngFileUpload', "ngResource"]);
+var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth', 'ngFileUpload', "ngResource", 'chart.js']);
 
 // Config of Google Oauth
 app.config(["$authProvider", function($authProvider) {
