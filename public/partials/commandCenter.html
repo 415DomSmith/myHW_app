@@ -17,8 +17,10 @@
 								</thead>		
 								<tbody>	
 									<tr ng-repeat="assignment in assignments">
-										<td>{{assignment.title}}</td>
-										<td>{{assignment.due_date | date:'fullDate'}}</td>
+									
+											<td>{{assignment.title}}</td>
+											<td>{{assignment.due_date | date:'fullDate'}}</td>
+											
 									</tr>
 								</tbody>	
 							</table>
@@ -52,6 +54,27 @@
 	</div> <!-- END ROW -->
 </section>
 
+<!-- STUDENTS SECTION -->
+
+<section class="content">
+	<div class="row">
+
+		<div class="col-sm-6 col-xs-12"> <!-- GRAPH2 BOX -->
+			<div class="box box-solid box-success">
+				<div class="box-header">  Graph 2</div>
+					<div class="inner">
+						<!-- PUT STUFF HERE -->
+
+						<canvas id="bar" class="chart chart-bar" chart-data="chartTwoY" chart-labels="chartTwoX"></canvas>
+
+					</div>
+			</div>
+		</div> <!-- END GRAPH2 BOX -->
+	</div> <!-- END ROW -->
+</section>
+
+{{students}}
+<!-- 
         Titles: {{assignmentTitles}}
         <br>
         Averages: {{averagesArr}}
@@ -68,4 +91,4 @@
         X: {{chartTwoX}}
         <br>
         <br>
-        Y: {{chartTwoY}}
+        Y: {{chartTwoY}} -->
