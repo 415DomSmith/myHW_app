@@ -349,6 +349,7 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
 
         $scope.chartTwoX = ["Total Students"]; // (chart-labels)
         $scope.chartTwoY = [[arr.length - 1 ]];//[arr.length - 1]; //(chart-data)
+        // $scope.seriesTwo = ["Number of Students"]
 
         
         $scope.assignmentsWithSubmissionsArr = []; //An array to hold all of the assignment objects (which contain an array of submissions)
@@ -357,7 +358,7 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         $scope.assignments.forEach(function(assignment){
 
             $scope.assignmentTitles.push(assignment.title); //To be used for chart1 x axis
-            // $scope.chartTwoX.push(assignment.title); //To be used for chart2 to populate x axis
+            $scope.chartTwoX.push(assignment.title); //To be used for chart2 to populate x axis
 
             Assignment.get({course_id: $routeParams.id, assignment_id: assignment.id}, function(a){
 
