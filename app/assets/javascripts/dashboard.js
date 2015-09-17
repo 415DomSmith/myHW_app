@@ -25,8 +25,7 @@ $(function() {
         zIndex: 999999
     }).disableSelection();;
 
-    //bootstrap WYSIHTML5 - text editor
-    $(".textarea").wysihtml5();
+
 
     $('.daterange').daterangepicker(
             {

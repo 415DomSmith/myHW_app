@@ -3,8 +3,12 @@
 <form ng-submit="createSubmission()">
 
 	<label for="answer">Answer</label>
-	<textarea id="answer" ng-model="submissionData.answer" cols="30" rows="10"></textarea>
-
+	<div class=box-body pad style="display: block;">
+		<textarea id="answer" ng-model="submissionData.answer" cols="30" rows="10">
+			
+			
+		</textarea>
+	</div>
 	<label for="submission_link">Your google drive link to answer</label>
 	<input type="text" ng-model="submissionData.submission_link" id="submission_link">
 
