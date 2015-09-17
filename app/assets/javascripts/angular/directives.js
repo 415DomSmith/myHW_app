@@ -1,3 +1,8 @@
+// ==================================================
+// TINYMCE TEXTBOX DIRECTIVE==
+// ==================================================
+
+
 angular.module('ui.tinymce', [])
   .value('uiTinymceConfig', {})
   .directive('uiTinymce', ['$rootScope', '$compile', '$timeout', '$window', '$sce', 'uiTinymceConfig', function($rootScope, $compile, $timeout, $window, $sce, uiTinymceConfig) {
@@ -171,3 +176,59 @@ angular.module('ui.tinymce', [])
       }
     };
   }]);
+
+// ==================================================
+// GRADE BOX DIRECTIVE ==
+// ==================================================
+
+
+app.directive('hwGradeBox', function() {
+  return {
+    templateUrl: 'partials/gradeBox.html',
+    // scope: {
+    //   // points: '=',
+    //   // max: '='
+
+    // },
+    scope: false,
+    link: function(scope, element, attrs) {
+      console.log(scope)
+      console.log(scope.student.max)
+      console.log(scope.student)
+      // debugger
+      scope.$watch( function() {return scope.student},
+                    function(oldVal, newVal) {
+                      console.log(oldVal)
+                      console.log(newVal)
+                      $(element).find(".gauge--3 .semi-circle--mask").attr({
+                        style: '-webkit-transform: rotate(' + (newVal.points / newVal.max * 180) + 'deg);' +
+                            '-moz-transform: rotate(' + (newVal.points / newVal.max * 180) + 'deg);' +
+                            'transform: rotate(' + (newVal.points / newVal.max * 180) + 'deg);'
+                      });
+                    }, true);
+      
+
+    // $(element).find(".gauge--3 .semi-circle--mask")
+
+
+
+
+     
+    }
+  };
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
