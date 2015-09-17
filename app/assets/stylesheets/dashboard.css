@@ -8,13 +8,25 @@
 .assignment-box-inner {
 	overflow-y: scroll;
 	overflow-x: hidden;
-	height: 3000px;
+	height: 900px;
 }
 
 .assignment-box-outer {
 	overflow-y: scroll;
 	overflow-x: hidden;
 	height: 250px;
+}
+
+.submission-box-inner {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 600px;
+}
+
+.submission-box-outer {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 175px;
 }
 
 .assign-title {
