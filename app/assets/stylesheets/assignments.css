@@ -13,6 +13,21 @@
 	margin-bottom: 40px;
 }
 
-.document-assignment-box-inner {
-	
+.doc-table-head {
+	table-layout: fixed;
 }
+
+.document-assignment-box-inner {
+	overflow-y: auto;
+	overflow-x: hidden;
+
+}
+
+.document-assignment-box-outer {
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 300px;
+}
+
+
+
