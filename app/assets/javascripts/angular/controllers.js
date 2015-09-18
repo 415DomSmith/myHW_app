@@ -181,6 +181,7 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
 
     $scope.tinymceOptions = {
         inline: false,
+        statusbar: false,
         plugins: 'autolink colorpicker save autosave image link paste print spellchecker table textcolor',
         skin: 'lightgray',
         theme: 'modern'
@@ -264,6 +265,13 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
         $scope.assignmentObj.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
             $location.path("/courses/" + $routeParams.course_id + "/commandcenter" );
         });
+    };
+
+    $scope.tinymceOptions = {
+        inline: false,
+        plugins: 'autolink colorpicker save autosave image link paste print spellchecker table textcolor',
+        skin: 'lightgray',
+        theme: 'modern'
     };
 }]);
 
