@@ -3,7 +3,7 @@ class SubmissionsController < ApplicationController
 	def create
 		@assignment = Assignment.find(params["assignment_id"])
 		@submission = @assignment.submissions.new(submission_params)
-		@submission.assignement_title = @assignment.title
+		@submission.assignment_title = @assignment.title
 		@submission.course_id = @assignment.course.id
 		current_user.submissions << @submission
 
