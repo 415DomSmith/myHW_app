@@ -706,20 +706,28 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
     });
 
     $scope.dashboard = function() {
-      $location.path("/users/" + $rootScope.user_id)
-    }
+      $location.path("/users/" + $rootScope.user_id);
+    };
 
+
+    $scope.toDocumentLibrary = function () {
+        $location.path("/users/" + $rootScope.user_id + "/documentLibrary");
+    };
+
+    $scope.toNewCourse = function () {
+        $location.path("/courses/new");
+    };
     //Logging someone out
 
     $scope.logout = function() {
-        $auth.signOut()
+        $auth.signOut();
         // .then(function(res) {
         //     console.log("goodbye")
         // })
         // .catch(function(res) {
         //     console.log("ldasjkd")
         // })
-    }
+    };
 
     $rootScope.$on("auth:logout-success", function(ev, user) {
         $rootScope.user_id = null;
