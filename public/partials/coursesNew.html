@@ -27,12 +27,12 @@
 										<thead>
 											<tr>
 												<th>Student Name</th>
-												<th>Enrolled in {{courseData.name}}</th>
+												<th>Enrolled in {{school.name}}</th>
 											</tr>	
 										</thead>		
 										<tbody>	
 											<tr ng-repeat="student in students">	<!-- REPEAT BEGIN -->			
-													<td>{{student.name}}</td>
+													<td>{{student.name}} {{student.id}} courseData.ids: {{courseData.ids}}</td>
 													<td><input type="checkbox" ng-model="courseData.ids[student.id]" ng-true-value="{{student.id}}" name="students" id="{{student.id}}"></td>
 											</tr>
 										</tbody>	
