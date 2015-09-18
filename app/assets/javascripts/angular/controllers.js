@@ -668,7 +668,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
 // ==================================================
 // GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ==
 // ==================================================
-app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User","$auth", function ($scope, $location, $http, $rootScope, User, $auth){
+app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User","$auth", "$log", function ($scope, $location, $http, $rootScope, User, $auth, $log){
 	
 
 //TODO handle auth:login-failure gracefully    
@@ -678,17 +678,17 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
        User.get({id: user.id})
                .$promise.then(function(loggedInUser){
                  //Set user on rootScope for access everywhere
-                       $rootScope.user_id = loggedInUser.user.id
+                       $rootScope.user_id = loggedInUser.user.id;
                        // If the user is new...
                        if(loggedInUser.user.isNewUser) {
-                               $location.path("/users/" + loggedInUser.user.id + "/additional_info");       
+                               $location.path("/users/" + loggedInUser.user.id + "/additional_info");
                                //Redirect additional info page
                        } else {
                        // If not, send them to their dashboard
-                           $location.path("/users/" + loggedInUser.user.id)
+                           $location.path("/users/" + loggedInUser.user.id);
                                
                        }
-               })
+               });
 	});
     
     // Function to redirect back to login after a refresh
@@ -699,8 +699,8 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
     });
 
     $scope.dashboard = function() {
-      $location.path("/users/" + $rootScope.user_id)
-    }
+      $location.path("/users/" + $rootScope.user_id);
+    };
 
     //Logging someone out
 
@@ -727,7 +727,19 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
         $location.path("/users/" + $rootScope.user_id + "/documentLibrary");
     };
 
+    $scope.status = {
+        isopen: false
+    };
 
+    $scope.toggled = function(open) {
+        $log.log('Dropdown is now: ', open);
+    };
+
+    $scope.toggleDropdown = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.status.isopen = !$scope.status.isopen;
+    };
 
 }]);
 
