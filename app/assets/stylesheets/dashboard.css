@@ -16,6 +16,10 @@
 	height: 250px;
 }
 
+.box-250 {
+  height: 250px;
+}
+
 .submission-box-inner {
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -27,10 +31,19 @@
 	height: 175px;
 }
 
+.dashboard-link:hover {
+  text-decoration: none;
+}
+
 .assign-title {
 	
 }
 
+.dashboard-scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 200px;
+}
 
 .flex{
   display: flex;

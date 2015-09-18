@@ -8,52 +8,89 @@
 
 <!-- {{user}}
 {{courses}} -->
+{{currentUser.user}}
+{{currentUser.user.isTeacher}}
+<div ng-if="!currentUser.user.isTeacher">
+	<h3>Courses</h3>
+	<div class="row">
 
-<h3>Courses</h3>
-<div class="row">
-
-	<a class="col-md-3 col-xs-6" ng-repeat="course in courses" ng-href="/#/courses/{{course.id}}">
-		<div class="box small-box box-solid bg-blue">
-			<div class="box-header">
-				<h3>{{course.name}}</h3>
+		<a class="col-md-3 col-xs-6 dashboard-link" ng-repeat="course in courses" ng-href="/#/courses/{{course.id}}">
+			<div class="box small-box box-solid bg-blue">
+				<div class="box-header">
+					<h3>{{course.name}}</h3>
+				</div>
+				<div class="box-body">
+					{{course.subject}}
+				</div>
+				<div class="small-box-footer">
+					Class Page   <i class="fa fa-arrow-circle-right"></i>
+				</div>
 			</div>
-			<div class="box-body">
-				{{course.subject}}
+		</a>
+	</div>
+</div>
+
+<div ng-if="currentUser.user.isTeacher">
+	<h3>Command Centers for Courses</h3>
+	<div class="row">
+
+		<a class="col-md-3 col-xs-6 dashboard-link" ng-repeat="course in courses" ng-href="/#/courses/{{course.id}}/commandcenter">
+			<div class="box small-box box-solid bg-lime">
+				<div class="box-header">
+					<h3>{{course.name}}</h3>
+				</div>
+				<div class="box-body">
+					{{course.subject}}
+				</div>
+				<div class="small-box-footer">
+					Class Page   <i class="fa fa-arrow-circle-right"></i>
+				</div>
 			</div>
-			<div class="small-box-footer">
-				Class Page   <i class="fa fa-arrow-circle-right"></i>
+		</a>
+	</div>
+</div>	
+
+
+<div class="row">
+	<div class="col-md-6 col-xs-6"><h3>Submissions</h3></div>
+	<div class="col-md-6 col-xs-6"><h3>Assignments</h3></div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-xs-6 dashboard-scroll" >
+		<!-- <h3>Submissions</h3> -->
+		<a class="col-md-6 col-xs-12 dashboard-link" ng-repeat="submission in submissions" ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}">
+			<div class="box small-box box-solid bg-teal">
+				<div class="box-header">
+					<h3>{{submission.assignment_title}}</h3>
+				</div>
+				<div class="box-body">
+					Score: {{submission.score}} / {{submission.max}} 
+				</div>
+				<div class="small-box-footer">
+					Submission Page   <i class="fa fa-arrow-circle-right"></i>
+				</div>
 			</div>
-		</div>
-	</a>
-</div>
-<h3>Submissions</h3>
-<div class="row">
-	<div class="box-header">
-	
+		</a>
 	</div>
-	<div ng-repeat = "submission in submissions" class="col-md-3">
-		<a ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}">Submission to {{submission.assignment_title}}</a>
+	<div class="col-md-6 col-xs-6 dashboard-scroll" >
+		<!-- <h3>Assignments</h3> -->
+		<a class="col-md-6 col-xs-12 dashboard-link" ng-repeat="assignment in assignments" ng-href="/#/courses/{{assignment.course_id}}/assignments/{{assignment.id}}">
+			<div class="box small-box box-solid bg-olive">
+				<div class="box-header">
+					<h3>{{assignment.title}}</h3>
+				</div>
+				<div class="box-body">
+					Due: {{assignment.due_date | date:'fullDate'}}
+				</div>
+				<div class="small-box-footer">
+					Assignment Page   <i class="fa fa-arrow-circle-right"></i>
+				</div>
+			</div>
+		</a>
 	</div>
-</div>
-<h3>Assignments</h3>
-<div class="row">
-	<div class="box-header">
-
-	</div>
-	<div class="col-md-3" ng-repeat="assignment in assignments">
-		<a ng-href="/#/courses/{{assignment.course_id}}/assignments/{{assignment.id}}">{{assignment.title}}</a>
-	</div>
-</div>
-
-<div ng-repeat="course in courses">
-	<a ng-href="/#/courses/{{course.id}}/commandcenter">Command Center for {{course.name}}</a>
-	<br>
-	<a ng-href="/#/courses/{{course.id}}">{{course.name}}</a>
-	<br>
-	<br>
-
 
 </div>
+
 
 
 
