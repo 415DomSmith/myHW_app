@@ -204,6 +204,16 @@ app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope",
     $scope.courseObj = Course.get({id: $routeParams.course_id}, function(){
         $scope.course = $scope.courseObj.course;
     });
+
+     $scope.tinymceOptions = {
+        inline: false,
+        toolbar: false,
+        menubar: false,
+        statusbar: false,
+        plugins: '',
+        skin: 'lightgray',
+        theme: 'modern'
+    };
     
 }]);
 
@@ -308,7 +318,7 @@ app.controller("SubmissionsShowController", ["$scope", "$location","$rootScope",
         inline: false,
         toolbar: false,
         menubar: false,
-        plugins: 'autolink noneditable colorpicker image link paste print spellchecker table textcolor wordcount',
+        plugins: '',
         skin: 'lightgray',
         theme: 'modern'
     };

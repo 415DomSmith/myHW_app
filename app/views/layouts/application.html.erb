@@ -33,22 +33,24 @@
                 <i class="fa fa-tasks"></i>
               </a>
               <ul class="dropdown-menu" aria-labelledby="simple-dropdown">
+       
+        <!-- New Course in Drop-down-->  
                 <li class="header">Navigate</li>
+        <!-- Dashboard in Drop-down-->
+                  <li class="dropdown notifications-menu">
+                    <a href="" ng-click="dashboard()"  class="dropdown-toggle">
+                      <i class="fa fa-tachometer"></i> Dashboard
+                    </a>
+                  </li>
                   <li class="dropdown messages-menu">
                     <a href="" ng-click="toNewCourse()" class="dropdown-toggle">
                       <i class="fa fa-plus pointer"></i> Add a Course
                     </a>
                   </li>
-        <!-- Messages: style can be found in dropdown.less-->
+        <!-- Document Library in Drop-down-->
                   <li class="dropdown messages-menu">
                     <a href="" ng-click="toDocumentLibrary()" class="dropdown-toggle">
                       <i class="fa fa-file-text-o pointer"></i> Document Library
-                    </a>
-                  </li>
-        <!-- Notifications: style can be found in dropdown.less -->
-                  <li class="dropdown notifications-menu">
-                    <a href=""  class="dropdown-toggle">
-                      <i class="fa fa-tachometer"></i> Dashboard
                     </a>
                   </li>
               </ul>  
