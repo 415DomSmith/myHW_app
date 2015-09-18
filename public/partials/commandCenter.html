@@ -41,7 +41,7 @@
 				</div>	
 			</div>
 		</div> <!-- END ASSIGNMENT BOX -->
-		<div class="col-sm-4 col-xs-12"> <!-- GRAPH1 BOX -->
+		<div class="col-sm-4 col-xs-12"> <!-- CHART1 BOX -->
 			<div class="box box-solid box-danger">
 				<div class="box-header text-center">Assignments vs. Average and Max Scores</div>
 					<div class="inner">
@@ -64,7 +64,7 @@
 				
 					</div>
 			</div>
-		</div> <!-- END GRAPH1 BOX -->
+		</div> <!-- END CHART1 BOX -->
 		<div class="col-sm-4 col-xs-12"> <!-- GRAPH2 BOX -->
 			<div class="box box-solid box-success">
 				<div class="box-header text-center">Submissions per Assignment</div>
@@ -94,13 +94,12 @@
 					<div class="inner"> <!-- STUDENT INNER BOX BEGIN-->
 						<div class="row"><!-- ROW FOR GRADE GAUGE AND SUBMISSION TABLE -->
 							<div class="col-sm-5 col-xs-5"> <!-- BOX FOR GRADE GAUGE -->
-								<p>custom directive</p>
-								<h3>Grade: {{student.points / student.max | percentage:2}}</h3>
+								<h3 "text-center">{{student.points / student.max | grade}} ({{student.points / student.max | percentage:2}})</h3>
 
 
 								<hw-grade-box max="student.max" points="student.points"></hw-grade-box>
 
-								
+
 							</div>
 							<div class="col-sm-7 col-xs-7"> <!-- BOX FOR SUBMISSION TABLE -->
 
@@ -116,7 +115,7 @@
 												
 											</thead>		
 											<tbody>	
-												<tr ng-repeat="submission in studentSubmissions">
+												<tr ng-repeat="submission in student.studentSubmissions">
 												
 														<td>{{student.studentChartLabels[$index]}}</td>
 														<td>{{submission.score}} / {{submission.max}}</td>
@@ -161,7 +160,7 @@
 	</div> <!-- END ROW -->
 </section>
 
-{{studentSubmissions}}
+{{chartOneData}}
 <!-- 
         Titles: {{assignmentTitles}}
         <br>
