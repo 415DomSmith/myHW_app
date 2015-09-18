@@ -447,17 +447,20 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
             points = 0;    
 
         course.enrolled_students.forEach(function(student){
+            console.log(studentChartLabels, "before")
 studentChartLabels = [];
+console.log(studentChartLabels, "after")
             SubmissionsForCourse.query({course_id: $routeParams.id, user_id: student.id}, function(submissions){
                 student.studentSubmissions = submissions
                 // Find score data and assignment titles
                 submissions.forEach(function(submission){
+
+
                     //Assignment titles
-                    Assignment.get({course_id: $routeParams.id, assignment_id: submission.assignment_id}, function(assignment){
-                        
-                        studentChartLabels.push(assignment.assignment.title);
-                    })
+                        studentChartLabels.push(submission.assignment_title);
                     //Submission Data
+
+
                     studentChartMaxPoints.push(submission.max);
                     studentChartTotalPoints.push(submission.score);
                     max += submission.max;
@@ -696,28 +699,20 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
     });
 
     $scope.dashboard = function() {
-      $location.path("/users/" + $rootScope.user_id);
-    };
+      $location.path("/users/" + $rootScope.user_id)
+    }
 
-
-    $scope.toDocumentLibrary = function () {
-        $location.path("/users/" + $rootScope.user_id + "/documentLibrary");
-    };
-
-    $scope.toNewCourse = function () {
-        $location.path("/courses/new");
-    };
     //Logging someone out
 
     $scope.logout = function() {
-        $auth.signOut();
+        $auth.signOut()
         // .then(function(res) {
         //     console.log("goodbye")
         // })
         // .catch(function(res) {
         //     console.log("ldasjkd")
         // })
-    };
+    }
 
     $rootScope.$on("auth:logout-success", function(ev, user) {
         $rootScope.user_id = null;
