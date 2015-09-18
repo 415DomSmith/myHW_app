@@ -705,21 +705,27 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
     //Logging someone out
 
     $scope.logout = function() {
-        $auth.signOut()
+        $auth.signOut();
         // .then(function(res) {
         //     console.log("goodbye")
         // })
         // .catch(function(res) {
         //     console.log("ldasjkd")
         // })
-    }
+    };
 
     $rootScope.$on("auth:logout-success", function(ev, user) {
         $rootScope.user_id = null;
         $location.path("/");
-    })
+    });
 
+    $scope.toNewCourse = function () {
+        $location.path("/courses/new/");
+    };
 
+    $scope.toDocumentLibrary = function () {
+        $location.path("/users/" + $rootScope.user_id + "/documentLibrary");
+    };
 
 
 
