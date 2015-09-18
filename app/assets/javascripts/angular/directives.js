@@ -192,9 +192,9 @@ app.directive('hwGradeBox', function() {
     // },
     scope: false,
     link: function(scope, element, attrs) {
-      console.log(scope)
-      console.log(scope.student.max)
-      console.log(scope.student)
+      // console.log(scope)
+      // console.log(scope.student.max)
+      // console.log(scope.student)
       // debugger
       scope.$watch( function() {return scope.student},
                     function(oldVal, newVal) {
