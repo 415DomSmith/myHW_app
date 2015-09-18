@@ -706,6 +706,8 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
 app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User","$auth", "$log", function ($scope, $location, $http, $rootScope, User, $auth, $log){
 	
 
+
+
 //TODO handle auth:login-failure gracefully    
     //Function to check when someone is logged in and redirect them to the appopriate place
     $rootScope.$on('auth:login-success', function(ev, user) {
@@ -730,7 +732,12 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
         if (!$rootScope.user_id) {
             $location.url("/login/");
+        } else{
+            User.get({id: $rootScope.user_id}, function(user){
+                $scope.currentUser = user
+            })
         };
+
 
     });
 
