@@ -94,10 +94,12 @@
 					<div class="inner"> <!-- STUDENT INNER BOX BEGIN-->
 						<div class="row"><!-- ROW FOR GRADE GAUGE AND SUBMISSION TABLE -->
 							<div class="col-sm-5 col-xs-5"> <!-- BOX FOR GRADE GAUGE -->
-								<h3 "text-center">{{student.points / student.max | grade}} ({{student.points / student.max | percentage:2}})</h3>
+								<h3 class="text-center">{{student.points / student.max | grade}} ({{student.points / student.max | percentage:2}})</h3>
 
-
-								<hw-grade-box max="student.max" points="student.points"></hw-grade-box>
+								<div class="flex">
+									<hw-grade-box max="student.max" points="student.points"></hw-grade-box>	
+								</div>
+								
 
 
 							</div>

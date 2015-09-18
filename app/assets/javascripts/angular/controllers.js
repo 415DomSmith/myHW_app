@@ -76,7 +76,9 @@ app.controller("DashboardController", ["$scope", "$location", "User", "$routePar
 // ==================================================
 
 app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Course", function ($scope, $location, $rootScope, Course){
-
+    // $scope.courseObj = Course.get({id: $routeParams.id},function(){
+    //     $scope.students = $scope.courseObj.students;
+    // });
     $scope.createCourse = function(){
         var course = $scope.courseData;
         course.teacherId = parseInt($rootScope.user_id);
@@ -447,9 +449,8 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
             points = 0;    
 
         course.enrolled_students.forEach(function(student){
-            console.log(studentChartLabels, "before")
-studentChartLabels = [];
-console.log(studentChartLabels, "after")
+
+
             SubmissionsForCourse.query({course_id: $routeParams.id, user_id: student.id}, function(submissions){
                 student.studentSubmissions = submissions
                 // Find score data and assignment titles
@@ -486,8 +487,13 @@ console.log(studentChartLabels, "after")
 
                 //push student to students
                 $scope.students.push(student);
-                console.log(student)
-                console.log(studentChartLabels)
+                // console.log(student)
+                // console.log(studentChartLabels)
+
+
+                // console.log(studentChartLabels, "before")
+                studentChartLabels = [];
+                // console.log(studentChartLabels, "after")
                 
                 studentChartTotalPoints = [];
                 studentChartMaxPoints = [];
@@ -695,7 +701,8 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
         if (!$rootScope.user_id) {
             $location.url("/login/");
-        }
+        };
+
     });
 
     $scope.dashboard = function() {

@@ -8,12 +8,43 @@
 		<form ng-submit="createCourse()">
 			<label for="name">Period, Block, or Name of Course</label>
 			<input class="form-control" type="text" id="name" ng-model="courseData.name">
-		<br>
+				<br>
 			<label  for="subject">Subject</label>
 			<input class="form-control" type="text" id="subject" ng-model="courseData.subject">
-		<br>
-		<br>
+				<br>
+				<br>
+
+
+			<div class="box-footer">
+
+				<div> 
+					<div class="box box-solid box-info">
+						<div class="box-header">Students in your school:</div>
+						<div class="document-assignment-box-outer">
+							<div class="document-assignment-box-inner">
+								<div class="box-body table-responsive no-padding">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>Student Name</th>
+												<th>Enrolled in {{courseData.name}}</th>
+											</tr>	
+										</thead>		
+										<tbody>	
+											<tr ng-repeat="student in students">	<!-- REPEAT BEGIN -->			
+													<td>{{student.name}}</td>
+													<td><input type="checkbox" ng-model="courseData.ids[student.id]" ng-true-value="{{student.id}}" name="students" id="{{student.id}}"></td>
+											</tr>
+										</tbody>	
+									</table>
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>	
 			<input type="submit" class="btn btn-lg btn-info" value="Create New Course">
 		</form>
+
 	</div>
 </div>
