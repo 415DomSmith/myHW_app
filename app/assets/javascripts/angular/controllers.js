@@ -29,7 +29,6 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 	//Find schools to add to user
 	$scope.schools = School.query();
 
-	console.log($scope.schools)
 
 	$scope.submitAdditionalInfo = function(id) {
 		
@@ -251,7 +250,7 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
 
     $scope.deleteAssignment = function(){
         $scope.assignmentObj.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
-            $location.path("/users/" + $rootScope.user_id);
+            $location.path("/courses/" + $routeParams.course_id + "/commandcenter" );
         });
     };
 }]);
@@ -376,6 +375,7 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         $scope.seriesOne = ["Average Points", "Maximum Points"]; // ("chart-series")
         $scope.chartOneData = [$scope.averagesArr, $scope.maxArr];
 
+
         //Chart2 Arrays (total submissions per assignment)
 
         $scope.chartTwoX = ["Total Students"]; // (chart-labels)
@@ -394,9 +394,6 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
             Assignment.get({course_id: $routeParams.id, assignment_id: assignment.id}, function(a){
 
                 $scope.assignmentsWithSubmissionsArr.push(a); //To be used to get averages
-            });
-
-        });
 
                 // Initial values to then find averages
                 var scoreSum = 0;
@@ -409,22 +406,10 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                     // Loop over the submissions in the assignment to get average
                     assignment.submissions.forEach(function(submission){
                         // Add up all the data from each submission for the assignment
-                        if(submission.score) {
-                            scoreSum += submission.score;
-                        } else {
-                            scoreSum += 0;
-                        }
-
-                        if(submission.max) {
-                            max = submission.max;
-                        } else {
-                            max = 0;
-                        }
-                        
-                        // max = submission.max;
+                        scoreSum += submission.score;
+                        max = submission.max;
                         averageCounter ++;
                         submissionCounter ++;
-                        console.log(submission.score, averageCounter)
 
                         // console.log(scoreSum)
                     });
@@ -442,6 +427,9 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                 $scope.chartTwoY[0].push(submissionCounter); // Push in the amount of submissions for an assignment
                 submissionCounter = 0; // Now that all of the submissions for an assignment have been counted, reset them
                 $scope.assignmentsWithSubmissionsArr =[]; // Reset array so it will only do magic on the following one the next time through
+            });
+
+        });
     }); // End of Get on courses for charts logic and all of its callbacks
 
     //____________________________________________________________________________________________________
@@ -459,14 +447,14 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
             points = 0;    
 
         course.enrolled_students.forEach(function(student){
-
+studentChartLabels = [];
             SubmissionsForCourse.query({course_id: $routeParams.id, user_id: student.id}, function(submissions){
                 student.studentSubmissions = submissions
                 // Find score data and assignment titles
                 submissions.forEach(function(submission){
                     //Assignment titles
                     Assignment.get({course_id: $routeParams.id, assignment_id: submission.assignment_id}, function(assignment){
-
+                        
                         studentChartLabels.push(assignment.assignment.title);
                     })
                     //Submission Data
@@ -495,7 +483,9 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
 
                 //push student to students
                 $scope.students.push(student);
-                studentChartLabels = [];
+                console.log(student)
+                console.log(studentChartLabels)
+                
                 studentChartTotalPoints = [];
                 studentChartMaxPoints = [];
                 studentChartData = [];
