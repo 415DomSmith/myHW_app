@@ -339,7 +339,7 @@ app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope"
     $scope.scoreSubmission = function() {
         var submission = $scope.submissionData;
         submission.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}).then(function(){
-            $location.path("/users/" + $rootScope.user_id);
+            $location.path("/courses/" + $routeParams.course_id + "/commandcenter");
         });
     };
 
@@ -375,7 +375,6 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         $scope.maxArr =[]; // Array to be used in Chart1 ()
         $scope.seriesOne = ["Average Points", "Maximum Points"]; // ("chart-series")
         $scope.chartOneData = [$scope.averagesArr, $scope.maxArr];
-        $scope.chartOneColors = []; // ("chart-colours")
 
         //Chart2 Arrays (total submissions per assignment)
 
@@ -395,6 +394,9 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
             Assignment.get({course_id: $routeParams.id, assignment_id: assignment.id}, function(a){
 
                 $scope.assignmentsWithSubmissionsArr.push(a); //To be used to get averages
+            });
+
+        });
 
                 // Initial values to then find averages
                 var scoreSum = 0;
@@ -407,10 +409,22 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                     // Loop over the submissions in the assignment to get average
                     assignment.submissions.forEach(function(submission){
                         // Add up all the data from each submission for the assignment
-                        scoreSum += submission.score;
-                        max = submission.max;
+                        if(submission.score) {
+                            scoreSum += submission.score;
+                        } else {
+                            scoreSum += 0;
+                        }
+
+                        if(submission.max) {
+                            max = submission.max;
+                        } else {
+                            max = 0;
+                        }
+                        
+                        // max = submission.max;
                         averageCounter ++;
                         submissionCounter ++;
+                        console.log(submission.score, averageCounter)
 
                         // console.log(scoreSum)
                     });
@@ -428,9 +442,6 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                 $scope.chartTwoY[0].push(submissionCounter); // Push in the amount of submissions for an assignment
                 submissionCounter = 0; // Now that all of the submissions for an assignment have been counted, reset them
                 $scope.assignmentsWithSubmissionsArr =[]; // Reset array so it will only do magic on the following one the next time through
-            });
-
-        });
     }); // End of Get on courses for charts logic and all of its callbacks
 
     //____________________________________________________________________________________________________
@@ -450,7 +461,7 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         course.enrolled_students.forEach(function(student){
 
             SubmissionsForCourse.query({course_id: $routeParams.id, user_id: student.id}, function(submissions){
-                $scope.studentSubmissions = submissions
+                student.studentSubmissions = submissions
                 // Find score data and assignment titles
                 submissions.forEach(function(submission){
                     //Assignment titles
@@ -471,23 +482,27 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                 max = 0;
                 points = 0;
 
+                //assign data to student
+                student.studentChartLabels = studentChartLabels;
+                student.studentChartSeries = ["Student's Points", "Max Points"];
+                student.studentChartData = [studentChartTotalPoints, studentChartMaxPoints];
+                student.courseId = $routeParams.id;
+                // student.max = max;
+                // student.points = points;
+                // console.log(max)
+                // console.log(points)
+                // console.log(student)
+
+                //push student to students
+                $scope.students.push(student);
+                studentChartLabels = [];
+                studentChartTotalPoints = [];
+                studentChartMaxPoints = [];
+                studentChartData = [];
             })
 
            
 
-            //assign data to student
-            student.studentChartLabels = studentChartLabels;
-            student.studentChartSeries = ["Student's Points", "Max Points"];
-            student.studentChartData = [studentChartTotalPoints, studentChartMaxPoints];
-            student.courseId = $routeParams.id;
-            // student.max = max;
-            // student.points = points;
-            // console.log(max)
-            // console.log(points)
-            // console.log(student)
-
-            //push student to students
-            $scope.students.push(student);
 
         });
 

@@ -198,8 +198,6 @@ app.directive('hwGradeBox', function() {
       // debugger
       scope.$watch( function() {return scope.student},
                     function(oldVal, newVal) {
-                      console.log(oldVal)
-                      console.log(newVal)
                       $(element).find(".gauge--3 .semi-circle--mask").attr({
                         style: '-webkit-transform: rotate(' + (newVal.points / newVal.max * 180) + 'deg);' +
                             '-moz-transform: rotate(' + (newVal.points / newVal.max * 180) + 'deg);' +
