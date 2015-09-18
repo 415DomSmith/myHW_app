@@ -46,9 +46,18 @@ class CoursesController < ApplicationController
 
 		# course_params.id.each
 
+		params["ids"].each do |value|
+			# binding.pry
+			if value.is_a? Integer
+				student = User.find(value)
+				@course.users << student
+				# binding.pry
+			end
+		end
+
 		# Set teacher, add it to user's courses, put it into a school
 		@course.teacherId = current_user.id
-		current_user.courses << @course
+		# current_user.courses << @course
 		@course.schools << current_user.schools[0]
 		# binding.pry
 		# Save the course

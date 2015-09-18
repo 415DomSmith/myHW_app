@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     
     #Routes for all resources
     scope '/api' do
-      resources :schools, only: [:index]
+      resources :schools, only: [:index, :show]
 
       resources :courses, only: [:create, :show, :update, :destroy] do
         resources :assignments, only: [:create, :show, :update, :destroy] do
