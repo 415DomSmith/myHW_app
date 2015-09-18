@@ -34,7 +34,7 @@ app.service('Submission', ['$resource', function($resource) {
   );
 }]);
 
-// Resource for Submissions sfor Course model
+// Resource for Submissions for Course model
 app.service('SubmissionsForCourse', ['$resource', function($resource) {
   return $resource(
     "/api/users/:user_id/courses/:course_id/assignments.json",

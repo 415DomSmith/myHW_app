@@ -12,12 +12,14 @@ class UsersController < ApplicationController
 		@courses = @user.courses
 		@submissions = @user.submissions
 		@assignments = @user.assignments
+		@schools = @user.schools
 		# binding.pry
 		render json: {
 						:user => @user,
 						:courses => @courses,
 						:submissions => @submissions,
-						:assignments => @assignments
+						:assignments => @assignments,
+						:schools => @schools
 					}, status: :ok   
 	end
 

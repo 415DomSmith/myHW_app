@@ -75,10 +75,21 @@ app.controller("DashboardController", ["$scope", "$location", "User", "$routePar
 // COURSES NEW CONTROLLER ==
 // ==================================================
 
-app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Course", function ($scope, $location, $rootScope, Course){
+app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Course", "School","User", function ($scope, $location, $rootScope, Course, School, User){
     // $scope.courseObj = Course.get({id: $routeParams.id},function(){
     //     $scope.students = $scope.courseObj.students;
     // });
+    $scope.courseData = {}
+    $scope.courseData.ids = [];
+    User.get({id: $rootScope.user_id }, function(user){
+        $scope.school = user.schools[0];
+        var school_id = user.schools[0].id;
+        School.get({id: school_id }, function(school){
+            $scope.students = school.users;
+        });
+    });
+
+    
     $scope.createCourse = function(){
         var course = $scope.courseData;
         course.teacherId = parseInt($rootScope.user_id);
