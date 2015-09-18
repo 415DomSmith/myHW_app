@@ -2,13 +2,13 @@
 <div class="box box-primary">
 	<div class="box-header">
 		<h3>Assignment Description:</h3>
-		<h4>{{assignment.details}}</h4>
+		<h4>{{assignment.description}}</h4>
 		<p> Type in your response to the assignment, or submit a link to a Google drive document... or both! </p>
 	</div>	
 	
 	<form ng-submit="createSubmission()">
 		<label for="answer">Response:</label>
-		<textarea ui-tinymce="tinymceOptions" ng-model="submissionData.answer" rows="30">
+		<textarea ui-tinymce="tinymceOptions" ng-model="submissionData.answer" rows="18">
 		</textarea>
 		<div class="submit-doc-link">
 			<img class="driveIcon" src="/Google-Drive-Icon.png" alt=""><label for="submission_link">Link to a Google Drive Document:</label>

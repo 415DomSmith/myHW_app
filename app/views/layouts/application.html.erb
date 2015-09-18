@@ -18,41 +18,45 @@
      	my_HW
     </a>
 <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top" role="navigation">
-<!-- Sidebar toggle button-->
-      
+    <nav class="navbar navbar-static-top" role="navigation">   
       <div class="navbar-right">
         <ul class="nav navbar-nav">
-<!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a href="" ng-click="logout()" class="dropdown-toggle" data-toggle="dropdown">
+<!-- LOGOUT BUTTON -->
+          <li class="dropdown">
+            <a href="" ng-click="logout()" class="dropdown-toggle">
               <i class="fa fa-sign-out pointer"></i> Sign Out
             </a>
           </li>
-<!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a href="" ng-click="toNewCourse()" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-plus pointer"></i> Add a Course
-            </a>
-          </li>
-<!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <a href="" ng-click="toDocumentLibrary()" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-file-text-o pointer"></i> Document Library
-            </a>
-          </li>
-<!-- Notifications: style can be found in dropdown.less -->
+<!-- NAVIGATION DROP DOWN -->  
           <li class="dropdown notifications-menu">
-            <a href=""  class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-tachometer"></i> Dashboard
-            </a>
- 					</li>
-<!-- Tasks: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-tasks"></i>
             </a>
-      		</li> <!--END TASKS -->
+            <ul class="dropdown-menu">
+              <li class="header">Navigate</li>
+              <ul class="menu">
+                <li class="dropdown messages-menu">
+                  <a href="" ng-click="toNewCourse()" class="dropdown-toggle">
+                    <i class="fa fa-plus pointer"></i> Add a Course
+                  </a>
+                </li>
+      <!-- Messages: style can be found in dropdown.less-->
+                <li class="dropdown messages-menu">
+                  <a href="" ng-click="toDocumentLibrary()" class="dropdown-toggle">
+                    <i class="fa fa-file-text-o pointer"></i> Document Library
+                  </a>
+                </li>
+      <!-- Notifications: style can be found in dropdown.less -->
+                <li class="dropdown notifications-menu">
+                  <a href=""  class="dropdown-toggle">
+                    <i class="fa fa-tachometer"></i> Dashboard
+                  </a>
+                </li>
+              </ul>
+            </ul>  
+          </li> 
+        <!--END TASKS -->
+
 <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
