@@ -315,7 +315,15 @@ app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", 
         theme: 'modern'
     };
 
-
+    $scope.tinymceOptions2 = {
+        inline: false,
+        toolbar: false,
+        menubar: false,
+        statusbar: false,
+        plugins: '',
+        skin: 'lightgray',
+        theme: 'modern'
+    };
     
 }]);
 
