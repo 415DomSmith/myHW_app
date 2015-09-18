@@ -32,6 +32,13 @@
 }
 
 
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 /*Grade Box Custom Directive Gauge Styling*/
 
 
@@ -74,7 +81,7 @@
   width: 12.5rem;
   height: 12.5rem;
   background: transparent;
-  transform: rotate(120deg) translate3d(0, 0, 0);
+  transform: rotate(180deg) translate3d(0, 0, 0);
   transform-origin: center center;
   backface-visibility: hidden;
   transition: all .3s ease-in-out;

@@ -18,6 +18,7 @@ class StaticsController < ApplicationController
   	# Find the submissions of that user for that individual course
   	@submissions_for_course = @user.submissions.where(course_id: @course.id)
 
+    # binding.pry
   	render json: @submissions_for_course, status: :ok
   	
   end
