@@ -166,24 +166,24 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
     $scope.createAssignment = function(){
         // console.log($scope.assignmentData);   
         var assignment = $scope.assignmentData;
-        //Assign the correct category to the object before sending it off
-        if(assignment.category === "class_participation"){
-            assignment.class_participation = true;
-        } else if(assignment.category === "classwork"){
-            assignment.classwork = true;
-        } else if(assignment.category === "homework") {
-            assignment.homework = true;
-        } else if (assignment.category === "project") {
-            assignment.project = true;
-        } else if (assignment.category === "quiz") {
-            assignment.quiz = true;
-        } else if (assignment.category === "reading") {
-            assignment.reading = true;
-        } else if (assignment.category === "test") {
-            assignment.test = true;
-        } else if (assignment.category === "miscellaneous") {
-            assignment.miscellaneous = true;
-        }
+        // //Assign the correct category to the object before sending it off
+        // if(assignment.category === "class_participation"){
+        //     assignment.class_participation = true;
+        // } else if(assignment.category === "classwork"){
+        //     assignment.classwork = true;
+        // } else if(assignment.category === "homework") {
+        //     assignment.homework = true;
+        // } else if (assignment.category === "project") {
+        //     assignment.project = true;
+        // } else if (assignment.category === "quiz") {
+        //     assignment.quiz = true;
+        // } else if (assignment.category === "reading") {
+        //     assignment.reading = true;
+        // } else if (assignment.category === "test") {
+        //     assignment.test = true;
+        // } else if (assignment.category === "miscellaneous") {
+        //     assignment.miscellaneous = true;
+        // }
 
         var newAssignment = new Assignment(assignment);
         newAssignment.$save({course_id: $routeParams.course_id}).then(function(){
@@ -269,24 +269,24 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
 
     $scope.updateAssignment = function(){
         $scope.assignmentObj.assignment = $scope.assignmentData;
-        //Assign the correct category to the object before sending it off
-        if($scope.assignmentObj.assignment.category === "class_participation"){
-            $scope.assignmentObj.assignment.class_participation = true;
-        } else if($scope.assignmentObj.assignment.category === "classwork"){
-            $scope.assignmentObj.assignment.classwork = true;
-        } else if($scope.assignmentObj.assignment.category === "homework") {
-            $scope.assignmentObj.assignment.homework = true;
-        } else if ($scope.assignmentObj.assignment.category === "project") {
-            $scope.assignmentObj.assignment.project = true;
-        } else if ($scope.assignmentObj.assignment.category === "quiz") {
-            $scope.assignmentObj.assignment.quiz = true;
-        } else if ($scope.assignmentObj.assignment.category === "reading") {
-            $scope.assignmentObj.assignment.reading = true;
-        } else if ($scope.assignmentObj.assignment.category === "test") {
-            $scope.assignmentObj.assignment.test = true;
-        } else if ($scope.assignmentObj.assignment.category === "miscellaneous") {
-            $scope.assignmentObj.assignment.miscellaneous = true;
-        };
+        // //Assign the correct category to the object before sending it off
+        // if($scope.assignmentObj.assignment.category === "class_participation"){
+        //     $scope.assignmentObj.assignment.class_participation = true;
+        // } else if($scope.assignmentObj.assignment.category === "classwork"){
+        //     $scope.assignmentObj.assignment.classwork = true;
+        // } else if($scope.assignmentObj.assignment.category === "homework") {
+        //     $scope.assignmentObj.assignment.homework = true;
+        // } else if ($scope.assignmentObj.assignment.category === "project") {
+        //     $scope.assignmentObj.assignment.project = true;
+        // } else if ($scope.assignmentObj.assignment.category === "quiz") {
+        //     $scope.assignmentObj.assignment.quiz = true;
+        // } else if ($scope.assignmentObj.assignment.category === "reading") {
+        //     $scope.assignmentObj.assignment.reading = true;
+        // } else if ($scope.assignmentObj.assignment.category === "test") {
+        //     $scope.assignmentObj.assignment.test = true;
+        // } else if ($scope.assignmentObj.assignment.category === "miscellaneous") {
+        //     $scope.assignmentObj.assignment.miscellaneous = true;
+        // };
 
         $scope.assignmentObj.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function() {
             $location.path('/courses/' + $routeParams.course_id + "/commandcenter");
@@ -495,7 +495,7 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
 
     var init = function(category) {
         // Get all the info about the course for charts
-        $scope.courseObj = Course.get({id: $routeParams.id}, function(){
+        $scope.courseObj = Course.get({id: $routeParams.id, category: category}, function(){
             //Set all of the data recieved to variables on the scope to access later in callback and on view
             $scope.assignments = $scope.courseObj.assignments;  
             $scope.enrolled_students = $scope.courseObj.enrolled_students;

@@ -71,7 +71,7 @@ private
 	end
 
 	def assignment_params
-		params.require(:assignment).permit(:title, :description, :due_date, :homework, :classwork, :class_participation, :quiz, :test, :project, :miscellaneous, :reading, :documents)
+		params.require(:assignment).permit(:title, :description, :due_date, :homework, :classwork, :class_participation, :quiz, :test, :project, :miscellaneous, :reading, :documents, :category)
 		
 	end
 end

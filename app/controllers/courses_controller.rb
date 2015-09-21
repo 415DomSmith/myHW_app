@@ -2,7 +2,17 @@ class CoursesController < ApplicationController
 	before_action :set_course, only: [:show, :edit, :update, :destroy]
 	def show
 		# binding.pry
-		@assignments = @course.assignments
+
+		if params["category"]
+			if params["category"] == "all"
+				@assignments = @course.assignments		
+			else
+				@assignments = @course.assignments.where(category: params["category"])
+			end
+		else
+			@assignments = @course.assignments	
+		end
+		# @assignments = @course.assignments
 		@enrolled_students = @course.users
 
 		#Find the school to find its users so that you can send that to the edit of courses

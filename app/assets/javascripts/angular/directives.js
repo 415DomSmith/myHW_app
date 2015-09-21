@@ -192,10 +192,7 @@ app.directive('hwGradeBox', function() {
     // },
     scope: false,
     link: function(scope, element, attrs) {
-      // console.log(scope)
-      // console.log(scope.student.max)
-      // console.log(scope.student)
-      // debugger
+  
       scope.$watch( function() {return scope.student},
                     function(oldVal, newVal) {
                       $(element).find(".gauge--3 .semi-circle--mask").attr({
@@ -204,13 +201,23 @@ app.directive('hwGradeBox', function() {
                             'transform: rotate(' + (newVal.points / newVal.max * 180) + 'deg);'
                       });
                     }, true);
-      
 
-    // $(element).find(".gauge--3 .semi-circle--mask")
-
-
-
-
+//Swirlly Animation (makes thing choppy)
+      // scope.$watch( function() {return scope.student},
+      //               function(oldVal, newVal) {
+      //                 $(element).find(".gauge--3 .semi-circle--mask").animate({ textIndent: (newVal.points / newVal.max * 180) },
+      //                         {
+      //                           step: function(now,fx){
+      //                             $(this).css({
+      //                               '-webkit-transform': 'rotate('+ now +'deg)',
+      //                               '-moz-transform': 'rotate('+ now +'deg)',
+      //                               '-ms-transform': 'rotate('+ now +'deg)',
+      //                               'transform': 'rotate('+ now +'deg)'
+      //                             });
+      //                           },
+      //                           duration: 1000
+      //                         })
+      //               }, true);
      
     }
   };
