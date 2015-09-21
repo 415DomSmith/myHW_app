@@ -42,17 +42,18 @@ class AssignmentsController < ApplicationController
 		
 	end
 
-	def update
-		
+	def update	
 		@assignment.documents = [];
-		params["assignment"]["documents"].each do |key, value|	
-			if value != false
-				@document = Document.find(value)
-				@assignment.documents << @document
+		if params["assignment"]["documents"]	
+			params["assignment"]["documents"].each do |key, value|	
+				if value != false
+					@document = Document.find(value)
+					@assignment.documents << @document
+				end
 			end
 		end	
 		if @assignment.update(assignment_params)
-			binding.pry
+			# binding.pry
 			render json: @assignment, status: :ok
 		else
 			render json: @assignment.errors, status: :unprocessable_entity
@@ -71,7 +72,7 @@ private
 	end
 
 	def assignment_params
-		params.require(:assignment).permit(:title, :description, :due_date, :homework, :classwork, :class_participation, :quiz, :test, :project, :miscellaneous, :reading, :documents)
+		params.require(:assignment).permit(:title, :description, :due_date, :homework, :classwork, :class_participation, :quiz, :test, :project, :miscellaneous, :reading)
 		
 	end
 end

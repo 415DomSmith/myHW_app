@@ -240,22 +240,18 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
     $scope.assignmentObj = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
         $scope.assignmentData = $scope.assignmentObj.assignment;
         $scope.assignmentDocuments = $scope.assignmentObj.documents;
-        console.log($scope.assignmentObj);
-    });
 
-    $scope.getUsersDocuments = Document.query(function(){
-        $scope.userDocs = $scope.getUsersDocuments;
-        $scope.userDocs.forEach(function(userDoc){
-            $scope.assignmentDocuments.forEach(function(assignedDoc){
-                if ( userDoc.id == assignedDoc.id ) {
-                    userDoc.checked = true;
-                } else {
-                    userDoc.checked = false;
-                }
+        $scope.getUsersDocuments = Document.query(function(){
+            $scope.userDocs = $scope.getUsersDocuments;
+            $scope.userDocs.forEach(function(userDoc){
+                $scope.assignmentDocuments.forEach(function(assignedDoc){
+                    if ( userDoc.id == assignedDoc.id ) {
+                        userDoc.checked = true;
+                    } else if (userDoc.checked !== true) {
+                        userDoc.checked = false;
+                    }
+                });
             });
-        });
-        
-
 
         //loop through userDocs
         //loop through assignmentDocuments
@@ -265,7 +261,31 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
         //on form update, save checkbox values.
 
 
+        });
+        // console.log($scope.assignmentObj);
     });
+
+    // $scope.getUsersDocuments = Document.query(function(){
+    //     $scope.userDocs = $scope.getUsersDocuments;
+    //     $scope.userDocs.forEach(function(userDoc){
+    //         $scope.assignmentDocuments.forEach(function(assignedDoc){
+    //             if ( userDoc.id == assignedDoc.id ) {
+    //                 userDoc.checked = true;
+    //             } else {
+    //                 userDoc.checked = false;
+    //             }
+    //         });
+    //     });
+
+    //     //loop through userDocs
+    //     //loop through assignmentDocuments
+    //     //compare userDocs id to assignmentDocuments id
+    //     //assign true value to userDocs for every document in assignment docs present
+    //     //display userDocs with correct check boxes.
+    //     //on form update, save checkbox values.
+
+
+    // });
 
     $scope.updateAssignment = function(){
         $scope.assignmentObj.assignment = $scope.assignmentData;
@@ -287,7 +307,6 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
         } else if ($scope.assignmentObj.assignment.category === "miscellaneous") {
             $scope.assignmentObj.assignment.miscellaneous = true;
         };
-
         $scope.assignmentObj.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function() {
             $location.path('/courses/' + $routeParams.course_id + "/commandcenter");
         });
@@ -995,8 +1014,8 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
         } else{
             User.get({id: $rootScope.user_id}, function(user){
                 $scope.currentUser = user;
-                console.log($scope.currentUser);
-                console.log($scope.currentUser.user.isTeacher);
+                // console.log($scope.currentUser);
+                // console.log($scope.currentUser.user.isTeacher);
             });
         }
 
