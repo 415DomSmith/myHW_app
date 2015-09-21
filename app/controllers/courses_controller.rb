@@ -8,13 +8,15 @@ class CoursesController < ApplicationController
 		#Find the school to find its users so that you can send that to the edit of courses
 		@school = @course.schools[0]
 		@students = @school.users
+		@announcements = @course.announcements
 
 
 
 		render json: { 	:course => @course, 
 						:assignments => @assignments, 
 						:students => @students, 
-						:enrolled_students => @enrolled_students
+						:enrolled_students => @enrolled_students,
+						:announcements => @announcements
 						}, status: :ok
 	end
 

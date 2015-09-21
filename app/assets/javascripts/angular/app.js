@@ -110,6 +110,18 @@ app.config(["$routeProvider", function ($routeProvider){
 		templateUrl: 'partials/commandCenter.html',
 		controller: 'CommandCenterController'
 	})
+
+	//Announcement New Template
+	.when('/courses/:id/announcements/new', {
+		templateUrl: 'partials/announcementsNew.html',
+		controller: 'AnnouncementsNewController'
+	})
+
+	//Announcement New Template
+	.when('/courses/:id/announcements/:announcement_id/edit', {
+		templateUrl: 'partials/announcementsEdit.html',
+		controller: 'AnnouncementsEditController'
+	})
 	.otherwise({ redirectTo: '/'});
 }]);
 

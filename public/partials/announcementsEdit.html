@@ -1,0 +1,19 @@
+<div class="box box-primary">
+	<div class="box-header">
+		<h1>Write an Announcement</h1>
+	</div>
+	<form ng-submit="updateAnnouncement()">
+		<label for="title">Title of Announcement</label>
+		<input class="form-control" type="text" id="title" ng-model="announcementData.title">
+			<br>
+		<label  for="body">Announcement Body</label>
+		<!-- <input class="form-control" type="text" id="body" ng-model="announcementData.body"> -->
+		<textarea class="form-control" name="body" id="body" cols="30" rows="10" ng-model="announcementData.body"></textarea>
+			<br>
+			<br>
+		<input type="submit" class="btn btn-lg btn-info" value="Edit this Announcement">
+	</form>
+
+<br>
+<button class="btn btn-lg btn-danger" ng-click="deleteAnnouncement()">Delete Announcement</button>
+</div>

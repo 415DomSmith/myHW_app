@@ -1,12 +1,38 @@
 <h1>{{course.name}} {{course.subject}}</h1>
-<!-- {{course}} <-->
 
-<a class="btn btn-lg btn-info" ng-href="/#/courses/{{course.id}}/edit">Update course</a>
-<a class="btn btn-lg btn-info" ng-href="/#/courses/{{course.id}}/assignments/new">Create an assignment for this course</a>
+<h3>Announcements</h3>
+	<!-- <div class="box small-box box-solid bg-aqua">
+		<div class="box-header">
+			<h3>{{assignment.title}}</h3>
+		</div>
+		<div class="box-body">
+			Due: {{assignment.due_date | date:'fullDate'}}
+		</div>
+		<div class="small-box-footer">
+			Assignment Page   <i class="fa fa-arrow-circle-right"></i>
+		</div>
+	</div> -->
+	
 
-<!-- {{assignments}} -->
+<h3>Assignments</h3>
 
-<h3>Assignments for this course</h3>
-<div ng-repeat="assignment in assignments">
-	<a ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}">{{assignment.title}}</a>
+<div class="row">
+	<a class="col-md-3 col-xs-6 dashboard-link" ng-repeat="assignment in assignments | orderBy:'due_date'" ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}">
+		<div class="box small-box box-solid bg-aqua">
+			<div class="box-header">
+				<h3>{{assignment.title}}</h3>
+			</div>
+			<div class="box-body">
+				Due: {{assignment.due_date | date:'fullDate'}}
+			</div>
+			<div class="small-box-footer">
+				Assignment Page   <i class="fa fa-arrow-circle-right"></i>
+			</div>
+		</div>
+	</a>
 </div>
+
+
+<!-- <div ng-repeat="assignment in assignments">
+	<a ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}">{{assignment.title}}</a>
+</div> -->
