@@ -11,26 +11,33 @@ class StaticsController < ApplicationController
 
   def submissions_for_course
 
+    @submissions_for_course = []
   	# Find user and course
   	@user = User.find(params["user_id"])
   	@course = Course.find(params["course_id"])
 
   	# Find the submissions of that user for that individual course
     # binding.pry
-    # if params["category"]
-    #   # @submissions_for_course = @user.submissions.where(course_id: @course.id, category: params["category"])
-    #   @assignments = @course.assignments.where(params["category"]: true)
-    #   @assignments.each do |assignment|
-    #     assignment.submissions.each do | submission|
-    #       if submission.user_id == params["user_id"]
-    #         @submissions_for_course << submission
-    #       end
-    #     end
-    #   end
-
-    # else
+    if params["category"]
+      # @submissions_for_course = @user.submissions.where(course_id: @course.id, category: params["category"])
+      if params["category"] == "all"
+        @submissions_for_course = @user.submissions.where(course_id: @course.id)
+      else
+        @assignments = @course.assignments.where(category: params["category"])
+        # binding.pry
+        @assignments.each do |assignment|
+          # binding.pry
+          assignment.submissions.each do |submission|
+            # binding.pry
+            if submission.user_id == @user.id
+              @submissions_for_course << submission
+            end
+          end
+        end
+      end
+    else
       @submissions_for_course = @user.submissions.where(course_id: @course.id)
-    # end
+    end
   	
 
     # binding.pry
