@@ -28,7 +28,7 @@
             </a>
           </li>
 <!-- NAVIGATION DROP DOWN -->         
-            <li class="dropdown notifications-menu"id="simple-btn-keyboard-nav" dropdown on-toggle="toggled(open)">
+            <li class="dropdown notifications-menu"id="simple-btn-keyboard-nav" dropdown on-toggle="toggled(open)" ng-if="currentUser.user.isTeacher">
               <a href="" class="dropdown-toggle" dropdown-toggle>
                 <i class="fa fa-tasks"></i>
               </a>

@@ -32,9 +32,10 @@ class AssignmentsController < ApplicationController
 
 
 	def show
-		# binding.pry
+		
 		@documents = @assignment.documents
 		@submissions = @assignment.submissions
+		# binding.pry
 		render json: {:assignment => @assignment, :documents => @documents, :submissions => @submissions}, status: :ok
 		
 	end

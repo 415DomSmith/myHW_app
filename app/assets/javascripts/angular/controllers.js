@@ -182,7 +182,7 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
             assignment.test = true;
         } else if (assignment.category === "miscellaneous") {
             assignment.miscellaneous = true;
-        };
+        }
 
         var newAssignment = new Assignment(assignment);
         newAssignment.$save({course_id: $routeParams.course_id}).then(function(){
@@ -234,15 +234,36 @@ app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope",
 // ==================================================
 // TODO: Look up how to refactor new and edits so code is DRYer
 app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Course", "Document", function ($scope, $location, $rootScope, Assignment, $routeParams, Course, Document){
-      
+    $scope.assignmentDocuments = [];
     // $scope.courseData = Course.get({id: $routeParams.id});
     $scope.assignmentObj = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
         $scope.assignmentData = $scope.assignmentObj.assignment;
+        $scope.assignmentDocuments = $scope.assignmentObj.documents;
+        console.log($scope.assignmentObj);
     });
 
     $scope.getUsersDocuments = Document.query(function(){
         $scope.userDocs = $scope.getUsersDocuments;
-        console.log($scope.userDocs);
+        $scope.userDocs.forEach(function(userDoc){
+            $scope.assignmentDocuments.forEach(function(assignedDoc){
+                if ( userDoc.id == assignedDoc.id ) {
+                    userDoc.checked = true;
+                } else {
+                    userDoc.checked = false;
+                }
+            });
+        });
+        
+
+
+        //loop through userDocs
+        //loop through assignmentDocuments
+        //compare userDocs to assignmentDocuments
+        //assign true value to userDocs for every document present
+        //display userDocs with correct check boxes.
+        //on form update, save checkbox values.
+
+        // console.log($scope.userDocs);
 
     });
 
@@ -759,9 +780,11 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
             $location.url("/login/");
         } else{
             User.get({id: $rootScope.user_id}, function(user){
-                $scope.currentUser = user
-            })
-        };
+                $scope.currentUser = user;
+                console.log($scope.currentUser);
+                console.log($scope.currentUser.user.isTeacher);
+            });
+        }
 
 
     });
@@ -799,9 +822,9 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
         isopen: false
     };
 
-    $scope.toggled = function(open) {
-        $log.log('Dropdown is now: ', open);
-    };
+    // $scope.toggled = function(open) {
+    //     $log.log('Dropdown is now: ', open);
+    // };
 
     $scope.toggleDropdown = function($event) {
         $event.preventDefault();

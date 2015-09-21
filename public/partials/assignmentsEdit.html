@@ -50,7 +50,7 @@
 								<tbody>	
 									<tr ng-repeat="doc in userDocs">				
 											<td><a target="_blank" ng-href="{{doc.google_drive_url}}{{doc.local_file_url}}">{{doc.attachment_file_name}}{{doc.google_doc_name}}</a></td>
-											<td><input type="checkbox" ng-model="assignmentData.documents[doc.id]" ng-true-value="{{doc.id}}" name="{{doc.id}}"></td>
+											<td><input type="checkbox" ng-model="assignmentData.documents[doc.id]" ng-true-value="{{doc.id}}" ng-checked="doc.checked == true" name="{{doc.id}}"></td>
 									</tr>
 								</tbody>	
 							</table>
@@ -67,3 +67,5 @@
 	</form>
 
 <a ng-click="deleteAssignment()" class="btn btn-lg btn-info">Delete this Assignment</a>
+
+
