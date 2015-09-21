@@ -259,12 +259,11 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
 
         //loop through userDocs
         //loop through assignmentDocuments
-        //compare userDocs to assignmentDocuments
-        //assign true value to userDocs for every document present
+        //compare userDocs id to assignmentDocuments id
+        //assign true value to userDocs for every document in assignment docs present
         //display userDocs with correct check boxes.
         //on form update, save checkbox values.
 
-        // console.log($scope.userDocs);
 
     });
 
