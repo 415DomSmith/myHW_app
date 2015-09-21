@@ -36,7 +36,9 @@ class AssignmentsController < ApplicationController
 		@documents = @assignment.documents
 		@submissions = @assignment.submissions
 		# binding.pry
-		render json: {:assignment => @assignment, :documents => @documents, :submissions => @submissions}, status: :ok
+		render json: { 	:assignment => @assignment, 
+						:documents => @documents, 
+						:submissions => @submissions}, status: :ok
 		
 	end
 

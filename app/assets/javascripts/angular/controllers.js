@@ -487,152 +487,315 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         $location.path("/courses/" + $routeParams.id + "/edit")
     };
 
-    // Get all the info about the course for charts
-    $scope.courseObj = Course.get({id: $routeParams.id}, function(){
-        //Set all of the data recieved to variables on the scope to access later in callback and on view
-        $scope.assignments = $scope.courseObj.assignments;  
-        $scope.enrolled_students = $scope.courseObj.enrolled_students;
-        var arr = Object.keys($scope.enrolled_students).map(function(k){ return $scope.enrolled_students[k]});
 
-    // CHART LOGIC
-
-        //Chart 1 Arrays (average vs max per assignment)
-        $scope.assignmentTitles = []; //An array to hold all assignment titles for the Chart1 ("chart-labels" in the directive)
-        $scope.averagesArr =[]; // Array to be used in Chart1 (averages of assignment submission totals)
-        $scope.maxArr =[]; // Array to be used in Chart1 ()
-        $scope.seriesOne = ["Average Points", "Maximum Points"]; // ("chart-series")
-        $scope.chartOneData = [$scope.averagesArr, $scope.maxArr];
+    $scope.changeCategories = function(){
+        init($scope.category)
+    }
 
 
-        //Chart2 Arrays (total submissions per assignment)
+    var init = function(category) {
+        // Get all the info about the course for charts
+        $scope.courseObj = Course.get({id: $routeParams.id}, function(){
+            //Set all of the data recieved to variables on the scope to access later in callback and on view
+            $scope.assignments = $scope.courseObj.assignments;  
+            $scope.enrolled_students = $scope.courseObj.enrolled_students;
+            var arr = Object.keys($scope.enrolled_students).map(function(k){ return $scope.enrolled_students[k]});
 
-        $scope.chartTwoX = ["Total Students"]; // (chart-labels)
-        $scope.chartTwoY = [[arr.length - 1 ]];//[arr.length - 1]; //(chart-data)
-        // $scope.seriesTwo = ["Number of Students"]
+        // CHART LOGIC
 
-        
-        $scope.assignmentsWithSubmissionsArr = []; //An array to hold all of the assignment objects (which contain an array of submissions)
-        
+            //Chart 1 Arrays (average vs max per assignment)
+            $scope.assignmentTitles = []; //An array to hold all assignment titles for the Chart1 ("chart-labels" in the directive)
+            $scope.averagesArr =[]; // Array to be used in Chart1 (averages of assignment submission totals)
+            $scope.maxArr =[]; // Array to be used in Chart1 ()
+            $scope.seriesOne = ["Average Points", "Maximum Points"]; // ("chart-series")
+            $scope.chartOneData = [$scope.averagesArr, $scope.maxArr];
 
-        $scope.assignments.forEach(function(assignment){
 
-            $scope.assignmentTitles.push(assignment.title); //To be used for chart1 x axis
-            $scope.chartTwoX.push(assignment.title); //To be used for chart2 to populate x axis
+            //Chart2 Arrays (total submissions per assignment)
 
-            Assignment.get({course_id: $routeParams.id, assignment_id: assignment.id}, function(a){
+            $scope.chartTwoX = ["Total Students"]; // (chart-labels)
+            $scope.chartTwoY = [[arr.length - 1 ]];//[arr.length - 1]; //(chart-data)
+            // $scope.seriesTwo = ["Number of Students"]
 
-                $scope.assignmentsWithSubmissionsArr.push(a); //To be used to get averages
+            
+            $scope.assignmentsWithSubmissionsArr = []; //An array to hold all of the assignment objects (which contain an array of submissions)
+            
 
-                // Initial values to then find averages
-                var scoreSum = 0;
-                var max = 0;
-                var averageCounter = 0;
-                var submissionCounter = 0;
+            $scope.assignments.forEach(function(assignment){
 
-                //Loop over array holding assignments with submissions nested
-                $scope.assignmentsWithSubmissionsArr.forEach(function(assignment){
-                    // Loop over the submissions in the assignment to get average
-                    assignment.submissions.forEach(function(submission){
-                        // Add up all the data from each submission for the assignment
-                        scoreSum += submission.score;
-                        max = submission.max;
-                        averageCounter ++;
-                        submissionCounter ++;
+                $scope.assignmentTitles.push(assignment.title); //To be used for chart1 x axis
+                $scope.chartTwoX.push(assignment.title); //To be used for chart2 to populate x axis
 
-                        // console.log(scoreSum)
+                Assignment.get({course_id: $routeParams.id, assignment_id: assignment.id}, function(a){
+
+                    $scope.assignmentsWithSubmissionsArr.push(a); //To be used to get averages
+
+                    // Initial values to then find averages
+                    var scoreSum = 0;
+                    var max = 0;
+                    var averageCounter = 0;
+                    var submissionCounter = 0;
+
+                    //Loop over array holding assignments with submissions nested
+                    $scope.assignmentsWithSubmissionsArr.forEach(function(assignment){
+                        // Loop over the submissions in the assignment to get average
+                        assignment.submissions.forEach(function(submission){
+                            // Add up all the data from each submission for the assignment
+                            scoreSum += submission.score;
+                            max = submission.max;
+                            averageCounter ++;
+                            submissionCounter ++;
+
+                            // console.log(scoreSum)
+                        });
+
+                        // console.log(scoreSum, "outside")
+                        $scope.maxArr.push(max); //Push the max to the array that will be used by the chart
+                        $scope.averagesArr.push( scoreSum / averageCounter ); // Push the average to the array used by the chart
+
+                        // Reset values for next assignment
+                        scoreSum = 0;
+                        max = 0;
+                        averageCounter = 0;
+
                     });
-
-                    // console.log(scoreSum, "outside")
-                    $scope.maxArr.push(max); //Push the max to the array that will be used by the chart
-                    $scope.averagesArr.push( scoreSum / averageCounter ); // Push the average to the array used by the chart
-
-                    // Reset values for next assignment
-                    scoreSum = 0;
-                    max = 0;
-                    averageCounter = 0;
-
+                    $scope.chartTwoY[0].push(submissionCounter); // Push in the amount of submissions for an assignment
+                    submissionCounter = 0; // Now that all of the submissions for an assignment have been counted, reset them
+                    $scope.assignmentsWithSubmissionsArr =[]; // Reset array so it will only do magic on the following one the next time through
                 });
-                $scope.chartTwoY[0].push(submissionCounter); // Push in the amount of submissions for an assignment
-                submissionCounter = 0; // Now that all of the submissions for an assignment have been counted, reset them
-                $scope.assignmentsWithSubmissionsArr =[]; // Reset array so it will only do magic on the following one the next time through
+
             });
+        }); // End of Get on courses for charts logic and all of its callbacks
 
-        });
-    }); // End of Get on courses for charts logic and all of its callbacks
+        //____________________________________________________________________________________________________
 
-    //____________________________________________________________________________________________________
+        // STUDENT LOGIC
+        Course.get({id: $routeParams.id}, function(course){
 
-    // STUDENT LOGIC
-    Course.get({id: $routeParams.id}, function(course){
+            // Arrays to populate with student data
+            $scope.students = [];
+            var studentChartLabels = [],
+                studentChartTotalPoints = [],
+                studentChartMaxPoints = [],
+                studentChartData = [],
+                max = 0,
+                points = 0;    
 
-        // Arrays to populate with student data
-        $scope.students = [];
-        var studentChartLabels = [],
-            studentChartTotalPoints = [],
-            studentChartMaxPoints = [],
-            studentChartData = [],
-            max = 0,
-            points = 0;    
-
-        course.enrolled_students.forEach(function(student){
+            course.enrolled_students.forEach(function(student){
 
 
-            SubmissionsForCourse.query({course_id: $routeParams.id, user_id: student.id}, function(submissions){
-                student.studentSubmissions = submissions
-                // Find score data and assignment titles
-                submissions.forEach(function(submission){
+                SubmissionsForCourse.query({course_id: $routeParams.id, user_id: student.id, category: category}, function(submissions){
+                    student.studentSubmissions = submissions
+                    // Find score data and assignment titles
+                    submissions.forEach(function(submission){
 
 
-                    //Assignment titles
-                        studentChartLabels.push(submission.assignment_title);
-                    //Submission Data
+                        //Assignment titles
+                            studentChartLabels.push(submission.assignment_title);
+                        //Submission Data
 
 
-                    studentChartMaxPoints.push(submission.max);
-                    studentChartTotalPoints.push(submission.score);
-                    max += submission.max;
-                    points += submission.score;
+                        studentChartMaxPoints.push(submission.max);
+                        studentChartTotalPoints.push(submission.score);
+                        max += submission.max;
+                        points += submission.score;
+                        // console.log(max)
+                        // console.log(points)
+                    });
+                    student.max = max;
+                    student.points = points;
+                    max = 0;
+                    points = 0;
+
+                    //assign data to student
+                    student.studentChartLabels = studentChartLabels;
+                    student.studentChartSeries = ["Student's Points", "Max Points"];
+                    student.studentChartData = [studentChartTotalPoints, studentChartMaxPoints];
+                    student.courseId = $routeParams.id;
+                    // student.max = max;
+                    // student.points = points;
                     // console.log(max)
                     // console.log(points)
-                });
-                student.max = max;
-                student.points = points;
-                max = 0;
-                points = 0;
+                    // console.log(student)
 
-                //assign data to student
-                student.studentChartLabels = studentChartLabels;
-                student.studentChartSeries = ["Student's Points", "Max Points"];
-                student.studentChartData = [studentChartTotalPoints, studentChartMaxPoints];
-                student.courseId = $routeParams.id;
-                // student.max = max;
-                // student.points = points;
-                // console.log(max)
-                // console.log(points)
-                // console.log(student)
-
-                //push student to students
-                $scope.students.push(student);
-                // console.log(student)
-                // console.log(studentChartLabels)
+                    //push student to students
+                    if (!student.isTeacher) {
+                        $scope.students.push(student);    
+                    };
+                    
+                    // console.log(student)
+                    // console.log(studentChartLabels)
 
 
-                // console.log(studentChartLabels, "before")
-                studentChartLabels = [];
-                // console.log(studentChartLabels, "after")
+                    // console.log(studentChartLabels, "before")
+                    studentChartLabels = [];
+                    // console.log(studentChartLabels, "after")
+                    
+                    studentChartTotalPoints = [];
+                    studentChartMaxPoints = [];
+                    studentChartData = [];
+                })
+
+               
+
+
+            });
+
+
+        });
+    } // END OF INIT
+
+    init();
+
+    // // Get all the info about the course for charts
+    // $scope.courseObj = Course.get({id: $routeParams.id}, function(){
+    //     //Set all of the data recieved to variables on the scope to access later in callback and on view
+    //     $scope.assignments = $scope.courseObj.assignments;  
+    //     $scope.enrolled_students = $scope.courseObj.enrolled_students;
+    //     var arr = Object.keys($scope.enrolled_students).map(function(k){ return $scope.enrolled_students[k]});
+
+    // // CHART LOGIC
+
+    //     //Chart 1 Arrays (average vs max per assignment)
+    //     $scope.assignmentTitles = []; //An array to hold all assignment titles for the Chart1 ("chart-labels" in the directive)
+    //     $scope.averagesArr =[]; // Array to be used in Chart1 (averages of assignment submission totals)
+    //     $scope.maxArr =[]; // Array to be used in Chart1 ()
+    //     $scope.seriesOne = ["Average Points", "Maximum Points"]; // ("chart-series")
+    //     $scope.chartOneData = [$scope.averagesArr, $scope.maxArr];
+
+
+    //     //Chart2 Arrays (total submissions per assignment)
+
+    //     $scope.chartTwoX = ["Total Students"]; // (chart-labels)
+    //     $scope.chartTwoY = [[arr.length - 1 ]];//[arr.length - 1]; //(chart-data)
+    //     // $scope.seriesTwo = ["Number of Students"]
+
+        
+    //     $scope.assignmentsWithSubmissionsArr = []; //An array to hold all of the assignment objects (which contain an array of submissions)
+        
+
+    //     $scope.assignments.forEach(function(assignment){
+
+    //         $scope.assignmentTitles.push(assignment.title); //To be used for chart1 x axis
+    //         $scope.chartTwoX.push(assignment.title); //To be used for chart2 to populate x axis
+
+    //         Assignment.get({course_id: $routeParams.id, assignment_id: assignment.id}, function(a){
+
+    //             $scope.assignmentsWithSubmissionsArr.push(a); //To be used to get averages
+
+    //             // Initial values to then find averages
+    //             var scoreSum = 0;
+    //             var max = 0;
+    //             var averageCounter = 0;
+    //             var submissionCounter = 0;
+
+    //             //Loop over array holding assignments with submissions nested
+    //             $scope.assignmentsWithSubmissionsArr.forEach(function(assignment){
+    //                 // Loop over the submissions in the assignment to get average
+    //                 assignment.submissions.forEach(function(submission){
+    //                     // Add up all the data from each submission for the assignment
+    //                     scoreSum += submission.score;
+    //                     max = submission.max;
+    //                     averageCounter ++;
+    //                     submissionCounter ++;
+
+    //                     // console.log(scoreSum)
+    //                 });
+
+    //                 // console.log(scoreSum, "outside")
+    //                 $scope.maxArr.push(max); //Push the max to the array that will be used by the chart
+    //                 $scope.averagesArr.push( scoreSum / averageCounter ); // Push the average to the array used by the chart
+
+    //                 // Reset values for next assignment
+    //                 scoreSum = 0;
+    //                 max = 0;
+    //                 averageCounter = 0;
+
+    //             });
+    //             $scope.chartTwoY[0].push(submissionCounter); // Push in the amount of submissions for an assignment
+    //             submissionCounter = 0; // Now that all of the submissions for an assignment have been counted, reset them
+    //             $scope.assignmentsWithSubmissionsArr =[]; // Reset array so it will only do magic on the following one the next time through
+    //         });
+
+    //     });
+    // }); // End of Get on courses for charts logic and all of its callbacks
+
+    // //____________________________________________________________________________________________________
+
+    // // STUDENT LOGIC
+    // Course.get({id: $routeParams.id}, function(course){
+
+    //     // Arrays to populate with student data
+    //     $scope.students = [];
+    //     var studentChartLabels = [],
+    //         studentChartTotalPoints = [],
+    //         studentChartMaxPoints = [],
+    //         studentChartData = [],
+    //         max = 0,
+    //         points = 0;    
+
+    //     course.enrolled_students.forEach(function(student){
+
+
+    //         SubmissionsForCourse.query({course_id: $routeParams.id, user_id: student.id}, function(submissions){
+    //             student.studentSubmissions = submissions
+    //             // Find score data and assignment titles
+    //             submissions.forEach(function(submission){
+
+
+    //                 //Assignment titles
+    //                     studentChartLabels.push(submission.assignment_title);
+    //                 //Submission Data
+
+
+    //                 studentChartMaxPoints.push(submission.max);
+    //                 studentChartTotalPoints.push(submission.score);
+    //                 max += submission.max;
+    //                 points += submission.score;
+    //                 // console.log(max)
+    //                 // console.log(points)
+    //             });
+    //             student.max = max;
+    //             student.points = points;
+    //             max = 0;
+    //             points = 0;
+
+    //             //assign data to student
+    //             student.studentChartLabels = studentChartLabels;
+    //             student.studentChartSeries = ["Student's Points", "Max Points"];
+    //             student.studentChartData = [studentChartTotalPoints, studentChartMaxPoints];
+    //             student.courseId = $routeParams.id;
+    //             // student.max = max;
+    //             // student.points = points;
+    //             // console.log(max)
+    //             // console.log(points)
+    //             // console.log(student)
+
+    //             //push student to students
+    //             if (!student.isTeacher) {
+    //                 $scope.students.push(student);    
+    //             };
                 
-                studentChartTotalPoints = [];
-                studentChartMaxPoints = [];
-                studentChartData = [];
-            })
+    //             // console.log(student)
+    //             // console.log(studentChartLabels)
+
+
+    //             // console.log(studentChartLabels, "before")
+    //             studentChartLabels = [];
+    //             // console.log(studentChartLabels, "after")
+                
+    //             studentChartTotalPoints = [];
+    //             studentChartMaxPoints = [];
+    //             studentChartData = [];
+    //         })
 
            
 
 
-        });
+    //     });
 
 
-    });
+    // });
 
 
     
