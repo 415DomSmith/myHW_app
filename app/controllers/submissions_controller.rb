@@ -5,6 +5,7 @@ class SubmissionsController < ApplicationController
 		@submission = @assignment.submissions.new(submission_params)
 		@submission.assignment_title = @assignment.title
 		@submission.course_id = @assignment.course.id
+		@submission.name = current_user.name
 		current_user.submissions << @submission
 
 		# binding.pry
@@ -44,7 +45,7 @@ private
 	end
 
 	def submission_params
-		params.require(:submission).permit(:score, :max, :answer, :submission_link)
+		params.require(:submission).permit(:score, :max, :answer, :name, :submission_link)
 		
 	end
 end

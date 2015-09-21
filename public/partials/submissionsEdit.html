@@ -1,15 +1,18 @@
-<h1>Student Edit Submission Page</h1>
+<h1>{{submissionData.name}}'s Response to {{submissionData.assignment_title}} </h1>
 
-<p>{{submissionData.max}}</p>
-<p>{{submissionData.score}}</p>
 
 <form ng-submit="updateSubmission()">
-	<label for="answer">Answer</label>
-	<textarea id="answer" ng-model="submissionData.answer" cols="30" rows="10"></textarea>
 
-	<label for="submission_link">Your google drive link to answer</label>
-	<input type="text" ng-model="submissionData.submission_link" id="submission_link">
+	<h5>Edit Your Response Below:</h5>
+	<textarea ui-tinymce="tinymceOptions" ng-model="submissionData.answer" rows="20">
+	</textarea>
+	
+	<div class="submit-doc-link">
+		<img class="driveIcon" src="/Google-Drive-Icon.png" alt=""><label for="submission_link">Link to a Google Drive Document:</label>
 
-	<input type="submit" value="Edit your submission">
+		<input type="text" class="form-control" ng-model="submissionData.submission_link" id="submission_link">
+	</div>
+	
+	<input type="submit" class="btn btn-lg btn-info center-block" value="Edit your response">
 	
 </form>

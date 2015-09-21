@@ -189,7 +189,7 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
             $location.path("/courses/" + $routeParams.course_id + "/commandcenter");
         });
     };
-
+    //Text editor options for creating a new assignment.
     $scope.tinymceOptions = {
         inline: false,
         statusbar: false,
@@ -216,7 +216,7 @@ app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope",
     $scope.courseObj = Course.get({id: $routeParams.course_id}, function(){
         $scope.course = $scope.courseObj.course;
     });
-
+    //Text editor options for displaying an assignment, without the toolbars.
      $scope.tinymceOptions = {
         inline: false,
         toolbar: false,
@@ -277,7 +277,7 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
             $location.path("/courses/" + $routeParams.course_id + "/commandcenter" );
         });
     };
-
+    //Text editor options for updating a new assignment.
     $scope.tinymceOptions = {
         inline: false,
         plugins: 'autolink colorpicker save autosave image link paste print spellchecker table textcolor',
@@ -307,14 +307,14 @@ app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", 
             $location.path("/users/" + $rootScope.user_id);
         });
     };
-
+    //Text editor options for entering a new submission
     $scope.tinymceOptions = {
         inline: false,
         plugins: 'autolink colorpicker save autosave image link paste print spellchecker table textcolor wordcount',
         skin: 'lightgray',
         theme: 'modern'
     };
-
+    //Text editor options to render the text box without toolbars (to just display the text).
     $scope.tinymceOptions2 = {
         inline: false,
         toolbar: false,
@@ -333,19 +333,19 @@ app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", 
 
 app.controller("SubmissionsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
 
-    $scope.submission = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id})
-
+    $scope.submission = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id});
+    // console.log($scope.submission);
     $scope.deleteSubmission = function(){
         $scope.submission.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}, function(){
-            $location.path("/users/" + $rootScope.user_id)
-        })
+            $location.path("/users/" + $rootScope.user_id);
+        });
     };
 
-     $scope.tinymceOptions = {
+    $scope.tinymceOptions = {
         inline: false,
         toolbar: false,
         menubar: false,
-        plugins: '',
+        plugins: 'wordcount',
         skin: 'lightgray',
         theme: 'modern'
     };
@@ -366,6 +366,14 @@ app.controller("SubmissionsEditController", ["$scope", "$location","$rootScope",
         });
     };
 
+    //Text editor options for entering a new submission
+    $scope.tinymceOptions = {
+        inline: false,
+        plugins: 'autolink colorpicker save autosave image link paste print spellchecker table textcolor wordcount',
+        skin: 'lightgray',
+        theme: 'modern'
+    };
+
 }]);
 
 // ==================================================
@@ -379,6 +387,15 @@ app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope"
         submission.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}).then(function(){
             $location.path("/courses/" + $routeParams.course_id + "/commandcenter");
         });
+    };
+
+    $scope.tinymceOptions = {
+        inline: false,
+        toolbar: false,
+        menubar: false,
+        plugins: 'wordcount',
+        skin: 'lightgray',
+        theme: 'modern'
     };
 
 

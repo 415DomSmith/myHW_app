@@ -1,25 +1,38 @@
-<h1>Additional Info Page</h1>
-<form ng-submit="submitAdditionalInfo()">
-	<input type="radio" ng-model="formData.teacher" name="userType"  value="Teacher" > Teacher
-	<br>
-	<input type="radio" ng-model="formData.student" name="userType" value="Student"> Student
-	<br>
-	<br>
-	<br>
-	<input type="radio" ng-model="formData.female" name="gender"  value="Female" > Female
-	<br>
-	<input type="radio" ng-model="formData.male" name="gender" value="Male"> Male
-	<br>
-	<br>
-	<br>
-	<select ng-model="formData.school">
-		<option ng-repeat="school in schools" value="{{school.id}}">{{school.name}}</option>
-	</select>
+<div class="box box-primary">
+	<div class="box-header">
+		<h1>Additional Info Page</h1>
+	</div>
+	<div class="add-info">
+		<form ng-submit="submitAdditionalInfo()">
+			<label for="isTeacher">Please Select Teacher or Student:</label>
+			<div>
+			<input type="radio" ng-model="formData.teacher" name="userType"  value="Teacher" > Teacher
+			<br>
+			<input type="radio" ng-model="formData.student" name="userType" value="Student"> Student
+			</div>
+			<br>
+			<br>
+			<br>
+			<label for="gender">Please Select Your Gender:</label>
+			<div>
+			<input type="radio" ng-model="formData.female" name="gender"  value="Female" > Female
+			<br>
+			<input type="radio" ng-model="formData.male" name="gender" value="Male"> Male
+			</div>
+			<br>
+			<br>
+			<br>
+			<label for="school">Please Select Your Current School:</label>
+			<select ng-model="formData.school">
+				<option ng-repeat="school in schools" value="{{school.id}}">{{school.name}}</option>
+			</select>
 
-	<br>
-	<br>
-	<br>
-	<input type="submit" value="Submit">
-</form>
+			<br>
+			<br>
+			<br>
+			<input class="btn btn-lg btn-info" type="submit" value="Submit">
+		</form>
+	</div>
+</div>
 
-<p>{{user}}</p>
+<!-- <p>{{user}}</p> -->

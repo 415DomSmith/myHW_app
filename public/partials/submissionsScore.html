@@ -1,15 +1,26 @@
-<h1>New Submission Page</h1>
-
-<p>{{submissionData.answer}}</p>
-<p>{{submissionData.submission_link}}</p>
+<h3>Score {{submissionData.name}}'s response to {{submissionData.assignment_title}}</h3>
 
 <form ng-submit="scoreSubmission()">
-	<label for="score">Score Points</label>
-	<input type="number" ng-model="submissionData.score" id="score">
-
-	<label for="max">Maximum Points Possible</label>
-	<input type="number" ng-model="submissionData.max" id="max">
-
-	<input type="submit" value="Submit your answer">
+	<div>
+		<label for="score"> {{submissionData.name}}'s Score:</label>
+		<input type="number" ng-model="submissionData.score" id="score">
+	</div>
+	<div>
+		<label for="max">Maximum Points Possible:</label>
+		<input type="number" ng-model="submissionData.max" id="max">
+	</div>
+	<input type="submit" class="btn btn-sm btn-info" value="Submit Grade">
 	
 </form>
+
+<h5 ng-hide="!submissionData.submission_link">Link to document uploaded by {{submissionData.name}}:</h5>
+<h5>{{submissionData.submission_link}}</h5>
+
+<div style="z-index: 2; pointer-events: none;">
+
+<h5>{{submissionData.name}}'s Response to {{submissionData.assignment_title}}:</h5>
+<textarea ui-tinymce="tinymceOptions" class="mceNonEditable" ng-model="submissionData.answer" rows="30">
+</textarea>
+
+
+
