@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         resources :assignments, only: [:create, :show, :update, :destroy] do
           resources :submissions, only: [:create, :show, :update, :destroy]
         end
+        resources :announcements, only: [:create, :update, :destroy, :show]
       end
 
       resources :users, only: [:index, :show, :create, :update, :destroy] do

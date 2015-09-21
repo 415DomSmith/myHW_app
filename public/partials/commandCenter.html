@@ -4,12 +4,20 @@
 	</div>
 	<div class="col-sm-4 col-xs-12">
 		<button ng-click="toNewAssignment()" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> New Assignment</button>
+		<button ng-click="toNewAnnouncement()" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> New Announcement</button>
 		<button ng-click="toEditCourse()" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Edit Course</button>
 	</div>
 
 
 </div>
+
 <section class="content">
+
+
+
+
+	
+
 	<div class="row">
 		<div class="col-sm-4 col-xs-12"> <!-- ASSIGNMENT BOX -->
 			<div class="box box-solid box-warning assignment-box-outer">
@@ -27,7 +35,7 @@
 									
 								</thead>		
 								<tbody>	
-									<tr ng-repeat="assignment in assignments">
+									<tr ng-repeat="assignment in assignments | orderBy:'due_date'">
 									
 											<td>{{assignment.title}}</td>
 											<td>{{assignment.due_date | date:'fullDate'}}</td>
@@ -65,6 +73,7 @@
 					</div>
 			</div>
 		</div> <!-- END CHART1 BOX -->
+		
 		<div class="col-sm-4 col-xs-12"> <!-- GRAPH2 BOX -->
 			<div class="box box-solid box-success">
 				<div class="box-header text-center">Submissions per Assignment</div>
@@ -84,12 +93,51 @@
 		</div> <!-- END GRAPH2 BOX -->
 	</div> <!-- END ROW -->
 
+	<div class="row">
+		<div class="col-sm-12 col-xs-12"> <!-- ANNOUNCEMENTS BOX -->
+			<div class="box box-solid box-info assignment-box-outer">
+				<div class="box-header text-center">Announcements</div>
+				<div class="assignment-box-inner">
+					<div class="inner">
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th class="assign-title">Title</th>
+										<th class="assign-title">Body</th>
+										<th>Edit</th>
+									</tr>
+									
+								</thead>		
+								<tbody>	
+									<tr ng-repeat="announcement in courseObj.announcements">
+									
+											<td>{{announcement.title}}</td>
+											<td>{{announcement.body}}</td>
+											<td><a class="btn btn-xs btn-warning" ng-href="/#/courses/{{courseObj.course.id}}/announcements/{{announcement.id}}/edit">Edit</a></td>
+											
+									</tr>
+								</tbody>	
+							</table>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div> <!-- END ANNOUNCEMENTS BOX -->
+
+	</div> <!-- END ROW -->
+
+
+
+
+
+
 <!-- STUDENTS BOXES -->
 
 	<div class="row">
 
 		<div class="col-sm-6 col-xs-12" ng-repeat="student in students"> <!-- STUDENT BOX -->
-			<div class="box box-solid box-info">
+			<div class="box box-solid box-primary">
 				<div class="box-header text-center">{{student.name}}</div>
 					<div class="inner"> <!-- STUDENT INNER BOX BEGIN-->
 						<div class="row"><!-- ROW FOR GRADE GAUGE AND SUBMISSION TABLE -->
@@ -162,24 +210,5 @@
 	</div> <!-- END ROW -->
 </section>
 
-<p>averages array: {{averagesArr}}</p>
-<p>max array: {{maxArr}}</p>
-<p>Chart 1 data: {{chartOneData}}</p>
-<!-- 
-        Titles: {{assignmentTitles}}
-        <br>
-        Averages: {{averagesArr}}
-        <br>
-        Maxes: {{maxArr}}
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
 
-        X: {{chartTwoX}}
-        <br>
-        <br>
-        Y: {{chartTwoY}} -->

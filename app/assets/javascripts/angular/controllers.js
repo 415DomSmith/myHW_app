@@ -110,6 +110,7 @@ app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Co
     $scope.courseObj = Course.get({id: $routeParams.id}, function(){
       $scope.course = $scope.courseObj.course;
       $scope.assignments = $scope.courseObj.assignments;  
+      $scope.announcements = $scope.courseObj.announcements
     });
     
 }]);
@@ -268,7 +269,7 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
         };
 
         $scope.assignmentObj.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function() {
-            $location.path('/courses/' + $routeParams.course_id) + "/assignments/" + $routeParams.assignment_id;
+            $location.path('/courses/' + $routeParams.course_id + "/commandcenter");
         });
     };
 
@@ -402,6 +403,53 @@ app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope"
 }]);
 
 // ==================================================
+// ANNOUNCEMENTS NEW CONTROLLER ==
+// ==================================================
+
+app.controller("AnnouncementsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Announcement", function ($scope, $location, $rootScope, Assignment, $routeParams, Announcement){
+        
+    $scope.announcementData = {};
+
+
+    $scope.createAnnouncement = function(){
+        var announcement = $scope.announcementData;
+        announcement.date = Date.now();
+        console.log(announcement.date)
+        console.log(Date.now())
+        var newAnnouncement = new Announcement(announcement)
+        newAnnouncement.$save({course_id: $routeParams.id}).then(function(){
+            $location.path("/courses/" + $routeParams.id + "/commandcenter");
+        });
+    }
+
+}]);
+
+// ==================================================
+// ANNOUNCEMENTS EDIT CONTROLLER ==
+// ==================================================
+
+app.controller("AnnouncementsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Announcement", function ($scope, $location, $rootScope, Assignment, $routeParams, Announcement){
+        
+    $scope.announcementData = Announcement.get({course_id: $routeParams.id, announcement_id: $routeParams.announcement_id});
+    $scope.updateAnnouncement = function() {
+        var announcement = $scope.announcementData;
+        announcement.$update({course_id: $routeParams.id, announcement_id: $routeParams.announcement_id}).then(function(){
+            // debugger
+            $location.path("/courses/" + $routeParams.id + "/commandcenter/");
+        });
+    };
+
+    $scope.deleteAnnouncement = function(){
+        // debugger
+        console.log($scope.announcementData)
+      $scope.announcementData.$delete({course_id: $routeParams.id, announcement_id: $scope.announcementData.id}, function(){
+          $location.path("/courses/" + $routeParams.id + "/commandcenter" );
+      });
+    };
+
+}]);
+
+// ==================================================
 // COMMAND CENTER CONTROLLER ==
 // ==================================================
 
@@ -409,6 +457,10 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
     
     $scope.toNewAssignment = function(){
         $location.path("/courses/" + $routeParams.id + "/assignments/new");
+    };
+
+    $scope.toNewAnnouncement = function(){
+        $location.path("/courses/" + $routeParams.id + "/announcements/new");
     };
 
     $scope.toEditCourse = function(){

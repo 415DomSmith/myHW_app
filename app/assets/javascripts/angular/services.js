@@ -25,6 +25,15 @@ app.service('Assignment', ['$resource', function($resource) {
   );
 }]);
 
+// Resource for Announcement model
+app.service('Announcement', ['$resource', function($resource) {
+  return $resource(
+    "/api/courses/:course_id/announcements/:announcement_id.json",
+    {course_id: "@course_id", assignment_id: "@announcement_id"},
+    {update: {method: "PUT"}}
+  );
+}]);
+
 // Resource for Submission model
 app.service('Submission', ['$resource', function($resource) {
   return $resource(
@@ -58,3 +67,6 @@ app.service('Document', ['$resource', '$rootScope', function ($resource, $rootSc
     {user_id: $rootScope.user_id }
   );
 }]);
+
+
+
