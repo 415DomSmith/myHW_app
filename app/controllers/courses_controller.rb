@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
 		# binding.pry
 
 		if params["category"]
-			if params["category"] == "all"
+			if params["category"] == "All"
 				@assignments = @course.assignments		
 			else
 				@assignments = @course.assignments.where(category: params["category"])
