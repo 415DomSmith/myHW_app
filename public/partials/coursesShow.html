@@ -1,17 +1,36 @@
 <h1>{{course.name}} {{course.subject}}</h1>
 
 <h3>Announcements</h3>
-	<!-- <div class="box small-box box-solid bg-aqua">
-		<div class="box-header">
-			<h3>{{assignment.title}}</h3>
+<div class="row">
+	<div class="col-sm-12 col-xs-12"> <!-- ANNOUNCEMENTS BOX -->
+		<div class="box box-solid box-info assignment-box-outer">
+			<div class="box-header text-center">Announcements</div>
+			<div class="assignment-box-inner">
+				<div class="inner">
+					<div class="box-body table-responsive no-padding">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th class="assign-title">Title</th>
+									<th class="assign-title">Body</th>
+								</tr>
+								
+							</thead>		
+							<tbody>	
+								<tr ng-repeat="announcement in announcements">
+								
+										<td>{{announcement.title}}</td>
+										<td>{{announcement.body}}</td>
+										
+								</tr>
+							</tbody>	
+						</table>
+					</div>
+				</div>
+			</div>	
 		</div>
-		<div class="box-body">
-			Due: {{assignment.due_date | date:'fullDate'}}
-		</div>
-		<div class="small-box-footer">
-			Assignment Page   <i class="fa fa-arrow-circle-right"></i>
-		</div>
-	</div> -->
+	</div> <!-- END ANNOUNCEMENTS BOX -->
+</div>
 	
 
 <h3>Assignments</h3>

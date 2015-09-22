@@ -20,7 +20,7 @@ class StaticsController < ApplicationController
     # binding.pry
     if params["category"]
       # @submissions_for_course = @user.submissions.where(course_id: @course.id, category: params["category"])
-      if params["category"] == "all"
+      if params["category"] == "All"
         @submissions_for_course = @user.submissions.where(course_id: @course.id)
       else
         @assignments = @course.assignments.where(category: params["category"])
