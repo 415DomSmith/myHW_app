@@ -60,11 +60,19 @@ app.service('School', ['$resource', function($resource) {
 }]);
 
 
-// Resource for Documents model
+// Resources for Documents model
 app.service('Document', ['$resource', '$rootScope', function ($resource, $rootScope) {
   return $resource(
     "/api/users/:user_id/documents",
     {user_id: $rootScope.user_id }
+  );
+}]);
+
+app.service('DestroyDoc', ['$resource', '$rootScope', function ($resource, $rootScope) {
+  return $resource(
+    "/api/documents/:id",
+    {id: "@id"},
+    {delete: {method: "DELETE"}}
   );
 }]);
 

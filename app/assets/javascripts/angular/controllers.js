@@ -645,7 +645,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootS
 // DOCUMENT LIBRARY CONTROLLER ======================
 // ==================================================
 
-app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", "Document", function ($scope, $location, $http, $rootScope, $routeParams, Document){
+app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", "Document", "DestroyDoc", function ($scope, $location, $http, $rootScope, $routeParams, Document, DestroyDoc){
 
     $scope.userDocs = "";
 // ===== SENDS GET REQUEST TO DOCUMENT CONTROLLER ON BACKEND, RESPONSE IS LIST OF USERS DOCS     
@@ -677,6 +677,27 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
     $scope.onApiLoad = function () {
         gapi.load('auth', {'callback': onAuthApiLoad});
         gapi.load('picker', {'callback': onPickerApiLoad});
+    };
+
+    // $scope.deleteSubmission = function(){
+    //     $scope.submission.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}, function(){
+    //         $location.path("/users/" + $rootScope.user_id);
+    //     });
+    // };
+    $scope.trashFile = function (file) {
+        var c = confirm("Are you sure you want to delete " + file.toElement.offsetParent.attributes[1].nodeValue + "?");
+        if (c === true) {
+            console.log(file);
+            var id = file.toElement.offsetParent.attributes[0].nodeValue;
+            console.log("File ID is " + id + ", destroy " + id);
+        } else {
+            console.log(file);
+            console.log("return file to its original position");
+        }
+    };
+
+    $scope.grabFile = function (file) {
+        console.log(file.target.dataset.id);
     };
 
 // Private Functions 

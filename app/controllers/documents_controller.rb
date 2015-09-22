@@ -37,6 +37,9 @@ class DocumentsController < ApplicationController
 
   def destroy ### TODO - FIGURE OUT DESTROY FOR PAPECLIP FILES... AND GOOGLE DRIVE FILES... SEPARATELY ###
     @document.destroy
+    # if @document has_attached_file :attachment
+    #   attachment.clear
+    # end
     respond_to do |format|
       format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
       format.json { head :no_content }
