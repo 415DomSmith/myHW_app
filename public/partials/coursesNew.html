@@ -12,6 +12,9 @@
 			<label  for="subject">Subject</label>
 			<input class="form-control" type="text" id="subject" ng-model="courseData.subject">
 				<br>
+			<label  for="iframe">Google Calendar Embed Code</label>
+			<input class="form-control" type="text" id="iframe" ng-model="courseData.iframe">
+				<br>
 				<br>
 
 
@@ -32,7 +35,7 @@
 										</thead>		
 										<tbody>	
 											<tr ng-repeat="student in students">	<!-- REPEAT BEGIN -->			
-													<td>{{student.name}} {{student.id}} courseData.ids: {{courseData.ids}}</td>
+													<td>{{student.name}}</td>
 													<td><input type="checkbox" ng-model="courseData.ids[student.id]" ng-true-value="{{student.id}}" name="students" id="{{student.id}}"></td>
 											</tr>
 										</tbody>	

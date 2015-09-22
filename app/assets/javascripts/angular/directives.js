@@ -223,6 +223,25 @@ app.directive('hwGradeBox', function() {
   };
 });
 
+app.directive('hwCalendar', function() {
+  return {
+    templateUrl: 'partials/calendar.html',
+    scope: {
+      iframe: "="
+
+    },
+    link: function(scope, element, attrs) {
+      // console.log(scope)
+      // $("div.calendar").text(scope.iframe)
+
+      scope.$watch( function() {return scope.iframe},
+                    function(oldVal, newVal) {
+                      $("div.calendar").html(scope.iframe)
+                    }, true);
+    }
+  };
+});
+
 
 
 

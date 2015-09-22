@@ -43,6 +43,7 @@ class CoursesController < ApplicationController
 		# course_params.delete("ids")
 		@course.name = course_params["name"]
 		@course.subject = course_params["subject"]
+		@course.iframe = course_params["iframe"]
 		# binding.pry
 		if @course.save
 		  render json: @course, status: :ok
@@ -73,6 +74,7 @@ class CoursesController < ApplicationController
 		@course.schools << current_user.schools[0]
 		# binding.pry
 		# Save the course
+		@course.iframe = course_params["iframe"]
 		if @course.save
 		  render json: @course, status: :created
 		else
@@ -90,7 +92,7 @@ class CoursesController < ApplicationController
 private
 
 	def course_params
-	  params.require(:course).permit(:name, :subject, ids: [])
+	  params.require(:course).permit(:name, :subject, :iframe, ids: [])
 	end
 
 	def set_course
