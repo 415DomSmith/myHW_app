@@ -1,0 +1,19 @@
+.driveIcon {
+  height: 20px;
+  width: 20px;
+  margin-top: -5px;
+}
+
+.fileIcon {
+	text-decoration: none;
+	list-style: none;
+	text-align: center;
+}
+
+.fileIcon a:visited {
+	color: black;
+}
+
+.fileIcon a:link {
+	color: black;
+}
