@@ -1,8 +1,28 @@
 <h1>{{course.name}} {{course.subject}}</h1>
 
+	
+
+<h3>Assignments</h3>
+
+<div class="row">
+	<a class="col-md-3 col-xs-6 dashboard-link" ng-repeat="assignment in assignments | orderBy:'due_date'" ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}">
+		<div class="box small-box box-solid bg-aqua">
+			<div class="box-header">
+				<h3>{{assignment.title}}</h3>
+			</div>
+			<div class="box-body">
+				Due: {{assignment.due_date | date:'fullDate'}}
+			</div>
+			<div class="small-box-footer">
+				Assignment Page   <i class="fa fa-arrow-circle-right"></i>
+			</div>
+		</div>
+	</a>
+</div>
+
 <h3>Announcements</h3>
 <div class="row">
-	<div class="col-sm-12 col-xs-12"> <!-- ANNOUNCEMENTS BOX -->
+	<div class="col-sm-4 col-xs-12"> <!-- ANNOUNCEMENTS BOX -->
 		<div class="box box-solid box-info assignment-box-outer">
 			<div class="box-header text-center">Announcements</div>
 			<div class="assignment-box-inner">
@@ -30,27 +50,10 @@
 			</div>	
 		</div>
 	</div> <!-- END ANNOUNCEMENTS BOX -->
+	<div class="col-sm-8 col-xs-12"><!-- CALENDAR BOX -->
+		<hw-calendar iframe="courseObj.course.iframe"></hw-calendar>
+	</div> <!-- END CALENDAR BOX -->
 </div>
-	
-
-<h3>Assignments</h3>
-
-<div class="row">
-	<a class="col-md-3 col-xs-6 dashboard-link" ng-repeat="assignment in assignments | orderBy:'due_date'" ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}">
-		<div class="box small-box box-solid bg-aqua">
-			<div class="box-header">
-				<h3>{{assignment.title}}</h3>
-			</div>
-			<div class="box-body">
-				Due: {{assignment.due_date | date:'fullDate'}}
-			</div>
-			<div class="small-box-footer">
-				Assignment Page   <i class="fa fa-arrow-circle-right"></i>
-			</div>
-		</div>
-	</a>
-</div>
-
 
 <!-- <div ng-repeat="assignment in assignments">
 	<a ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}">{{assignment.title}}</a>
