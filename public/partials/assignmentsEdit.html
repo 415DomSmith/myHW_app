@@ -8,14 +8,14 @@
 		<div class="assign-category">
 			<label for="category">Category:</label>
 			<select ng-model="assignmentData.category" id="category">
-				<option value="class_participation">Class Participation</option>
-				<option value="classwork">Classwork</option>
-				<option value="homework">Homework</option>
-				<option value="project">Project</option>
-				<option value="quiz">Quiz</option>
-				<option value="reading">Reading</option>
-				<option value="test">Test</option>
-				<option value="miscellaneous">Miscellaneous</option>
+				<option value="Class Participation">Class Participation</option>
+				<option value="Classwork">Classwork</option>
+				<option value="Homework">Homework</option>
+				<option value="Project">Project</option>
+				<option value="Quiz">Quiz</option>
+				<option value="Reading">Reading</option>
+				<option value="Test">Test</option>
+				<option value="Miscellaneous">Miscellaneous</option>
 			</select>
 		</div>
 		<div class="assign-title">
@@ -49,8 +49,8 @@
 								</thead>		
 								<tbody>	
 									<tr ng-repeat="doc in userDocs">				
-											<td><a target="_blank" ng-href="{{doc.google_drive_url}}{{doc.local_file_url}}">{{doc.attachment_file_name}}{{doc.google_doc_name}}</a></td>
-											<td><input type="checkbox" ng-model="assignmentData.documents[doc.id]" ng-true-value="{{doc.id}}" ng-checked="doc.checked == true" name="{{doc.id}}"></td>
+										<td><a target="_blank" ng-href="{{doc.google_drive_url}}{{doc.local_file_url}}">{{doc.attachment_file_name}}{{doc.google_doc_name}}</a></td>
+										<td><input type="checkbox" ng-model="assignmentData.documents[doc.id]" ng-true-value="{{doc.id}}" ng-checked="doc.checked == true" name="{{doc.id}}"></td>
 									</tr>
 								</tbody>	
 							</table>
@@ -66,6 +66,6 @@
 		</div>
 	</form>
 
-<a ng-click="deleteAssignment()" class="btn btn-lg btn-info">Delete this Assignment</a>
+<a ng-click="deleteAssignment()" class="btn btn-lg btn-danger">Delete this Assignment</a>
 
 

@@ -1,9 +1,8 @@
 == README
 
-Name: Dominic Smith and Parker Lewis
-Date: 9/8/15
+
 Description:
-A platform for students and teachers to interact digitally online. Teachers assign homework through our app or by posting electronic documents, either uploaded to our app or pulled down from google drive. Teachers can track and grade assignments, and maintain a classroom grade book for each student. Also, teachers and students will be able to chat via a Firebase/Angular chat feature.
+A platform for students and teachers to interact digitally online. Teachers assign homework through our app or by posting electronic documents, either uploaded to our app or pulled down from google drive. Teachers can track and grade assignments, and maintain a classroom grade book for each student. Teachers and students will be able to chat via a Firebase/Angular chat feature. Teachers can post classroom announcements. Teachers can manage a class-room calendar. 
 
 Technologies:
 - Rails for back-end

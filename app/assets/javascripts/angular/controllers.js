@@ -218,60 +218,31 @@ app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope",
 // TODO: Look up how to refactor new and edits so code is DRYer
 app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Course", "Document", function ($scope, $location, $rootScope, Assignment, $routeParams, Course, Document){
     $scope.assignmentDocuments = [];
+    // $scope.assignmentData.documents = {};
     // $scope.courseData = Course.get({id: $routeParams.id});
     $scope.assignmentObj = Assignment.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}, function(){
         $scope.assignmentData = $scope.assignmentObj.assignment;
         $scope.assignmentDocuments = $scope.assignmentObj.documents;
-
+        $scope.assignmentData.documents = {};
         $scope.getUsersDocuments = Document.query(function(){
             $scope.userDocs = $scope.getUsersDocuments;
-            $scope.userDocs.forEach(function(userDoc){
+            $scope.userDocs.forEach(function (userDoc){
                 $scope.assignmentDocuments.forEach(function(assignedDoc){
                     if ( userDoc.id == assignedDoc.id ) {
                         userDoc.checked = true;
+                        $scope.assignmentData.documents[assignedDoc.id] = assignedDoc.id;
                     } else if (userDoc.checked !== true) {
                         userDoc.checked = false;
                     }
                 });
             });
-
-        //loop through userDocs
-        //loop through assignmentDocuments
-        //compare userDocs id to assignmentDocuments id
-        //assign true value to userDocs for every document in assignment docs present
-        //display userDocs with correct check boxes.
-        //on form update, save checkbox values.
-
-
         });
-        // console.log($scope.assignmentObj);
     });
 
-    // $scope.getUsersDocuments = Document.query(function(){
-    //     $scope.userDocs = $scope.getUsersDocuments;
-    //     $scope.userDocs.forEach(function(userDoc){
-    //         $scope.assignmentDocuments.forEach(function(assignedDoc){
-    //             if ( userDoc.id == assignedDoc.id ) {
-    //                 userDoc.checked = true;
-    //             } else {
-    //                 userDoc.checked = false;
-    //             }
-    //         });
-    //     });
 
-    //     //loop through userDocs
-    //     //loop through assignmentDocuments
-    //     //compare userDocs id to assignmentDocuments id
-    //     //assign true value to userDocs for every document in assignment docs present
-    //     //display userDocs with correct check boxes.
-    //     //on form update, save checkbox values.
-
-
-    // });
-
+    
     $scope.updateAssignment = function(){
         $scope.assignmentObj.assignment = $scope.assignmentData;
-
         $scope.assignmentObj.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function() {
             $location.path('/courses/' + $routeParams.course_id + "/commandcenter");
         });
@@ -301,8 +272,6 @@ app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", 
          $scope.assignment = $scope.assignmentObj.assignment;
      });
     
-   
-
     $scope.createSubmission = function(){
         // console.log($scope.submissionData)
         var submission = $scope.submissionData;

@@ -8,16 +8,13 @@ class AssignmentsController < ApplicationController
 	
 
 		params["documents"].each do |key, value|
-			# binding.pry
 			if value != false
 				@document = Document.find(value)
 				@assignment.documents << @document
 			end
 		end	
-		
-		# binding.pry
-
 		# gives all users of the class the assignment
+		binding.pry
 		if @assignment.save
 			@course.users.each do |r|
 				# @user = User.find(r.id)
