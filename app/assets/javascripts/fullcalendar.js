@@ -711,9 +711,10 @@ function Calendar(element, options, eventSources) {
 				}
 			})
 			.bind('dragstop', function(ev, ui) {
-				console.log("stop")
-				console.log("ev", ev)
-				console.log("ui", ui)
+				console.log(date)
+				// console.log("stop")
+				// console.log("ev", ev)
+				// console.log("ui", ui)
 				// debugger
 				if (_dragElement) {
 					currentView.dragStop(_dragElement, ev, ui);

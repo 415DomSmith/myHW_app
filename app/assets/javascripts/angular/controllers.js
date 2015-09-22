@@ -445,6 +445,11 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         init($scope.category);
     };
 
+    $scope.sendToGoogle = function(){
+        console.log($scope.start)
+        console.log($scope.finish)
+    }
+
 
     var init = function(category) {
         // Get all the info about the course for charts
