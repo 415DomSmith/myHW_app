@@ -423,7 +423,7 @@ app.controller("AnnouncementsEditController", ["$scope", "$location","$rootScope
 }]);
 
 // ==================================================
-// COMMAND CENTER CONTROLLER ==
+// COMMANDCENTER CONTROLLER ==
 // ==================================================
 
 app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", 'SubmissionsForCourse', function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course, SubmissionsForCourse){
@@ -587,18 +587,12 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                     studentChartTotalPoints = [];
                     studentChartMaxPoints = [];
                     studentChartData = [];
-                })
-
-               
-
-
+                });
             });
-
-
         });
-    } // END OF INIT
+    }; // END OF INIT
 
-    init();    
+    init();
 
 }]);
 
