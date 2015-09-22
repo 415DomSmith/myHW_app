@@ -3,12 +3,14 @@
 <a ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}/edit" class="btn btn-sm btn-info" >Edit this submission</a>
 
 
+<div ng-if="currentUser.isTeacher">
+	<a ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}/score" class="btn btn-sm btn-info">Score this submission</a>	
+</div>
 
-<a ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}/score" class="btn btn-sm btn-info">Score this submission</a>
 
 
 
-<a ng-click="deleteSubmission()" class="btn btn-sm btn-info">Delete this submission</a>
+<a ng-click="deleteSubmission()" class="btn btn-sm btn-danger">Delete this submission</a>
 
 <div class= "score-box box box-solid box-warning" ng-hide="!submission.score">
 	<div class= box-header>
