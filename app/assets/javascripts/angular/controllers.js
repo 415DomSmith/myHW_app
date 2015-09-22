@@ -647,7 +647,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootS
 
 app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", "Document", function ($scope, $location, $http, $rootScope, $routeParams, Document){
 
-    $scope.userDocs = "";   
+    $scope.userDocs = "";
 // ===== SENDS GET REQUEST TO DOCUMENT CONTROLLER ON BACKEND, RESPONSE IS LIST OF USERS DOCS     
     $scope.getUsersDocuments = function () {
         $http.get('/api/users/:user_id/documents').then(function (res) {
@@ -750,6 +750,9 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
        
         document.getElementById('result').innerHTML = message;
     }
+
+
+
 
 }]);
 

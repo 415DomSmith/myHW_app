@@ -13,9 +13,9 @@
 
 
 <div>
-	<li ng-repeat="doc in userDocs" class="fileIcon">
+	<li ng-repeat="doc in userDocs" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{animate:true}" class="fileIcon">
 		<div>
-			<a target="_blank" draggable="true" ng-href="{{doc.google_drive_url}}{{doc.local_file_url}}">
+			<a target="_blank" ng-href="{{doc.google_drive_url}}{{doc.local_file_url}}">
 				<i class="fa fa-file-o fa-5x"></i>
 				<p>{{doc.attachment_file_name}}{{doc.google_doc_name}}</p>
 			</a>

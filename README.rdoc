@@ -8,8 +8,8 @@ Technologies:
 - Rails for back-end
 - Paperclip for local file storage
 - Angular for front-end
-Twitter Bootstrap for reactivity
-Firebase or socket.io for chat
+- Twitter Bootstrap for reactivity
+- Firebase or socket.io for chat
 
 
 APIs:
