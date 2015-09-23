@@ -4,10 +4,24 @@
   margin-top: -5px;
 }
 
+.trash-icon {
+	width: 100px;
+	height: 100px;
+}
+
+.file-area {
+	margin-top: 50px;
+	height: 80%;
+}
+
 .fileIcon {
 	text-decoration: none;
 	list-style: none;
 	text-align: center;
+	margin: 20px;
+	display: inline-block;
+	width: 100px;
+	height: 100px;
 }
 
 .fileIcon a:visited {
@@ -18,15 +32,9 @@
 	color: black;
 }
 
-.trash-icon {
-	width: 85px;
-	height: 85px;
-}
-
-.file-area {
-	margin-top: 50px;
-}
-
 .file-icon-text {
-
+	margin-top: 5px;
+	overflow: auto;
+	height: 40px;
 }
+
