@@ -17,6 +17,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'less-rails', '~> 2.7.0'
 gem 'therubyracer'
 
+gem 'rails_12factor', :group => :production
+
 gem 'adminlte2-rails'
 gem 'less-rails-bootstrap'
 #Devise gem for authentication

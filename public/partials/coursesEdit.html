@@ -6,10 +6,10 @@
 		</div>
 		<form ng-submit="updateCourse()">
 			<label for="name">Period, Block, or Name of Course</label>
-			<input class="form-control" type="text" id="name" ng-model="courseData.name">
+			<input class="form-control" type="text" id="name" ng-model="courseData.name" name="course-name" required>
 		<br>
 			<label  for="subject">Subject</label>
-			<input class="form-control" type="text" id="subject" ng-model="courseData.subject">
+			<input class="form-control" type="text" id="subject" ng-model="courseData.subject" name="course-subject" required>
 		<br>
 		<label  for="iframe">Google Calendar Embed Code</label>
 			<input class="form-control" type="text" id="iframe" ng-model="courseData.iframe">

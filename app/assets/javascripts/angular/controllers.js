@@ -133,9 +133,12 @@ app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Co
     };
 
     $scope.deleteCourse = function() {
-        $scope.courseObj.$delete({id: $routeParams.id}, function(){
-            $location.path("/users/" + $rootScope.user_id);
-        });
+        var c = confirm("Are you sure you want to delete this course?");
+        if (c === true) {
+            $scope.courseObj.$delete({id: $routeParams.id}, function(){
+                $location.path("/users/" + $rootScope.user_id);
+            });
+        }
     };
 }]);//END COURSE EDIT CONT
 
@@ -655,9 +658,11 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
         $location.path("/users/" + $routeParams.id + "/gDrive");
     };
 //========TODO -- MOVE API KEYS==============
-    var clientId = '605204229077-4vs3h126rq01capco35b045nlf09vs36.apps.googleusercontent.com';
-    var developerKey = 'AIzaSyD_QG50mpCMVrp0m5oMHY2UHL62G2Qj0-I';
-    var clientSecret = 'H71cfMHC9ejDfp9c4S-bOEsC';
+
+
+    var cid = '605204229077-4vs3h126rq01capco35b045nlf09vs36.apps.googleusercontent.com';
+    var dk = 'AIzaSyD_QG50mpCMVrp0m5oMHY2UHL62G2Qj0-I';
+
     var oauthToken;
     var pickerApiLoaded = false;
     var scope = ['https://www.googleapis.com/auth/drive.file'];
@@ -689,7 +694,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
     function onAuthApiLoad() { //Runs google auth again for access to drive files
         window.gapi.auth.authorize(
             {
-              'client_id': clientId,
+              'client_id': cid,
               'scope': scope,
               'immediate': false
             },
@@ -713,7 +718,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
         if (pickerApiLoaded && oauthToken) {
             var picker = new google.picker.PickerBuilder()
             .setOAuthToken(oauthToken)
-            .setDeveloperKey(developerKey)
+            .setDeveloperKey(dk)
             .addView(new google.picker.DocsView()) //chooses documents view in picker
             // .enableFeature(google.picker.Feature.MULTISELECT_ENABLED) //currently can only select one file for importing at a time
             .setCallback(pickerCallback)

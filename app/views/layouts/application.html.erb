@@ -6,6 +6,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
+
   <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -21,12 +22,6 @@
     <nav class="navbar navbar-static-top" role="navigation">   
       <div class="navbar-right">
         <ul class="nav navbar-nav">
-<!-- LOGOUT BUTTON -->
-          <li class="dropdown">
-            <a href="" ng-click="logout()" class="dropdown-toggle">
-              <i class="fa fa-sign-out pointer"></i> Sign Out
-            </a>
-          </li>
 <!-- NAVIGATION DROP DOWN -->         
             <li class="dropdown notifications-menu"id="simple-btn-keyboard-nav" dropdown on-toggle="toggled(open)" ng-if="currentUser.user.isTeacher">
               <a href="" class="dropdown-toggle" dropdown-toggle>
@@ -58,28 +53,19 @@
         <!--END TASKS -->
 
 <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">
-              <i class=""></i>
-              <span>USER NAME <i class="caret"></i></span>
+          <li class="dropdown user user-menu" dropdown on-toggle="toggled(open)">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
+             
+              <span>{{currentUser.user.name}}</span>
             </a>
             <ul class="dropdown-menu">
           <!-- User image -->
               <li class="user-header bg-light-blue">
-                <img src="" class="img-circle" alt="User Image" />
-                <p> Jane Doe - Web Developer</p>
+                <img ng-src="{{currentUser.user.image}}" class="img-circle" alt="User Image" />
+                <p> {{currentUser.user.name}}</p>
               </li>
         	<!-- Menu Body -->
               <li class="user-body">
-                <div class="col-xs-4 text-center">
-                  <a href="">Followers</a>
-                </div>
-                <div class="col-xs-4 text-center">
-                  <a href="">Sales</a>
-                </div>
-                <div class="col-xs-4 text-center">
-                  <a href="">Friends</a>
-                </div>
               </li>
           <!-- Menu Footer-->
               <li class="user-footer">
@@ -87,7 +73,7 @@
                   <a href="" class="btn btn-default btn-flat">Profile</a>
                 </div>
               	<div class="pull-right">
-                  <a href="" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="" class="btn btn-default btn-flat" ng-click="logout()">Sign out</a>
                 </div>
               </li>
             </ul>

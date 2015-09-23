@@ -3,11 +3,11 @@
 <form ng-submit="scoreSubmission()">
 	<div>
 		<label for="score"> {{submissionData.name}}'s Score:</label>
-		<input type="number" ng-model="submissionData.score" id="score">
+		<input type="number" ng-model="submissionData.score" id="score" name="score" required>
 	</div>
 	<div>
 		<label for="max">Maximum Points Possible:</label>
-		<input type="number" ng-model="submissionData.max" id="max">
+		<input type="number" ng-model="submissionData.max" id="max" name="max-points" required>
 	</div>
 	<input type="submit" class="btn btn-sm btn-info" value="Submit Grade">
 	
