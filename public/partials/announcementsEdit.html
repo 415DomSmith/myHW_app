@@ -4,7 +4,7 @@
 	</div>
 	<form ng-submit="updateAnnouncement()">
 		<label for="title">Title of Announcement</label>
-		<input class="form-control" type="text" id="title" ng-model="announcementData.title">
+		<input class="form-control" type="text" id="title" ng-model="announcementData.title" name="title" required>
 			<br>
 		<label  for="body">Announcement Body</label>
 		<!-- <input class="form-control" type="text" id="body" ng-model="announcementData.body"> -->

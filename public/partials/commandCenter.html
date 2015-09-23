@@ -24,7 +24,7 @@
 				<div class="box-header text-center">{{category}} Assignments</div>
 				<br>
 					<label for="category">Category:</label>
-					<select ng-model="category" id="category" ng-change="changeCategories()">
+					<select ng-model="category" id="category" ng-change="changeCategories()" ng-init="category = 'All'">
 						<option value="All">All</option>
 						<option value="Class Participation">Class Participation</option>
 						<option value="Classwork">Classwork</option>
