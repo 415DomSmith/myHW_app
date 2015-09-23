@@ -1,19 +1,17 @@
 class DocumentsController < ApplicationController
+
   before_action :set_document, only: [:show, :edit, :update, :destroy]
+
+  before_action :confirm_logged_in
+  
+  before_action :confirm_teacher, only: [:create, :index, :destroy]
+
 	
   def index
 		@documents = current_user.documents #### ONLY GETTING CURRENT USERS DOCUMENTS ###
 		render json: @documents, status: :ok
   end
 
-	# def show ### NOT SURE WE NEED SHOW ###
- #    @documents = current_user.documents
-	# 	render json: @documents, status: :ok
-	# end
-
-	def new
-		@document = Document.new
-	end
 
 	def create
 		# binding.pry
@@ -27,13 +25,6 @@ class DocumentsController < ApplicationController
     end
 	end
 
-	def update ### NOT SURE HOW UPDATE WILL WORK ###
-    if @document.update(document_params)
-      render json: @document, status: :ok
-    else
-      render json: @document.errors, status: :unprocessable_entity
-    end
-	end
 
   def destroy ### TODO - FIGURE OUT DESTROY FOR PAPECLIP FILES... AND GOOGLE DRIVE FILES... SEPARATELY ###
     

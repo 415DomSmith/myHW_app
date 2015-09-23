@@ -1,4 +1,4 @@
-var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth', 'ngFileUpload', "ngResource", 'chart.js', 'ui.tinymce', 'ui.bootstrap', 'ngDragDrop']);
+var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth', 'ngFileUpload', "ngResource", 'chart.js', 'ui.tinymce', 'ui.bootstrap', 'ngDragDrop', 'ngAnimate']);
 
 // Config of Google Oauth
 app.config(["$authProvider", function($authProvider) {
@@ -13,6 +13,19 @@ app.config(["$authProvider", function($authProvider) {
 app.config(["$httpProvider", function($httpProvider) {
 	$httpProvider.defaults.headers.common['X-CSRF-Token'] =
     $('meta[name=csrf-token]').attr('content');
+
+    $httpProvider.interceptors.push(["$q", "$location", function($q, $location) {
+      return {
+       'responseError': function(rejection) {
+             // do something on error
+             if (rejection.status == 401) {
+               $location.path("/")
+             }
+             return $q.reject(rejection);
+           }
+      };
+    }]);
+
 }]);
 
 // Angular Routes

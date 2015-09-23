@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
 	before_action :set_course, only: [:show, :edit, :update, :destroy]
+	before_action :confirm_logged_in
+	before_action :confirm_teacher, only: [:create, :update, :destroy]
 	def show
 		# binding.pry
 
