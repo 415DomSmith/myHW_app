@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="row file-area">
-		<li data-id="{{doc.id}}" data-docName="{{doc.attachment_file_name}}{{doc.google_doc_name}}" ng-repeat="doc in userDocs" data-drag="true" data-jqyoui-options="{revert: 'false'}" jqyoui-draggable="{animate:true, onStart: 'grabFile'}" class="fileIcon">
+		<li data-id="{{doc.id}}" data-docName="{{doc.attachment_file_name}}{{doc.google_doc_name}}" ng-repeat="doc in userDocs" data-drag="true" data-jqyoui-options="{revert: 'false'}" jqyoui-draggable="{animate:true}" class="fileIcon">
 			<div>
 				<a target="_blank" ng-href="{{doc.google_drive_url}}{{doc.local_file_url}}">
 					<i class="fa fa-file-o fa-5x"></i>
