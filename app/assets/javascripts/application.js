@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular/lib/angular.min
+//= require angular/lib/Chart.min
+//= require angular/lib/angular-chart
 //= require_tree ./angular/lib
 //= require angular/app
 //= require tinymce
