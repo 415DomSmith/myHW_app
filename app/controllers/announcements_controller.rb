@@ -1,5 +1,7 @@
 class AnnouncementsController < ApplicationController
 	before_action :set_announcement, only: [:show, :update, :destroy]
+	before_action :confirm_logged_in
+	before_action :confirm_teacher, only: [:create, :update, :destroy]
 
 	def create
 		# binding.pry
