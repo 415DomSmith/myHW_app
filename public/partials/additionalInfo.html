@@ -6,18 +6,18 @@
 		<form ng-submit="submitAdditionalInfo()">
 			<label for="isTeacher">Please Select Teacher or Student:</label>
 			<div>
-			<input type="radio" ng-model="formData.teacher" name="userType"  value="Teacher" > Teacher
+			<input type="radio" ng-model="formData.teacher" name="userType"  value="Teacher" required> Teacher
 			<br>
-			<input type="radio" ng-model="formData.student" name="userType" value="Student"> Student
+			<input type="radio" ng-model="formData.student" name="userType" value="Student" required> Student
 			</div>
 			<br>
 			<br>
 			<br>
 			<label for="gender">Please Select Your Gender:</label>
 			<div>
-			<input type="radio" ng-model="formData.female" name="gender"  value="Female" > Female
+			<input type="radio" ng-model="formData.female" name="gender"  value="Female" required > Female
 			<br>
-			<input type="radio" ng-model="formData.male" name="gender" value="Male"> Male
+			<input type="radio" ng-model="formData.male" name="gender" value="Male" required> Male
 			</div>
 			<br>
 			<br>

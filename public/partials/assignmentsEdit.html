@@ -7,7 +7,7 @@
 	<form ng-submit="updateAssignment()" >
 		<div class="assign-category">
 			<label for="category">Category:</label>
-			<select ng-model="assignmentData.category" id="category">
+			<select ng-model="assignmentData.category" id="category" name="category">
 				<option value="Class Participation">Class Participation</option>
 				<option value="Classwork">Classwork</option>
 				<option value="Homework">Homework</option>
@@ -20,13 +20,14 @@
 		</div>
 		<div class="assign-title">
 			<label for="title">Title of Assignment:</label>
-			<input class="form-control" type="text" ng-model="assignmentData.title" id="title">
+			<p>(Be sure to keep your title succinct to ensure your graphs load properly.)</p>
+			<input class="form-control" type="text" ng-model="assignmentData.title" id="title" name="title" required>
 		</div>
 		<label for="description">Description of Assignment:</label>
-		<textarea ng-model="assignmentData.description" ui-tinymce="tinymceOptions" cols="30" rows="10"></textarea>
+		<textarea ng-model="assignmentData.description" ui-tinymce="tinymceOptions" cols="30" rows="10" name="description"></textarea>
 		<div class="assign-due">
 			<label for="due_date">Due Date</label>
-			<input type="date" ng-model="assignmentData.due_date" id="due_date">
+			<input type="date" ng-model="assignmentData.due_date" id="due_date" name="due_date" required>
 		</div>	
 		
 		<div class="box box-primary">
