@@ -308,7 +308,7 @@ app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", 
 app.controller("SubmissionsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
 
     $scope.submission = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id});
-    // console.log($scope.submission);
+    console.log($scope.submission);
     $scope.deleteSubmission = function(){
         $scope.submission.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}, function(){
             $location.path("/users/" + $rootScope.user_id);
@@ -333,6 +333,7 @@ app.controller("SubmissionsShowController", ["$scope", "$location","$rootScope",
 app.controller("SubmissionsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
 
     $scope.submissionData = Submission.get({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id});
+    console.log($scope.submissionData);
     $scope.updateSubmission = function() {
         var submission = $scope.submissionData;
         submission.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}).then(function(){
@@ -347,6 +348,16 @@ app.controller("SubmissionsEditController", ["$scope", "$location","$rootScope",
         skin: 'lightgray',
         theme: 'modern'
     };
+
+    // $scope.tinymceOptions2 = {
+    //     inline: false,
+    //     toolbar: false,
+    //     menubar: false,
+    //     statusbar: false,
+    //     plugins: '',
+    //     skin: 'lightgray',
+    //     theme: 'modern'
+    // };
 
 }]);
 
@@ -444,11 +455,6 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
     $scope.changeCategories = function(){
         init($scope.category);
     };
-
-    $scope.sendToGoogle = function(){
-        console.log($scope.start)
-        console.log($scope.finish)
-    }
 
 
     var init = function(category) {
@@ -650,7 +656,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootS
 // DOCUMENT LIBRARY CONTROLLER ======================
 // ==================================================
 
-app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", "Document", "DestroyDoc", function ($scope, $location, $http, $rootScope, $routeParams, Document, DestroyDoc){
+app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$rootScope", "$routeParams", "Document", function ($scope, $location, $http, $rootScope, $routeParams, Document){
 
     $scope.userDocs = "";
 // ===== SENDS GET REQUEST TO DOCUMENT CONTROLLER ON BACKEND, RESPONSE IS LIST OF USERS DOCS     
@@ -684,17 +690,18 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
         gapi.load('picker', {'callback': onPickerApiLoad});
     };
 
-    // $scope.deleteSubmission = function(){
-    //     $scope.submission.$delete({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id, submission_id: $routeParams.submission_id}, function(){
-    //         $location.path("/users/" + $rootScope.user_id);
-    //     });
-    // };
+   
     $scope.trashFile = function (file) {
         var c = confirm("Are you sure you want to delete " + file.toElement.offsetParent.attributes[1].nodeValue + "?");
         if (c === true) {
             console.log(file);
             var id = file.toElement.offsetParent.attributes[0].nodeValue;
-            console.log("File ID is " + id + ", destroy " + id);
+            var element = file.toElement.offsetParent;
+            $http.delete("/api/documents/" + id).then(function () {
+                element.remove();
+                console.log("File ID is " + id + ", destroy " + id);
+            });
+            // console.log("File ID is " + id + ", destroy " + id);
         } else {
             console.log(file);
             console.log("return file to its original position");
@@ -702,7 +709,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
     };
 
     $scope.grabFile = function (file) {
-        console.log(file.target.dataset.id);
+        console.log("Grabbed file " + file.target.dataset.id);
     };
 
 // Private Functions 
@@ -763,18 +770,18 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
             };
 
             var newDriveFile = new Document(file);
-                newDriveFile.$save().then(function(){
+                newDriveFile.$save().then(function (res){
+                    $http.get('/api/users/:user_id/documents').then(function (res) {
+                        $scope.userDocs = res.data;
+                    });
                     console.log("File Saved Locally");
-                    $scope.getUsersDocuments();
             });
             // console.log(data.docs[0]);
 
 
         }
 //TODO - BUILD A WIDGET OR SOMETHING TO NOTIFY USER WHAT FILE WAS BROUGHT IN AND IF IT WAS SUCCESSFUL
-        var message = 'You picked: ' + fileType;
-       
-        document.getElementById('result').innerHTML = message;
+        
     }
 
 

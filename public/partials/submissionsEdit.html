@@ -1,5 +1,9 @@
 <h1>{{submissionData.name}}'s Response to {{submissionData.assignment_title}} </h1>
 
+<div style="z-index: 2; pointer-events: none;">
+		<textarea ui-tinymce="tinymceOptions2" ng-model="submissionData.assignment.description" rows="18">
+		</textarea>
+</div>		
 
 <form ng-submit="updateSubmission()">
 
@@ -16,3 +20,4 @@
 	<input type="submit" class="btn btn-lg btn-info center-block" value="Edit your response">
 	
 </form>
+

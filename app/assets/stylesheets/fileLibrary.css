@@ -17,3 +17,16 @@
 .fileIcon a:link {
 	color: black;
 }
+
+.trash-icon {
+	width: 85px;
+	height: 85px;
+}
+
+.file-area {
+	margin-top: 50px;
+}
+
+.file-icon-text {
+
+}

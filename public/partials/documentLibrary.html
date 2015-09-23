@@ -1,30 +1,29 @@
 
-<div ng-click = "toNewUpload()" class="btn btn-lg btn-info">Upload a New File</div>
-<div ng-click= "onApiLoad()" class="btn btn-lg btn-info"><img class="driveIcon" src="/Google-Drive-Icon.png" alt=""> Import A Google Drive File</div>
-<div id="result"></div>
-
-<h1>DOCUMENT LIBRARY</h1>
+<div ng-click = "toNewUpload()" class="btn btn-sm btn-info">Upload a File Directly to my_HW</div>
+<div ng-click= "onApiLoad()" class="btn btn-sm btn-info"><img class="driveIcon" src="/Google-Drive-Icon.png" alt=""> Import A Google Drive File</div>
 
 
-<h4>TODO - Make icons sortable / build persistent file structure. </h4>
-<h4>TODO - Make it pretty.</h4>
+<h1>Your Document Library</h1>
+<div class="box box-primary">
+	<div data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop: 'trashFile'}">
+		<p>Drag a file to the trash to delete it. Files are deleted locally, not from your Google drive.
+		</p> 
 
-<div data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop: 'trashFile'}" style="border: solid 4px black; width: 100px;"> Drag to Trash to Delete Document From Your Library
+		<img src="/trashIcon.png" class="trash-icon" alt="">
+	</div>
 
-	<i class="fa fa-trash-o fa-5x"></i>
+	<div class="row file-area">
+		<li data-id="{{doc.id}}" data-docName="{{doc.attachment_file_name}}{{doc.google_doc_name}}" ng-repeat="doc in userDocs" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{animate:true, onStart: 'grabFile'}" class="fileIcon col-xs-1">
+			<div>
+				<a target="_blank" ng-href="{{doc.google_drive_url}}{{doc.local_file_url}}">
+					<i class="fa fa-file-o fa-5x"></i>
+					<p class="file-icon-text">{{doc.attachment_file_name}}{{doc.google_doc_name}}</p>
+				</a>
+			</div>
+		</li> <!-- END OF REPEAT -->
+	</div>	
 </div>
 
-<div>
-	<li data-id="{{doc.id}}" data-docName="{{doc.attachment_file_name}}{{doc.google_doc_name}}" ng-repeat="doc in userDocs" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{animate:true, onStart: 'grabFile'}" class="fileIcon">
-		<div>
-			<a target="_blank" ng-href="{{doc.google_drive_url}}{{doc.local_file_url}}">
-				<i class="fa fa-file-o fa-5x"></i>
-				<p>{{doc.attachment_file_name}}{{doc.google_doc_name}}</p>
-			</a>
-		</div>
-	</li>
-
-</div>
 
 
 

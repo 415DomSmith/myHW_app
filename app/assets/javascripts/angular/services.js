@@ -68,13 +68,5 @@ app.service('Document', ['$resource', '$rootScope', function ($resource, $rootSc
   );
 }]);
 
-app.service('DestroyDoc', ['$resource', '$rootScope', function ($resource, $rootScope) {
-  return $resource(
-    "/api/documents/:id",
-    {id: "@id"},
-    {delete: {method: "DELETE"}}
-  );
-}]);
-
 
 
