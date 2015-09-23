@@ -4,10 +4,16 @@
   margin-top: -5px;
 }
 
+.drop-zone {
+	width: 100px;
+}
+
 .trash-icon {
 	width: 100px;
 	height: 100px;
 }
+
+
 
 .file-area {
 	margin-top: 50px;
@@ -38,3 +44,31 @@
 	height: 40px;
 }
 
+
+/*File Upload Page*/
+
+.drop-in-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+}
+.dragover-here {
+    border: 5px dashed blue;
+}
+
+.bottom-buffer {
+	height: 30px;
+}
+
+.back-to-library {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.select-file-button {
+	margin-left: 15px;
+}

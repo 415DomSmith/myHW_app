@@ -11,15 +11,13 @@ app.controller("LoginController", ["$scope", "$location", "$http", "$auth", func
 	//Send authentication request to Google
 		$auth.authenticate('google_oauth2');
 	};
-}]);
+}]);//END LOGIN CONT
 
 // ==================================================
-// ADDITIONAL INFO CONTROLLER ==
+// ADDITIONAL INFO CONTROLLER =======================
 // ==================================================
-
 
 //TODO -- Fix the get on the user (need userObj now. search it for examples)
-
 
 app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$routeParams", "School", function ($scope, $location, User, $routeParams, School){
 
@@ -29,24 +27,19 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 	//Find schools to add to user
 	$scope.schools = School.query();
 
-
 	$scope.submitAdditionalInfo = function(id) {
-		
-
 		// Check if they are student or teacher
 		if($scope.formData.teacher) {
 			$scope.user.isTeacher = true;
 		} else if ($scope.formData.student){
 			$scope.user.isTeacher = false;
 		}
-
         //Check if they are male or female
         if($scope.formData.female) {
             $scope.user.isFemale = true;
         } else if ($scope.formData.male) {
             $scope.user.isFemale = false;
         }
-
 		// Choose the school the teacher/student is a part of.
         $scope.user.school = $scope.formData.school;
 
@@ -54,10 +47,10 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
             $location.path('/users/' + $routeParams.id);
         });
 	};
-}]);
+}]);//END ADDINFO CONT
 
 // ==================================================
-// DASHBOARD (USER SHOW) CONTROLLER ==
+// DASHBOARD (USER SHOW) CONTROLLER =================
 // ==================================================
 
 app.controller("DashboardController", ["$scope", "$location", "User", "$routeParams", "School", function ($scope, $location, User, $routeParams, School){
@@ -69,10 +62,10 @@ app.controller("DashboardController", ["$scope", "$location", "User", "$routePar
         $scope.assignments = $scope.userObj.assignments;
     });
 
-}]);
+}]);//END DASHBOARD CONT
 
 // ==================================================
-// COURSES NEW CONTROLLER ==
+// COURSES NEW CONTROLLER ===========================
 // ==================================================
 
 app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Course", "School","User", function ($scope, $location, $rootScope, Course, School, User){
@@ -99,10 +92,10 @@ app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Cou
         })
 
     }
-}]);
+}]);//END COURSE NEW CONT
 
 // ==================================================
-// COURSES SHOW CONTROLLER ==
+// COURSES SHOW CONTROLLER ==========================
 // ==================================================
 
 app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Course", "$routeParams", function ($scope, $location, $rootScope, Course, $routeParams){
@@ -113,10 +106,10 @@ app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Co
       $scope.announcements = $scope.courseObj.announcements
     });
     
-}]);
+}]);//END COURSE SHOW CONT
 
 // ==================================================
-// COURSES EDIT CONTROLLER ==
+// COURSES EDIT CONTROLLER ==========================
 // ==================================================
 
 app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Course", "$routeParams","$rootScope", function ($scope, $location, $rootScope, Course, $routeParams, $rootScope){
@@ -129,8 +122,6 @@ app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Co
         $scope.enrolledStudents.forEach(function(student){
             $scope.courseData.ids[student.id] = student.id;
         });
-
-
     });
 
     $scope.updateCourse = function(){
@@ -146,14 +137,11 @@ app.controller("CoursesEditController", ["$scope", "$location","$rootScope", "Co
             $location.path("/users/" + $rootScope.user_id);
         });
     };
-
-
-}]);
+}]);//END COURSE EDIT CONT
 
 // ==================================================
 // ASSIGNMENTS NEW CONTROLLER ======================
 // ==================================================
-
 
 app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Document", function ($scope, $location, $rootScope, Assignment, $routeParams, Document){
 //Get users documents to be attached to an assignment    
@@ -179,10 +167,8 @@ app.controller("AssignmentsNewController", ["$scope", "$location","$rootScope", 
         plugins: 'autolink colorpicker save autosave image link paste print spellchecker table textcolor',
         skin: 'lightgray',
         theme: 'modern'
-    };
-
-     
-}]);
+    };   
+}]);//END ASSIGNMENTS NEW CONT
 
 // ==================================================
 // ASSIGNMENTS SHOW CONTROLLER ==
@@ -209,11 +195,10 @@ app.controller("AssignmentsShowController", ["$scope", "$location","$rootScope",
         skin: 'lightgray',
         theme: 'modern'
     };
-    
-}]);
+}]);//END ASSIGNMENTS SHOW CONT
 
 // ==================================================
-// ASSIGNMENTS EDIT CONTROLLER ==
+// ASSIGNMENTS EDIT CONTROLLER ======================
 // ==================================================
 // TODO: Look up how to refactor new and edits so code is DRYer
 app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Course", "Document", function ($scope, $location, $rootScope, Assignment, $routeParams, Course, Document){
@@ -238,9 +223,7 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
             });
         });
     });
-
-
-    
+  
     $scope.updateAssignment = function(){
         $scope.assignmentObj.assignment = $scope.assignmentData;
         $scope.assignmentObj.$update({course_id: $routeParams.course_id, assignment_id: $routeParams.assignment_id}).then(function() {
@@ -260,7 +243,7 @@ app.controller("AssignmentsEditController", ["$scope", "$location","$rootScope",
         skin: 'lightgray',
         theme: 'modern'
     };
-}]);
+}]);//END ASSIGNMENTS EDIT CONT
 
 // ==================================================
 // SUBMISSIONS NEW CONTROLLER =======================
@@ -299,10 +282,10 @@ app.controller("SubmissionsNewController", ["$scope", "$location","$rootScope", 
         theme: 'modern'
     };
     
-}]);
+}]);//END SUBMISSIONS NEW CONT
 
 // ==================================================
-// SUBMISSIONS SHOW CONTROLLER ==
+// SUBMISSIONS SHOW CONTROLLER ======================
 // ==================================================
 
 app.controller("SubmissionsShowController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
@@ -323,11 +306,10 @@ app.controller("SubmissionsShowController", ["$scope", "$location","$rootScope",
         skin: 'lightgray',
         theme: 'modern'
     };
-
-}]);
+}]);//END SUBMISSIONS SHOW CONT
 
 // ==================================================
-// SUBMISSIONS EDIT (FOR STUDENTS) CONTROLLER ==
+// SUBMISSIONS EDIT (FOR STUDENTS) CONTROLLER =======
 // ==================================================
 
 app.controller("SubmissionsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
@@ -348,7 +330,7 @@ app.controller("SubmissionsEditController", ["$scope", "$location","$rootScope",
         skin: 'lightgray',
         theme: 'modern'
     };
-
+    //For rendering assignment description... not needed at the moment because description isn't passed through
     // $scope.tinymceOptions2 = {
     //     inline: false,
     //     toolbar: false,
@@ -358,11 +340,10 @@ app.controller("SubmissionsEditController", ["$scope", "$location","$rootScope",
     //     skin: 'lightgray',
     //     theme: 'modern'
     // };
-
-}]);
+}]);//END SUBMISSIONS EDIT CONT
 
 // ==================================================
-// SUBMISSIONS SCORE (FOR TEACHERS) CONTROLLER ==
+// SUBMISSIONS SCORE (FOR TEACHERS) CONTROLLER ======
 // ==================================================
 
 app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission){
@@ -383,33 +364,31 @@ app.controller("SubmissionsScoreController", ["$scope", "$location","$rootScope"
         theme: 'modern'
     };
 
-
-}]);
+}]);//END SUBMISSIONS SCORE CONT
 
 // ==================================================
-// ANNOUNCEMENTS NEW CONTROLLER ==
+// ANNOUNCEMENTS NEW CONTROLLER =====================
 // ==================================================
 
 app.controller("AnnouncementsNewController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Announcement", function ($scope, $location, $rootScope, Assignment, $routeParams, Announcement){
         
     $scope.announcementData = {};
 
-
     $scope.createAnnouncement = function(){
         var announcement = $scope.announcementData;
         announcement.date = Date.now();
-        console.log(announcement.date)
-        console.log(Date.now())
-        var newAnnouncement = new Announcement(announcement)
+        console.log(announcement.date);
+        console.log(Date.now());
+        var newAnnouncement = new Announcement(announcement);
         newAnnouncement.$save({course_id: $routeParams.id}).then(function(){
             $location.path("/courses/" + $routeParams.id + "/commandcenter");
         });
-    }
+    };
 
-}]);
+}]);//END ANNOUNCEMENTS NEW CONT
 
 // ==================================================
-// ANNOUNCEMENTS EDIT CONTROLLER ==
+// ANNOUNCEMENTS EDIT CONTROLLER ====================
 // ==================================================
 
 app.controller("AnnouncementsEditController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Announcement", function ($scope, $location, $rootScope, Assignment, $routeParams, Announcement){
@@ -425,16 +404,16 @@ app.controller("AnnouncementsEditController", ["$scope", "$location","$rootScope
 
     $scope.deleteAnnouncement = function(){
         // debugger
-        console.log($scope.announcementData)
-      $scope.announcementData.$delete({course_id: $routeParams.id, announcement_id: $scope.announcementData.id}, function(){
-          $location.path("/courses/" + $routeParams.id + "/commandcenter" );
-      });
+        console.log($scope.announcementData);
+        $scope.announcementData.$delete({course_id: $routeParams.id, announcement_id: $scope.announcementData.id}, function(){
+            $location.path("/courses/" + $routeParams.id + "/commandcenter" );
+        });
     };
 
-}]);
+}]);//END ANNOUNCEMENTS EDIT CONT
 
 // ==================================================
-// COMMANDCENTER CONTROLLER ==
+// COMMANDCENTER CONTROLLER =========================
 // ==================================================
 
 app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", 'SubmissionsForCourse', function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course, SubmissionsForCourse){
@@ -547,17 +526,14 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
 
             course.enrolled_students.forEach(function(student){
 
-
                 SubmissionsForCourse.query({course_id: $routeParams.id, user_id: student.id, category: category}, function(submissions){
                     student.studentSubmissions = submissions
                     // Find score data and assignment titles
                     submissions.forEach(function(submission){
 
-
                         //Assignment titles
                             studentChartLabels.push(submission.assignment_title);
                         //Submission Data
-
 
                         studentChartMaxPoints.push(submission.max);
                         studentChartTotalPoints.push(submission.score);
@@ -605,14 +581,14 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
 
     init();
 
-}]);
+}]);//END COMMAND CENTER CONT
 
 // ==================================================
 // LOCAL UPLOAD (PAPERCLIP) FOR DOCUMENTS CONTROLLER=
 // ==================================================
 
 app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootScope", "$routeParams", "$location", function ($scope, Upload, $timeout, $rootScope, $routeParams, $location) {
-//========== SETS A $WATCH ON UPLOAD DROP AND UPLOAD CLICK, CURRENTLY ONLY USING 'FILES' SCOPE VAR    
+//========== SETS A WATCHER ON UPLOAD DROP AND UPLOAD CLICK, CURRENTLY ONLY USING 'FILES' SCOPE VAR    
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });
@@ -637,20 +613,21 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootS
                 }).progress(function (evt) { //TODO-- UPLOAD PROGRESS METER... BUILT IN TO NG-FILE-UPLOAD... MAKE IT PRETTY
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     $scope.log = 'progress: ' + progressPercentage + '% ' +
-                                evt.config.file.name + '\n' + $scope.log;
+                                evt.config.file.name + '\n';
                 }).success(function (data, status, headers, config) {
                     $timeout(function() {
-                        $scope.log = 'file: ' + config.file.name + ', Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+                        $scope.log = 'file: ' + config.file.name +  '\n' + $scope.log;
                     });
                 });
               }
             }
         }
     };
+    //Link back to file library
     $scope.toFileLibrary = function() {
         $location.path("/users/" + $routeParams.id + "/documentLibrary" );
     };
-}]);
+}]);//END LOCAL UPLOAD CONT
 
 // ==================================================
 // DOCUMENT LIBRARY CONTROLLER ======================
@@ -690,7 +667,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
         gapi.load('picker', {'callback': onPickerApiLoad});
     };
 
-   
+   // FILE DELETE ON DRAG & DROP 
     $scope.trashFile = function (file) {
         var c = confirm("Are you sure you want to delete " + file.toElement.offsetParent.attributes[1].nodeValue + "?");
         if (c === true) {
@@ -708,12 +685,8 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
         }
     };
 
-    $scope.grabFile = function (file) {
-        console.log("Grabbed file " + file.target.dataset.id);
-    };
-
-// Private Functions 
-    function onAuthApiLoad() {
+// Google Drive Private Functions 
+    function onAuthApiLoad() { //Runs google auth again for access to drive files
         window.gapi.auth.authorize(
             {
               'client_id': clientId,
@@ -723,12 +696,12 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
             handleAuthResult);
     }
 
-    function onPickerApiLoad() {
+    function onPickerApiLoad() { //creates the file picker window
         pickerApiLoaded = true;
         createPicker();
     }
 
-    function handleAuthResult(authResult) {
+    function handleAuthResult(authResult) { //creates the file picker window if auth returns
         if (authResult && !authResult.error) {
           oauthToken = authResult.access_token;
           createPicker();
@@ -741,26 +714,26 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
             var picker = new google.picker.PickerBuilder()
             .setOAuthToken(oauthToken)
             .setDeveloperKey(developerKey)
-            .addView(new google.picker.DocsView())
-            // .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+            .addView(new google.picker.DocsView()) //chooses documents view in picker
+            // .enableFeature(google.picker.Feature.MULTISELECT_ENABLED) //currently can only select one file for importing at a time
             .setCallback(pickerCallback)
             .build();
             picker.setVisible(true);
         }
     }
     // callback implementation to post to back-end.
-    function pickerCallback(data) {
+    function pickerCallback(data) { //on file select, formats the data returned from google in to a JSON object we can use
         var url, description, gId, fileType, name, parentId;
         if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
             var doc = data[google.picker.Response.DOCUMENTS][0];
-            url = data.docs[0].url;
+            url = data.docs[0].url; //link to file
             description = data.docs[0].url;
-            gId = data.docs[0].id;
+            gId = data.docs[0].id; //googles file ID
             fileType = data.docs[0].mimeType;
             name = data.docs[0].name;
-            parentId = data.docs[0].parentId;
+            parentId = data.docs[0].parentId; //if file is in a folder, folder == parentId
 
-            var file = {
+            var file = { //file and its respective data gets sent to back-end
                 google_drive_id: gId,
                 description: description,
                 google_drive_url: url,
@@ -772,32 +745,21 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
             var newDriveFile = new Document(file);
                 newDriveFile.$save().then(function (res){
                     $http.get('/api/users/:user_id/documents').then(function (res) {
-                        $scope.userDocs = res.data;
+                        $scope.userDocs = res.data; //making get call to update current file library. updating userDocs renders new file on the screen.
                     });
                     console.log("File Saved Locally");
             });
             // console.log(data.docs[0]);
-
-
         }
-//TODO - BUILD A WIDGET OR SOMETHING TO NOTIFY USER WHAT FILE WAS BROUGHT IN AND IF IT WAS SUCCESSFUL
-        
+//TODO - BUILD A WIDGET OR SOMETHING TO NOTIFY USER WHAT FILE WAS BROUGHT IN AND IF IT WAS SUCCESSFUL     
     }
-
-
-
-
-}]);
-
+}]); //END DOCUMENT LIBRARY CONT
 
 // ==================================================
-// GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ==
+// GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ====
 // ==================================================
 app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User","$auth", "$log", function ($scope, $location, $http, $rootScope, User, $auth, $log){
 	
-
-
-
 //TODO handle auth:login-failure gracefully    
     //Function to check when someone is logged in and redirect them to the appopriate place
     $rootScope.$on('auth:login-success', function(ev, user) {
@@ -813,7 +775,6 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
                        } else {
                        // If not, send them to their dashboard
                            $location.path("/users/" + loggedInUser.user.id);
-                               
                        }
                });
 	});
@@ -829,8 +790,6 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
                 // console.log($scope.currentUser.user.isTeacher);
             });
         }
-
-
     });
 
     $scope.dashboard = function() {
@@ -838,7 +797,6 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
     };
 
     //Logging someone out
-
     $scope.logout = function() {
         $auth.signOut();
         // .then(function(res) {
@@ -876,13 +834,4 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
         $scope.status.isopen = !$scope.status.isopen;
     };
 
-}]);
-
-
-
-
-
-// Link local uploads to logged in user
-// Display local files in users file library
-// Get google drive docs
-// Display users google drive docs 
+}]);//END GLOBAL CONT

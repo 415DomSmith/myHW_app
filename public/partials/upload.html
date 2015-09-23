@@ -1,36 +1,25 @@
 
-<style> 
-.drop-in-box {
-    background: #F8F8F8;
-    border: 5px dashed #DDD;
-    width: 200px;
-    height: 65px;
-    text-align: center;
-    padding-top: 25px;
-    margin: 10px;
-}
-.dragover-here {
-    border: 5px dashed blue;
-}</style>
+<div class="btn btn-sm btn-info back-to-library" ng-click= "toFileLibrary()">Back to Document Library</div>
 
 <div ng-controller="LocalUploadController">
-  
-    <div class="btn btn-lg btn-info" ngf-select ng-model="files" ngf-multiple="true">Select File</div>
-    
-    Drop File:
-    <div ngf-drop ngf-select ng-model="files" class="drop-in-box" 
-        ngf-drag-over-class="dragover-here" ngf-multiple="true" ngf-allow-dir="true"
-        accept="application/pdf" 
-        ngf-pattern="'application/pdf'">Drop files here or click to upload</div>
-    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-    Files:
-    <ul>
-        <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
-    </ul>
-    Upload Log:
-    <pre>{{log}}</pre>
-</div>
+    <h2>Upload Files to Your File Library</h2>
+    <div class="box box-primary">
+        <p>Currently, only .pdf files are supported for local upload. If you would like to save others file types in my_HW, try uploading them and importing through Google Drive.</p>
+        <div class="btn btn-sm btn-info select-file-button" ngf-select ng-model="files" ngf-multiple="true">Select File
+        </div>
+        <div ngf-drop ngf-select ng-model="files" class="drop-in-box" 
+            ngf-drag-over-class="dragover-here" ngf-multiple="true" ngf-allow-dir="true"
+            accept="application/pdf" 
+            ngf-pattern="'application/pdf'">Drop files here or click to upload
+        </div>
+        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser
+        </div>
+        
+        Upload Log:
+        <pre>{{log}}</pre>
+        <div class="bottom-buffer"></div>
+    </div>
 </div>
 
 
- <div class="btn btn-lg btn-info" ng-click= "toFileLibrary()">Document Library</div>
+ 

@@ -5,15 +5,14 @@
 
 <h1>Your Document Library</h1>
 <div class="box box-primary">
-	<div data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop: 'trashFile'}">
-		<p>Drag a file to the trash to delete it. Files are deleted locally, not from your Google drive.
-		</p> 
-
+	<p>Drag a file to the trash to delete it. Files are deleted locally, not from your Google Drive.
+	</p> 
+	<div data-drop="true" class="drop-zone center-block" data-jqyoui-options jqyoui-droppable="{onDrop: 'trashFile'}">
 		<img src="/trashIcon.png" class="trash-icon" alt="">
 	</div>
 
 	<div class="row file-area">
-		<li data-id="{{doc.id}}" data-docName="{{doc.attachment_file_name}}{{doc.google_doc_name}}" ng-repeat="doc in userDocs" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{animate:true, onStart: 'grabFile'}" class="fileIcon">
+		<li data-id="{{doc.id}}" data-docName="{{doc.attachment_file_name}}{{doc.google_doc_name}}" ng-repeat="doc in userDocs" data-drag="true" data-jqyoui-options="{revert: 'false'}" jqyoui-draggable="{animate:true, onStart: 'grabFile'}" class="fileIcon">
 			<div>
 				<a target="_blank" ng-href="{{doc.google_drive_url}}{{doc.local_file_url}}">
 					<i class="fa fa-file-o fa-5x"></i>

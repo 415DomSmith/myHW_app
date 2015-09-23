@@ -14,7 +14,7 @@ class AssignmentsController < ApplicationController
 			end
 		end	
 		# gives all users of the class the assignment
-		binding.pry
+		# binding.pry
 		if @assignment.save
 			@course.users.each do |r|
 				# @user = User.find(r.id)
