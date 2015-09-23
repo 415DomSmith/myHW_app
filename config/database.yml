@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: myHW_app_production
-  username: myHW_app
-  password: <%= ENV['MYHW_APP_DATABASE_PASSWORD'] %>
+  
+  
