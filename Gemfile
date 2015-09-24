@@ -16,8 +16,12 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'less-rails', '~> 2.7.0'
 gem 'therubyracer'
-
+# For heroku deploy
 gem 'rails_12factor', :group => :production
+
+
+#For AWS s3 for paperclip files
+gem 'right_aws'
 
 gem 'adminlte2-rails'
 gem 'less-rails-bootstrap'

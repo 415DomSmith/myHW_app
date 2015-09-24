@@ -1,6 +1,53 @@
-<div class="form-box" id="login-box">
-	
-	<div class="footer">                                                               
-		<button type="submit" ng-click="authenticateUser()" class="btn bg-red btn-block"><i class="fa fa-google-plus"></i> Sign in with Google</button>  
-  </div>
-</div>  
+
+
+<header class="intro-box">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <!-- <div class="col-md-8 col-md-offset-2"> -->
+                 <div style="height: 305px">
+                    <carousel interval="myInterval" no-wrap="noWrapSlides" class="carousel-box">
+                        <slide ng-repeat="slide in slides" active="slide.active">
+                            <img ng-src="{{slide.image}}" class="carousel-image img-responsive">
+                            <div class="carousel-caption">
+                                <h4>{{slide.text}}</h4>
+                            </div>
+                        </slide>
+                    </carousel>
+                </div>
+            </div>
+        </div>
+    </div>
+</header> 
+<section id="login" class="container content-section text-center">
+        
+            
+            <div class="form-box" id="login-box">
+                <div class="footer">                                     
+                    <button type="submit" ng-click="authenticateUser()" class="btn bg-red btn-block"><i class="fa fa-google-plus"></i> Sign in with Google
+                    </button>  
+                </div> 
+            </div>               
+    
+            
+        
+</section>
+
+</section> 
+<div></div>
+<div class="landing-page-body">         
+    
+</div>                
+
+
+
+
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>Copyright &copy; Dominic Smith 2015</p>
+        <p><a href="">Contact the designer of this page</a></p>
+    </div>
+</footer>
+
+ 

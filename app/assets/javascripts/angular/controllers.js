@@ -11,6 +11,10 @@ app.controller("LoginController", ["$scope", "$location", "$http", "$auth", func
 	//Send authentication request to Google
 		$auth.authenticate('google_oauth2');
 	};
+
+    $scope.myInterval = 5000;
+    $scope.noWrapSlides = false;
+    $scope.slides = [{image: "educational_technology.jpg", text: "A platform for students and teachers to interact digitally online."}, {image: "technology-education.jpg", text: "Manage assignments and track student progres." }, {image: "technology-in-the-classroom.jpeg", text: "my_HW"}];
 }]);//END LOGIN CONT
 
 // ==================================================
