@@ -416,6 +416,35 @@ app.controller("AnnouncementsEditController", ["$scope", "$location","$rootScope
 }]);//END ANNOUNCEMENTS EDIT CONT
 
 // ==================================================
+// PROFILE CONTROLLER ====================
+// ==================================================
+
+app.controller("ProfileController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "User", function ($scope, $location, $rootScope, Assignment, $routeParams, User){
+        
+    User.get({id: $routeParams.id}, function(user){
+        $scope.userObj = user
+    })
+
+    // $scope.announcementData = Announcement.get({course_id: $routeParams.id, announcement_id: $routeParams.announcement_id});
+    // $scope.updateAnnouncement = function() {
+    //     var announcement = $scope.announcementData;
+    //     announcement.$update({course_id: $routeParams.id, announcement_id: $routeParams.announcement_id}).then(function(){
+    //         // debugger
+    //         $location.path("/courses/" + $routeParams.id + "/commandcenter/");
+    //     });
+    // };
+
+    // $scope.deleteAnnouncement = function(){
+    //     // debugger
+    //     console.log($scope.announcementData);
+    //     $scope.announcementData.$delete({course_id: $routeParams.id, announcement_id: $scope.announcementData.id}, function(){
+    //         $location.path("/courses/" + $routeParams.id + "/commandcenter" );
+    //     });
+    // };
+
+}]);//END PROFILE CONT
+
+// ==================================================
 // COMMANDCENTER CONTROLLER =========================
 // ==================================================
 

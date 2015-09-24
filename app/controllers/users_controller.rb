@@ -30,9 +30,11 @@ class UsersController < ApplicationController
 
 	def update
 		# binding.pry
-		@school = School.find(params["school"])
-		@user.schools << @school
-		@user.isNewUser = false
+		if !@user.schools
+			@school = School.find(params["school"])
+			@user.schools << @school
+			@user.isNewUser = false
+		end
 		if @user.update(user_params)
 		  render json: @user, status: :ok
 		else
@@ -42,6 +44,8 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
+		@user.destroy
+		render json: @user, status: :ok
 		
 	end
 
