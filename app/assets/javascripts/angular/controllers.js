@@ -419,28 +419,22 @@ app.controller("AnnouncementsEditController", ["$scope", "$location","$rootScope
 // PROFILE CONTROLLER ====================
 // ==================================================
 
-app.controller("ProfileController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "User", function ($scope, $location, $rootScope, Assignment, $routeParams, User){
+app.controller("ProfileController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "User", "$auth", "$http", function ($scope, $location, $rootScope, Assignment, $routeParams, User, $auth, $http){
         
-    User.get({id: $routeParams.id}, function(user){
+    User.get({id: $rootScope.user_id}, function(user){
         $scope.userObj = user
     })
 
-    // $scope.announcementData = Announcement.get({course_id: $routeParams.id, announcement_id: $routeParams.announcement_id});
-    // $scope.updateAnnouncement = function() {
-    //     var announcement = $scope.announcementData;
-    //     announcement.$update({course_id: $routeParams.id, announcement_id: $routeParams.announcement_id}).then(function(){
-    //         // debugger
-    //         $location.path("/courses/" + $routeParams.id + "/commandcenter/");
-    //     });
-    // };
+    $scope.deleteProfile = function(){
+        var user = $scope.userObj
+        // $auth.signOut()
+        // $rootScope.currentUser = {}
+        $auth.signOut().then(function() {
+            $scope.currentUser = {};
+            user.$delete({id: $rootScope.user_id});
+        });
+    }
 
-    // $scope.deleteAnnouncement = function(){
-    //     // debugger
-    //     console.log($scope.announcementData);
-    //     $scope.announcementData.$delete({course_id: $routeParams.id, announcement_id: $scope.announcementData.id}, function(){
-    //         $location.path("/courses/" + $routeParams.id + "/commandcenter" );
-    //     });
-    // };
 
 }]);//END PROFILE CONT
 
@@ -792,7 +786,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
 // ==================================================
 // GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ====
 // ==================================================
-app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User","$auth", "$log", function ($scope, $location, $http, $rootScope, User, $auth, $log){
+app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User","$auth", "$log", "$routeParams", function ($scope, $location, $http, $rootScope, User, $auth, $log, $routeParams){
 	
 //TODO handle auth:login-failure gracefully    
     //Function to check when someone is logged in and redirect them to the appopriate place
@@ -832,7 +826,10 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
 
     //Logging someone out
     $scope.logout = function() {
-        $auth.signOut();
+        
+        $auth.signOut().then(function() {
+            $scope.currentUser = {}
+        });
         // .then(function(res) {
         //     console.log("goodbye")
         // })
@@ -840,6 +837,12 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
         //     console.log("ldasjkd")
         // })
     };
+
+    //Going to a users profile page
+
+    $scope.toProfile =  function() {
+        $location.path("/users/" + $rootScope.user_id + "/profile")
+    }
 
     $rootScope.$on("auth:logout-success", function(ev, user) {
         $rootScope.user_id = null;
