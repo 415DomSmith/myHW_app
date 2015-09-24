@@ -4,12 +4,12 @@
   <title>myHW</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
 
   <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
 </head>
 <body ng-app="myHWApp" ng-controller="GlobalController" class="skin-blue">
 <!-- header logo: style can be found in header.less -->
@@ -70,7 +70,7 @@
           <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="" class="btn btn-default btn-flat">Profile</a>
+                  <a href="" class="btn btn-default btn-flat" ng-click="toProfile()">Profile</a>
                 </div>
               	<div class="pull-right">
                   <a href="" class="btn btn-default btn-flat" ng-click="logout()">Sign out</a>

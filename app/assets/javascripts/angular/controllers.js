@@ -420,6 +420,29 @@ app.controller("AnnouncementsEditController", ["$scope", "$location","$rootScope
 }]);//END ANNOUNCEMENTS EDIT CONT
 
 // ==================================================
+// PROFILE CONTROLLER ====================
+// ==================================================
+
+app.controller("ProfileController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "User", "$auth", "$http", function ($scope, $location, $rootScope, Assignment, $routeParams, User, $auth, $http){
+        
+    User.get({id: $rootScope.user_id}, function(user){
+        $scope.userObj = user
+    })
+
+    $scope.deleteProfile = function(){
+        var user = $scope.userObj
+        // $auth.signOut()
+        // $rootScope.currentUser = {}
+        $auth.signOut().then(function() {
+            $scope.currentUser = {};
+            user.$delete({id: $rootScope.user_id});
+        });
+    }
+
+
+}]);//END PROFILE CONT
+
+// ==================================================
 // COMMANDCENTER CONTROLLER =========================
 // ==================================================
 
@@ -767,7 +790,7 @@ app.controller("DocumentLibraryController", ["$scope", "$location", "$http", "$r
 // ==================================================
 // GLOBAL CONTROLLER FOR LOGIN AND LOGOUT EVENTS ====
 // ==================================================
-app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User","$auth", "$log", function ($scope, $location, $http, $rootScope, User, $auth, $log){
+app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope", "User","$auth", "$log", "$routeParams", function ($scope, $location, $http, $rootScope, User, $auth, $log, $routeParams){
 	
 //TODO handle auth:login-failure gracefully    
     //Function to check when someone is logged in and redirect them to the appopriate place
@@ -807,7 +830,10 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
 
     //Logging someone out
     $scope.logout = function() {
-        $auth.signOut();
+        
+        $auth.signOut().then(function() {
+            $scope.currentUser = {}
+        });
         // .then(function(res) {
         //     console.log("goodbye")
         // })
@@ -815,6 +841,12 @@ app.controller("GlobalController", ["$scope", "$location", "$http","$rootScope",
         //     console.log("ldasjkd")
         // })
     };
+
+    //Going to a users profile page
+
+    $scope.toProfile =  function() {
+        $location.path("/users/" + $rootScope.user_id + "/profile")
+    }
 
     $rootScope.$on("auth:logout-success", function(ev, user) {
         $rootScope.user_id = null;
