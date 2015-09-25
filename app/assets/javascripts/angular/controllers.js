@@ -15,7 +15,13 @@ app.controller("LoginController", ["$scope", "$location", "$http", "$auth", "$an
     $scope.myInterval = 3000;
     $scope.slides = [ {image: 'educational_technology.jpg', text: "A platform for Teachers and Students to interact online."} , {image: 'technology-education.jpg', text: "Create assignments, and share them with your class." }, {image: 'education-ICT.jpg'}];
     
+    $scope.scrollToAbout = function () {
+        $location.hash('about');
+        $anchorScroll();
+    };
+
     $scope.scrollTo = function(id) {
+        console.log("hello " + id);
         $location.hash(id);
         $anchorScroll();
     };

@@ -6,16 +6,13 @@
     font-weight: 500;
 }
 
-
-
-
 .intro-box {
     display: table;
     width: 100%;
     height: 500px;
     
     color: #fff;
-    background: url(./trianglifyBG.png) no-repeat center scroll;
+    background: url('/assets/trianglifyBG.png') no-repeat center scroll;
     background-color: rgba(0,0,0,0.1);
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -23,8 +20,7 @@
     -o-background-size: cover;
 }
 .intro .intro-body {
-    
-    
+       
     height: 580px;
 }
 
@@ -47,8 +43,13 @@
   width: 50%;
   float: none;
   margin: 0 auto;
-  margin-right: auto;
- 
+  margin-right: auto; 
+}
+
+.demo-instructions {
+  width: 100%; 
+  margin-top: 50px;
+  padding-bottom: 50px;
 }
 
 .carousel-control {
@@ -68,7 +69,7 @@
 }
 
 .content-section {
-    margin-bottom: 300px;
+    margin-bottom: 50px;
 }
 
 
@@ -80,17 +81,16 @@
 .login-text {
     margin-top: 50px;
     width: 100%;
-    height: 600px;
 }
 
 .landing-page-body {
-    background: url(./trianglifyBG.png) no-repeat scroll;
-    height: 1000px;
+    background: url('/assets/trianglifyBG.png') no-repeat scroll;
+    height: 800px;
     width: 100%;
 }
 
 .about-title {
-    margin-top: 100px;
+    margin-top: 50px;
     font-family: 'Kaushan Script', cursive;
     font-weight: 500;
 }
@@ -101,7 +101,7 @@
 }
 
 .footy {
-    margin-top: -200px;
+    margin-top: 100px;
 }
 
 

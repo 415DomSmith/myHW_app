@@ -4,7 +4,7 @@
     <div class="intro-body">
         <div class="container">
             <div class="row">
-                <h1 class="intro-title">my_HW</h1>
+                <h1 class="intro-title">myHW</h1>
                 <carousel interval="myInterval" class="slides_control">
                     <slide ng-repeat="slide in slides" active="slide.active">
                         <img ng-src="{{slide.image}}" class="carousel-image">
@@ -19,7 +19,8 @@
 </header> 
 <section id="login" name="login" class="container content-section text-center">
         
-            <h2 class="login-title">Login / Join Here or <a href="" ng-click="scrollTo('about')">Learn More.</a> </h2>
+            <h2 class="login-title">Login / Join Here</h2>
+            <h6> (Scroll down to learn more about myHW and how to login with a demo account) </h6>
     
             <div class="form-box" id="login-box">
                 <div class="footer">                                     
@@ -27,23 +28,30 @@
                     </button>  
                 </div> 
             </div>
+            <div class="box box-primary demo-instructions">
+                <h4 style="margin-top: 50px;">Want to demo myHW before signing up? <a href="https://accounts.google.com/Logout?">Logout of your Google account</a>, and login with one of our demo accounts.</h4>
+                <h4 style="margin-top: 50px;">To see the view of a teacher, login with: <strong>my.hw.teacher.demo@gmail.com</strong> </h4>
+                <h4 style="margin-top: 50px;">To see the view of a student, login with: <strong>my.hw.student.demo@gmail.com</strong></h4>
+                <h4 style="margin-top: 50px;">When promoted for a password, enter <strong>demodemo</strong> .</h4>
+            </div>
 </section>
 
 <div class="landing-page-body container content-section text-center">
-    <section >
+    <section>
         <h2 class="about-title">About</h2>   
         <div class="box box-primary login-text">
-            <h3> my_HW uses your Google account to allow you to bring in files from Google Drive and assign and share them with your students. </h3>
+            <h3> myHW uses your Google account to allow you to bring in files from Google Drive and assign and share them with your students. </h3>
             
             <h3 style="margin-top: 50px;">Create assignments, attach documents to assignments, and set due dates. Students can submit answers to assignments directly through my_HW, or submit a link to a document on their Google drive.</h3>
 
-            <h3 style="margin-top: 50px;">Teachers can grade students' assignments, track the number of students that have turned in their homework or response to an assignment, and track a students performance through my_HW. </h3>
+            <h3 style="margin-top: 50px;">Teachers can grade students' assignments, track the number of students that have turned in their homework or response to an assignment, and track a students performance through myHW. </h3>
 
-            <h3 style="margin-top: 50px;">Teachers also have the power to manage and share classroom specific Google calendars, so students always know what is going on in the classroom!</h3> 
+            <h3 style="margin-top: 50px;">Teachers also have the power to manage and share classroom specific Google calendars, so students always know what is going on in the classroom!</h3>
+            <div id='about' name='about'></div> 
 
             <h3 style="margin-top: 50px; margin-bottom: 50px;"> Ready to <a href="" ng-click="scrollTo('login')">join?</a></h3>
         </div>     
-        <div id='about'></div>               
+                      
     </section>
 </div>  
 <!-- Footer -->
