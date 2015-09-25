@@ -5,7 +5,7 @@
 
 .text-contain {
   font-size: 2vw;
-  overflow-x: scroll;
+  overflow-x: hidden;
 }
 
 .assignment-box-inner {
