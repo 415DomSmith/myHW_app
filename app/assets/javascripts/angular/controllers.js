@@ -6,15 +6,19 @@ app.controller("HomeController", ["$scope", "$location", "$http", function ($sco
 // LOGIN CONTROLLER ==
 // ==================================================
 
-app.controller("LoginController", ["$scope", "$location", "$http", "$auth", function ($scope, $location, $http, $auth){
+app.controller("LoginController", ["$scope", "$location", "$http", "$auth", "$anchorScroll", function ($scope, $location, $http, $auth, $anchorScroll){
 	$scope.authenticateUser = function(){
 	//Send authentication request to Google
 		$auth.authenticate('google_oauth2');
 	};
 
-    $scope.myInterval = 5000;
-    $scope.noWrapSlides = false;
-    $scope.slides = [{image: "educational_technology.jpg", text: "A platform for students and teachers to interact digitally online."}, {image: "technology-education.jpg", text: "Manage assignments and track student progres." }, {image: "technology-in-the-classroom.jpeg", text: "my_HW"}];
+    $scope.myInterval = 3000;
+    $scope.slides = [ {image: 'educational_technology.jpg', text: "A platform for Teachers and Students to interact online."} , {image: 'technology-education.jpg', text: "Create assignments, and share them with your class." }, {image: 'education-ICT.jpg'}];
+    
+    $scope.scrollTo = function(id) {
+        $location.hash(id);
+        $anchorScroll();
+    };
 }]);//END LOGIN CONT
 
 // ==================================================

@@ -1,52 +1,55 @@
-
+<a href="https://github.com/415DomSmith/myHW_app"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 20000000" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 
 <header class="intro-box">
     <div class="intro-body">
         <div class="container">
             <div class="row">
-                <!-- <div class="col-md-8 col-md-offset-2"> -->
-                 <div style="height: 305px">
-                    <carousel interval="myInterval" no-wrap="noWrapSlides" class="carousel-box">
-                        <slide ng-repeat="slide in slides" active="slide.active">
-                            <img ng-src="{{slide.image}}" class="carousel-image img-responsive">
-                            <div class="carousel-caption">
-                                <h4>{{slide.text}}</h4>
-                            </div>
-                        </slide>
-                    </carousel>
-                </div>
-            </div>
+                <h1 class="intro-title">my_HW</h1>
+                <carousel interval="myInterval" class="slides_control">
+                    <slide ng-repeat="slide in slides" active="slide.active">
+                        <img ng-src="{{slide.image}}" class="carousel-image">
+                        <div class="carousel-caption">
+                            <h4>{{slide.text}}</h4>
+                        </div>
+                    </slide>
+                </carousel>
+            </div>    
         </div>
     </div>
 </header> 
-<section id="login" class="container content-section text-center">
+<section id="login" name="login" class="container content-section text-center">
         
-            
+            <h2 class="login-title">Login / Join Here or <a href="" ng-click="scrollTo('about')">Learn More.</a> </h2>
+    
             <div class="form-box" id="login-box">
                 <div class="footer">                                     
                     <button type="submit" ng-click="authenticateUser()" class="btn bg-red btn-block"><i class="fa fa-google-plus"></i> Sign in with Google
                     </button>  
                 </div> 
-            </div>               
-    
-            
-        
+            </div>
 </section>
 
-</section> 
-<div></div>
-<div class="landing-page-body">         
-    
-</div>                
+<div class="landing-page-body container content-section text-center">
+    <section >
+        <h2 class="about-title">About</h2>   
+        <div class="box box-primary login-text">
+            <h3> my_HW uses your Google account to allow you to bring in files from Google Drive and assign and share them with your students. </h3>
+            
+            <h3 style="margin-top: 50px;">Create assignments, attach documents to assignments, and set due dates. Students can submit answers to assignments directly through my_HW, or submit a link to a document on their Google drive.</h3>
 
+            <h3 style="margin-top: 50px;">Teachers can grade students' assignments, track the number of students that have turned in their homework or response to an assignment, and track a students performance through my_HW. </h3>
 
+            <h3 style="margin-top: 50px;">Teachers also have the power to manage and share classroom specific Google calendars, so students always know what is going on in the classroom!</h3> 
 
-
+            <h3 style="margin-top: 50px; margin-bottom: 50px;"> Ready to <a href="" ng-click="scrollTo('login')">join?</a></h3>
+        </div>     
+        <div id='about'></div>               
+    </section>
+</div>  
 <!-- Footer -->
-<footer>
+<footer class="footy">
     <div class="container text-center">
-        <p>Copyright &copy; Dominic Smith 2015</p>
-        <p><a href="">Contact the designer of this page</a></p>
+        <h4>Created by <a href="https://github.com/parkerlewis9">Parker Lewis</a> and <a href="https://github.com/415DomSmith">Dominic Smith</a>. Check us out on Github! <a href="https://github.com/415DomSmith/myHW_app"><img src="gh.png" alt="Github" class="gh-img"></a></h4>
     </div>
 </footer>
 

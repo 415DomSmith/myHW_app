@@ -11,7 +11,7 @@
 		<a class="col-md-3 col-xs-6 dashboard-link" ng-repeat="course in courses" ng-href="/#/courses/{{course.id}}">
 			<div class="box small-box box-solid bg-blue">
 				<div class="box-header">
-					<h3>{{course.name}}</h3>
+					<h3 class="text-contain">{{course.name}}</h3>
 				</div>
 				<div class="box-body">
 					{{course.subject}}
@@ -31,7 +31,7 @@
 		<a class="col-md-3 col-xs-6 dashboard-link" ng-repeat="course in courses" ng-href="/#/courses/{{course.id}}/commandcenter">
 			<div class="box small-box box-solid bg-lime">
 				<div class="box-header">
-					<h3>{{course.name}}</h3>
+					<h3 class="text-contain">{{course.name}}</h3>
 				</div>
 				<div class="box-body">
 					{{course.subject}}
@@ -56,7 +56,7 @@
 		<a class="col-md-6 col-xs-12 dashboard-link" ng-repeat="submission in submissions" ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}">
 			<div class="box small-box box-solid bg-teal">
 				<div class="box-header">
-					<h3>{{submission.assignment_title}}</h3>
+					<h3 class="text-contain">{{submission.assignment_title}}</h3>
 				</div>
 				<div class="box-body">
 					Score: {{submission.score}} / {{submission.max}} 
@@ -72,7 +72,7 @@
 		<a class="col-md-6 col-xs-12 dashboard-link" ng-repeat="assignment in assignments" ng-href="/#/courses/{{assignment.course_id}}/assignments/{{assignment.id}}">
 			<div class="box small-box box-solid bg-olive">
 				<div class="box-header">
-					<h3>{{assignment.title}}</h3>
+					<h3 class="text-contain">{{assignment.title}}</h3>
 				</div>
 				<div class="box-body">
 					Due: {{assignment.due_date | date:'fullDate'}}

@@ -3,7 +3,10 @@
 }
 
 
-
+.text-contain {
+  font-size: 2vw;
+  overflow-x: scroll;
+}
 
 .assignment-box-inner {
 	overflow-y: auto;
