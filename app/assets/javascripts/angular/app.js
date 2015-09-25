@@ -130,10 +130,16 @@ app.config(["$routeProvider", function ($routeProvider){
 		controller: 'AnnouncementsNewController'
 	})
 
-	//Announcement New Template
+	//Announcement Edit Template
 	.when('/courses/:id/announcements/:announcement_id/edit', {
 		templateUrl: 'partials/announcementsEdit.html',
 		controller: 'AnnouncementsEditController'
+	})
+
+	//Profile Template
+	.when('/users/:id/profile', {
+		templateUrl: 'partials/profile.html',
+		controller: 'ProfileController'
 	})
 	.otherwise({ redirectTo: '/'});
 }]);

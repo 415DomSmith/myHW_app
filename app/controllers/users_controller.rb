@@ -42,6 +42,8 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
+		@user.destroy
+		render json: @user, status: :ok
 		
 	end
 
