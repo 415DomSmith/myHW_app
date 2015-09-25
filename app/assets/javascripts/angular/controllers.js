@@ -445,7 +445,7 @@ app.controller("ProfileController", ["$scope", "$location","$rootScope", "Assign
         // $rootScope.currentUser = {}
         $auth.signOut().then(function() {
             $scope.currentUser = {};
-            user.$delete({id: $rootScope.user_id});
+            user.$delete({id: $routeParams.id});
         });
     }
 
