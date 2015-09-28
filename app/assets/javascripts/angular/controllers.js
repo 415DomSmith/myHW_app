@@ -76,6 +76,7 @@ app.controller("DashboardController", ["$scope", "$location", "User", "$routePar
         $scope.assignments = $scope.userObj.assignments;
     });
 
+
 }]);//END DASHBOARD CONT
 
 // ==================================================
@@ -103,22 +104,45 @@ app.controller("CoursesNewController", ["$scope", "$location","$rootScope", "Cou
         var newCourse = new Course(course);
         newCourse.$save().then(function(){
             $location.path("/users/" + $rootScope.user_id)
-        })
+        });
 
-    }
+    };
 }]);//END COURSE NEW CONT
 
 // ==================================================
 // COURSES SHOW CONTROLLER ==========================
 // ==================================================
 
-app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Course", "$routeParams", function ($scope, $location, $rootScope, Course, $routeParams){
+app.controller("CoursesShowController", ["$scope", "$location","$rootScope", "Course", "$routeParams", "$firebaseArray", function ($scope, $location, $rootScope, Course, $routeParams, $firebaseArray){
     //Getting course and assignment back from active record
     $scope.courseObj = Course.get({id: $routeParams.id}, function(){
       $scope.course = $scope.courseObj.course;
-      $scope.assignments = $scope.courseObj.assignments;  
-      $scope.announcements = $scope.courseObj.announcements
+      $scope.assignments = $scope.courseObj.assignments;
+      $scope.announcements = $scope.courseObj.announcements;
     });
+
+    // FIREBASE CHAT
+
+    Course.get({id: $routeParams.id}, function(course){
+        console.log(course);
+        var courseObj = course;
+
+        // create reference
+        var messagesRef = new Firebase("https://scorching-torch-2920.firebaseio.com/" + courseObj.course.id);
+        // use ref to create synchronized arr
+        $scope.messages = $firebaseArray(messagesRef);
+    });
+
+    // $scope.messages.$add({author: "Parker", imageUrl: "http://cutepuppyclub.com/wp-content/uploads/2015/05/White-Cute-Puppy-.jpg", message: "Hello world!"})
+    
+    $scope.newMessage = {author: $scope.currentUser.user.name, imageUrl: $scope.currentUser.user.image, message: ""};
+
+    $scope.addMessage = function() {
+        $scope.messages.$add($scope.newMessage).then(function(data){
+            console.log(data);
+            $scope.newMessage.message = "";
+        });
+    };
     
 }]);//END COURSE SHOW CONT
 
@@ -474,35 +498,39 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
     $scope.changeCategories = function(){
         init($scope.category);
     };
-    //FIREBASE CHAT
-
-    // Course.get({id: $routeParams.id}, function(course){
-    //     console.log(course);
-    //     var courseObj = course;
-    // });
-
-    // // create reference
-    // var messagesRef = new Firebase("https://scorching-torch-2920.firebaseio.com/" + courseObj.course.id);
-    // // use ref to create synchronized arr
-    // $scope.messages = $firebaseArray(messagesRef);
-
-    // // $scope.messages.$add({author: "Parker", imageUrl: "http://cutepuppyclub.com/wp-content/uploads/2015/05/White-Cute-Puppy-.jpg", message: "Hello world!"})
     
-    // $scope.newMessage = {author: "", imageUrl: "", message: "", showMessage: true, showEdit: false};
 
-    // $scope.removeMessage = function(message){
-    //     $scope.messages.$remove(message);
-    // };
+    // FIREBASE CHAT
 
-    // $scope.addMessage = function() {
-    //     $scope.messages.$add($scope.newMessage).then(function(data){
-    //         console.log(data);
-    //         $scope.newMessage.author = "";
-    //         $scope.newMessage.imageUrl = "";
-    //         $scope.newMessage.message = "";
+    Course.get({id: $routeParams.id}, function(course){
+        console.log(course);
+        var courseObj = course;
 
-    //     });
-    // };
+        // create reference
+        var messagesRef = new Firebase("https://scorching-torch-2920.firebaseio.com/" + courseObj.course.id);
+        // use ref to create synchronized arr
+        $scope.messages = $firebaseArray(messagesRef);
+    });
+
+    
+
+    // $scope.messages.$add({author: "Parker", imageUrl: "http://cutepuppyclub.com/wp-content/uploads/2015/05/White-Cute-Puppy-.jpg", message: "Hello world!"})
+    
+    $scope.newMessage = {author: $scope.currentUser.user.name, imageUrl: $scope.currentUser.user.image, message: ""};
+
+    $scope.removeMessage = function(message){
+        var x = confirm("Are you sure you want to remove this message?");
+        if (x === true) {
+            $scope.messages.$remove(message);
+        }
+    };
+
+    $scope.addMessage = function() {
+        $scope.messages.$add($scope.newMessage).then(function(data){
+            console.log(data);
+            $scope.newMessage.message = "";
+        });
+    };
 
 
 

@@ -112,7 +112,54 @@
 	</div> <!-- END ROW -->
 
 	<div class="row">
-		<div class="col-sm-4 col-xs-12"> <!-- ANNOUNCEMENTS BOX -->
+		<div class="col-sm-4 col-xs-12"> <!-- CHAT BOX -->
+			<div class="box box-solid box-info chat-box-outer">
+				<div class="box-header text-center">Chat for {{courseObj.course.name}}</div>
+				<div class="assignment-box-inner">
+					<div class="inner">
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+							
+								<tbody>	
+									<tr ng-repeat="message in messages">
+											<td style="width: 75px;"><p><strong>{{message.author}}</strong></p></td>
+											<td>{{message.message}}</td>
+											<td style="width: 25px; text-align: center;"> <i class="fa fa-times-circle-o btn-remove-message" ng-click="removeMessage(message)"></i></td>
+									</tr>
+								</tbody>	
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+	<div class="form-group">
+								<form ng-submit="addMessage()">
+									<input type="text" ng-model="newMessage.message" class="form-control" name="message" id="chat-message">
+								</form>
+							</div>
+		</div> <!-- END CHAT BOX -->
+
+		<div class="col-sm-8 col-xs-12"> <!-- CALENDAR BOX -->
+			<div class="box box-solid box-info">
+				<div class="box-header text-center">Class Calendar</div>
+				<div class="assignment-box-inner">
+					<div class="inner">
+						
+						<hw-calendar iframe="courseObj.course.iframe"></hw-calendar>	
+						<!-- <iframe src="https://www.google.com/calendar/embed?src=paike09%40gmail.com&ctz=America/Los_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
+
+					</div>
+				</div>	
+			</div>
+		</div> <!-- END CALENDAR BOX -->
+
+	</div> <!-- END ROW -->
+
+
+<div class="row">
+	<div class="col-sm-12 col-xs-12">
+				<div class="col-sm-12 col-xs-12"> <!-- ANNOUNCEMENTS BOX -->
 			<div class="box box-solid box-info assignment-box-outer">
 				<div class="box-header text-center">Announcements</div>
 				<div class="assignment-box-inner">
@@ -141,46 +188,9 @@
 					</div>
 				</div>	
 			</div>
-		</div> <!-- END ANNOUNCEMENTS BOX -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<div class="col-sm-8 col-xs-12"> <!-- CALENDAR BOX -->
-			<div class="box box-solid box-info">
-				<div class="box-header text-center">Class Calendar</div>
-				<div class="assignment-box-inner">
-					<div class="inner">
-						
-						<hw-calendar iframe="courseObj.course.iframe"></hw-calendar>	
-						<!-- <iframe src="https://www.google.com/calendar/embed?src=paike09%40gmail.com&ctz=America/Los_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
-
-					</div>
-				</div>	
-			</div>
-		</div> <!-- END CALENDAR BOX -->
-
-	</div> <!-- END ROW -->
-
-
-
+		</div> <!-- END ANNOUNCEMENTS BOX -->	
+	</div>
+</div>
 
 
 

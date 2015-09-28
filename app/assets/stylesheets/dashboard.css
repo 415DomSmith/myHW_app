@@ -8,6 +8,7 @@
   overflow-x: hidden;
 }
 
+/*ASSIGNMENT-BOX*/
 .assignment-box-inner {
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -18,6 +19,8 @@
 	overflow-x: hidden;
 	height: 250px;
 }
+
+
 
 .box-250 {
   height: 250px;
@@ -52,6 +55,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/*COURSE SHOW - STUDENT VIEW*/
+
+.annoucement-box-outer {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 200px;  
+}
+
+/*CHAT BOX*/
+.btn-remove-message{
+  cursor: pointer;
+  color: grey;
+  width: 20px;
+}
+
+.btn-remove-message:hover{
+  color:red;
+}
+
+.chat-box-outer {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 450px;
 }
 
 
