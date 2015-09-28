@@ -6,7 +6,11 @@ class Document < ActiveRecord::Base
 	has_many :assignments, through: :assignment_documents
 
 #### PAPERCLIP STUFF #####
-	has_attached_file :attachment
+	has_attached_file :attachment,
+	:storage => :s3,
+	:s3_credentials => "/config/s3.yml",
+	:path => ":attachment/:id/:style.:extension",
+	:bucket => 'myhwapp' 
 	validates_attachment_content_type :attachment, :content_type => "application/pdf", :default_url => ""
 
 	# :storage => :s3,

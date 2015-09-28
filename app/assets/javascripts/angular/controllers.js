@@ -456,8 +456,8 @@ app.controller("ProfileController", ["$scope", "$location","$rootScope", "Assign
 // COMMANDCENTER CONTROLLER =========================
 // ==================================================
 
-app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", 'SubmissionsForCourse', function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course, SubmissionsForCourse){
-    
+app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", 'SubmissionsForCourse', '$firebaseArray', function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course, SubmissionsForCourse, $firebaseArray){
+    //PATHS
     $scope.toNewAssignment = function(){
         $location.path("/courses/" + $routeParams.id + "/assignments/new");
     };
@@ -474,7 +474,41 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
     $scope.changeCategories = function(){
         init($scope.category);
     };
+    //FIREBASE CHAT
 
+    // Course.get({id: $routeParams.id}, function(course){
+    //     console.log(course);
+    //     var courseObj = course;
+    // });
+
+    // // create reference
+    // var messagesRef = new Firebase("https://scorching-torch-2920.firebaseio.com/" + courseObj.course.id);
+    // // use ref to create synchronized arr
+    // $scope.messages = $firebaseArray(messagesRef);
+
+    // // $scope.messages.$add({author: "Parker", imageUrl: "http://cutepuppyclub.com/wp-content/uploads/2015/05/White-Cute-Puppy-.jpg", message: "Hello world!"})
+    
+    // $scope.newMessage = {author: "", imageUrl: "", message: "", showMessage: true, showEdit: false};
+
+    // $scope.removeMessage = function(message){
+    //     $scope.messages.$remove(message);
+    // };
+
+    // $scope.addMessage = function() {
+    //     $scope.messages.$add($scope.newMessage).then(function(data){
+    //         console.log(data);
+    //         $scope.newMessage.author = "";
+    //         $scope.newMessage.imageUrl = "";
+    //         $scope.newMessage.message = "";
+
+    //     });
+    // };
+
+
+
+
+
+    //CHARTS
 
     var init = function(category) {
         // Get all the info about the course for charts
