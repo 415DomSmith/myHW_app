@@ -16,12 +16,7 @@ class Document < ActiveRecord::Base
 	:bucket => 'myhwapp' 
 	validates_attachment_content_type :attachment, :content_type => "application/pdf", :default_url => ""
 
-	def s3_credentials
-      { :access_key_id => 'AKIAJKH3CGGRXGXK4JMQ',
-        :secret_access_key => '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',
-        :bucket => 'myhwapp'
-      }
-  end
+
 
 	# :storage => :s3,
  #    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
