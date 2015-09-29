@@ -222,9 +222,6 @@ GEM
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     retriable (2.0.2)
-    right_aws (3.1.0)
-      right_http_connection (>= 1.2.5)
-    right_http_connection (1.5.0)
     sass (3.4.18)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -298,7 +295,6 @@ DEPENDENCIES
   rack-rewrite
   rails (= 4.2.3)
   rails_12factor
-  right_aws
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

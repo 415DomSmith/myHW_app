@@ -1,14 +1,14 @@
 development:
-  access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
-  secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
-  bucket: <%= ENV["S3_BUCKET"] %>
+  access_key_id: AKIAJKH3CGGRXGXK4JMQ#<%= ENV["AWS_ACCESS_KEY_ID"] %>
+  secret_access_key: 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#<%= ENV["AWS_SECRET_ACCESS_KEY"] %>
+  bucket: myhwapp#<%= ENV["S3_BUCKET"] %>
 
 test:
-  access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
-  secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
-  bucket: <%= ENV["S3_BUCKET"] %> <%= ENV["AWS_ACCESS_KEY_ID"] %>
+  access_key_id: AKIAJKH3CGGRXGXK4JMQ#<%= ENV["AWS_ACCESS_KEY_ID"] %>
+  secret_access_key: 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#<%= ENV["AWS_SECRET_ACCESS_KEY"] %>
+  bucket: myhwapp#<%= ENV["S3_BUCKET"] %>
 
 production:
-  access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
-  secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
-  bucket: <%= ENV["S3_BUCKET"] %>
+  access_key_id: AKIAJKH3CGGRXGXK4JMQ
+  secret_access_key: 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
+  bucket: myhwapp
