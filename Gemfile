@@ -21,7 +21,7 @@ gem 'rails_12factor', :group => :production
 
 
 #For AWS s3 for paperclip files
-gem 'right_aws'
+# gem 'right_aws'
 gem 'aws-sdk', '~> 1.6'
 
 gem 'adminlte2-rails'

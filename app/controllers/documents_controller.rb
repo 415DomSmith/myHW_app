@@ -47,6 +47,8 @@ class DocumentsController < ApplicationController
       params.require(:document).permit(:attachment, :description, :drive_parent_id, :file_type, :google_doc_name, :google_drive_id, :google_drive_url)
     end
 
+  
+
     # def set_s3_direct_post
     #   @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
     # end

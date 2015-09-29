@@ -7,11 +7,21 @@ class Document < ActiveRecord::Base
 
 #### PAPERCLIP STUFF #####
 	has_attached_file :attachment, 
-	s3_permissions: private,
+	# s3_permissions: private,
 	:storage => :s3,
-	:s3_credentials => "/config/s3.yml",
+	:s3_credentials => Proc.new{|a| a.instance.s3_credentials },
+	# :s3_credentials => "/#{Rails.root}/config/s3.yml",
+	# :s3_credentials => "/config/s3.yml",
+	:path => ":attachment/:id/:style.:extension",
 	:bucket => 'myhwapp' 
-	# validates_attachment_content_type :attachment, :content_type => "application/pdf", :default_url => ""
+	validates_attachment_content_type :attachment, :content_type => "application/pdf", :default_url => ""
+
+	def s3_credentials
+      { :access_key_id => 'AKIAJKH3CGGRXGXK4JMQ',
+        :secret_access_key => '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',
+        :bucket => 'myhwapp'
+      }
+  end
 
 	# :storage => :s3,
  #    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
