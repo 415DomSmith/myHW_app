@@ -69,6 +69,7 @@ app.controller("AdditionalInfoController", ["$scope", "$location", "User", "$rou
 
 app.controller("DashboardController", ["$scope", "$location", "User", "$routeParams", "School", function ($scope, $location, User, $routeParams, School){
     // Get all info about the user to display it in dashboard
+    $scope.submissionsQuery = "";
     $scope.userObj = User.get({id: $routeParams.id}, function(){
         $scope.user = $scope.userObj.user;
         $scope.courses = $scope.userObj.courses;

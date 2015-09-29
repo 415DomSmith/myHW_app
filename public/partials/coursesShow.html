@@ -35,8 +35,24 @@
 
 <h3>Assignments</h3>
 
+<div class="row"><!--  Row for querying submissions and assignments -->
+	<div class="col-md-6 col-xs-12">
+		<div class="options-box">
+			<form>
+				<label for="query">
+					Search:
+				</label>
+				<input type="text" name="query" id="query" ng-model="query">
+			</form>
+			<br>
+		</div>
+	</div>
+
+</div>
+
+
 <div class="row">
-	<a class="col-md-3 col-xs-6 dashboard-link" ng-repeat="assignment in assignments | orderBy:'due_date'" ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}">
+	<a class="col-md-3 col-xs-6 dashboard-link" ng-repeat="assignment in assignments | filter:query | orderBy:'due_date'" ng-href="/#/courses/{{course.id}}/assignments/{{assignment.id}}">
 		<div class="box small-box box-solid bg-aqua">
 			<div class="box-header">
 				<h3 class="text-contain">{{assignment.title}}</h3>
