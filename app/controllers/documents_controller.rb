@@ -2,7 +2,7 @@ class DocumentsController < ApplicationController
 
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
-  before_action :set_s3_direct_post, only: [:create]
+  # before_action :set_s3_direct_post, only: [:create]
 
   before_action :confirm_logged_in
   
@@ -10,13 +10,15 @@ class DocumentsController < ApplicationController
 
 	
   def index
+    # binding.pry
 		@documents = current_user.documents #### ONLY GETTING CURRENT USERS DOCUMENTS ###
+    # format.json { render :json => @documents }
 		render json: @documents, status: :ok
   end
 
 
 	def create
-		# binding.pry
+		binding.pry
 
     @document = Document.new(document_params)
     @document.user_id = current_user.id ### SETTING OWNERSHIP OF CREATED DOC TO CURRENT USER ###
@@ -45,10 +47,13 @@ class DocumentsController < ApplicationController
       params.require(:document).permit(:attachment, :description, :drive_parent_id, :file_type, :google_doc_name, :google_drive_id, :google_drive_url)
     end
 
-    def set_s3_direct_post
-      @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
-    end
+  
 
+    # def set_s3_direct_post
+    #   @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
+    # end
+
+  
 
 
 end
