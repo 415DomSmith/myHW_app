@@ -2,8 +2,6 @@ class DocumentsController < ApplicationController
 
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
-  # before_action :set_s3_direct_post, only: [:create]
-
   before_action :confirm_logged_in
   
   before_action :confirm_teacher, only: [:create, :index, :destroy]
@@ -18,8 +16,7 @@ class DocumentsController < ApplicationController
 
 
 	def create
-		binding.pry
-
+		
     @document = Document.new(document_params)
     @document.user_id = current_user.id ### SETTING OWNERSHIP OF CREATED DOC TO CURRENT USER ###
     if @document.save
@@ -48,11 +45,6 @@ class DocumentsController < ApplicationController
     end
 
   
-
-    # def set_s3_direct_post
-    #   @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: '201', acl: 'public-read')
-    # end
-
   
 
 
