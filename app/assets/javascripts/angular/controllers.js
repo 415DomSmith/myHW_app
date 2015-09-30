@@ -690,7 +690,7 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
 // LOCAL UPLOAD (PAPERCLIP) FOR DOCUMENTS CONTROLLER=
 // ==================================================
 
-app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootScope", "$routeParams", "$location", function ($scope, Upload, $timeout, $rootScope, $routeParams, $location) {
+app.controller("LocalUploadController", ['$scope', '$timeout', "$rootScope", "$routeParams", "$location", "Document", function ($scope, $timeout, $rootScope, $routeParams, $location, Document) {
 //========== SETS A WATCHER ON UPLOAD DROP AND UPLOAD CLICK, CURRENTLY ONLY USING 'FILES' SCOPE VAR    
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
@@ -708,7 +708,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootS
               var file = files[i];
               if (!file.$error) { //TODO -- .$ERROR IS TRIGGERING ERRORS IN THE CONSOLE (not breaking anything). MAKE THE RED GO AWAY.
                 Upload.upload({
-                    url: 'https://salty-fjord-1026.herokuapp.com/api/users/:user_id/documents',
+                    url: 'http://www.myhwapp.com/api/users/:user_id/documents',
                     method: 'POST',
                     fields: {},
                     file: file,
