@@ -9,14 +9,20 @@ class Document < ActiveRecord::Base
 	has_attached_file :attachment, 
 	# s3_permissions: private,
 	:storage => :s3,
-	:s3_credentials => Proc.new{|a| a.instance.s3_credentials },
-	# :s3_credentials => "/#{Rails.root}/config/s3.yml",
+	# :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
+	:s3_credentials => "/#{Rails.root}/config/s3.yml",
 	# :s3_credentials => "/config/s3.yml",
 	:path => ":attachment/:id/:style.:extension",
 	:bucket => 'myhwapp' 
 	validates_attachment_content_type :attachment, :content_type => "application/pdf", :default_url => ""
 
+	
 
+	
+	# :storage => :s3,
+ #    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+ #    :path => ":attachment/:id/:style.:extension",
+ #    :bucket => 'myhwapp'
 ### TODO- ADD MORE ACCEPTED FILE TYPES ###	
 
 ### FORMATS THE JSON FROM OUR BACK END TO ALLOW PAPERCLIPS URL PROPERTY TO BE ADDED AND SENT TO OUR ANGULAR FRONT-END. MORE JSON KEY's CAN BE CREATED / ADDED IF NEED BE. ###
