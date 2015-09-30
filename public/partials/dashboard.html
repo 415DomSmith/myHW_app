@@ -46,14 +46,33 @@
 
 
 <div class="row">
-	<div class="col-md-6 col-xs-6" ng-if="!currentUser.user.isTeacher"><h3>Submissions</h3></div>
+	<div class="col-md-6 col-xs-6" ng-if="!currentUser.user.isTeacher">
+		<h3>Submissions</h3>
+	</div>
 
-	<div class="col-md-6 col-xs-6" ><h3>Assignments</h3></div>
+	<div class="col-md-6 col-xs-6" >
+		<h3>Assignments</h3>
+		
+	</div>
+</div>
+<div class="row"><!--  Row for querying submissions and assignments -->
+	<div class="col-md-3 col-xs-12">
+		<div class="options-box form-group">
+			<form class="form-inline">
+				<label for="query">
+					Search:
+				</label>
+				<input type="text" class="form-control" name="query" id="query" ng-model="query">
+			</form>
+			<br>
+		</div>
+	</div>
+
 </div>
 <div class="row">
 	<div class="col-md-6 col-xs-6 dashboard-scroll" ng-if="!currentUser.user.isTeacher" >
-		<!-- <h3>Submissions</h3> -->
-		<a class="col-md-6 col-xs-12 dashboard-link" ng-repeat="submission in submissions" ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}">
+
+		<a class="col-md-6 col-xs-12 dashboard-link" ng-repeat="submission in submissions | filter:query" ng-href="/#/courses/{{submission.course_id}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}">
 			<div class="box small-box box-solid bg-teal">
 				<div class="box-header">
 					<h3 class="text-contain">{{submission.assignment_title}}</h3>
@@ -68,8 +87,7 @@
 		</a>
 	</div>
 	<div class="col-md-6 col-xs-6 dashboard-scroll" >
-		<!-- <h3>Assignments</h3> -->
-		<a class="col-md-6 col-xs-12 dashboard-link" ng-repeat="assignment in assignments" ng-href="/#/courses/{{assignment.course_id}}/assignments/{{assignment.id}}">
+		<a class="col-md-6 col-xs-12 dashboard-link" ng-repeat="assignment in assignments | filter: query" ng-href="/#/courses/{{assignment.course_id}}/assignments/{{assignment.id}}">
 			<div class="box small-box box-solid bg-olive">
 				<div class="box-header">
 					<h3 class="text-contain">{{assignment.title}}</h3>
