@@ -1,8 +1,8 @@
 <div style="margin-top: 20px; height: 20px;"></div>
-<h2>Assignment: {{assignment.title}}</h2>
+<h2><strong>Assignment:</strong> {{assignment.title}}</h2>
 <div class="box box-primary">
-	<h4>Due: {{assignment.due_date | date:'fullDate'}}</h4>
-	<h4>Description:</h4>
+	<h4><strong>Due:</strong> {{assignment.due_date | date:'fullDate'}}</h4>
+	<h4><strong>Description:</strong></h4>
 	<div style="z-index: 2; pointer-events: none;">
 		<textarea ui-tinymce="tinymceOptions" class="mceNonEditable" ng-model="assignment.description" rows="25">
 		</textarea>
@@ -10,7 +10,7 @@
 
 	<div class="assignment-docs"> 
 		<div class="box box-primary">
-			<h4>Documents Attached to This Assignment:</h4>
+			<h4><strong>Documents Attached to This Assignment:</strong></h4>
 			<div class="box box-solid box-danger">
 				<div class="box-header">
 					<h5>Be sure to look at the documents attached to this assignment!

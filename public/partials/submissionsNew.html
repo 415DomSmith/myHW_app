@@ -11,11 +11,11 @@
 	</div>	
 	
 	<form ng-submit="createSubmission()">
-		<label for="answer">Response:</label>
+		<label for="answer"><strong>Response:</strong></label>
 		<textarea ui-tinymce="tinymceOptions" ng-model="submissionData.answer" rows="18">
 		</textarea>
 		<div class="submit-doc-link">
-			<img class="driveIcon" src="/Google-Drive-Icon.png" alt=""><label for="submission_link">Link to a Google Drive Document:</label>
+			<img class="driveIcon" src="/Google-Drive-Icon.png" alt=""><label for="submission_link"><strong>Link to a Google Drive Document:</strong></label>
 
 			<input type="text" class="form-control" ng-model="submissionData.submission_link" id="submission_link">
 		</div>

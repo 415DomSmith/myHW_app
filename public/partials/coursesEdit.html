@@ -6,13 +6,13 @@
 			<p>Students will see changes to the name and subject of the course.</p>
 		</div>
 		<form ng-submit="updateCourse()">
-			<label for="name">Period, Block, or Name of Course</label>
+			<label for="name"><strong>Period, Block, or Name of Course</strong></label>
 			<input class="form-control" type="text" id="name" ng-model="courseData.name" name="course-name" required>
 		<br>
-			<label  for="subject">Subject</label>
+			<label  for="subject"><strong>Subject</strong></label>
 			<input class="form-control" type="text" id="subject" ng-model="courseData.subject" name="course-subject" required>
 		<br>
-		<label  for="iframe">Google Calendar Embed Code</label>
+		<label  for="iframe"><strong>Google Calendar Embed Code</strong></label>
 			<input class="form-control" type="text" id="iframe" ng-model="courseData.iframe">
 		<br>
 			<p>To find this visit <a target="_blank" href="http://www.google.com/calendar">Google Calendars</a>. On the left sidebar, you will see a list of your existing calendars. Click on the calendar that you would like to use for this course, then select “Calendar Settings”. <div><img class="img-responsive" src="https://cdn.elegantthemes.com/blog/wp-content/uploads/2014/12/GoogleCalendarSettings2.jpg" alt="Google Calendar Image"></div> Find the "Embed This Calendar" portion of the page. Copy and paste the code found in the scrollable text area box (look for the word "iframe" and copy everything in that box). Now paste what you found into the box above.  </p>
@@ -24,7 +24,7 @@
 			<!-- OPTIONS FOR STUDENTS -->
 				<div class="options-box">
 						<label for="studentQuery">
-							Find a Student By Name:
+							<strong>Find a Student By Name:</strong>
 						</label>
 						<input type="text" name="studentQuery" id="studentQuery" ng-model="studentQuery">
 					<br>
@@ -32,7 +32,7 @@
 				<p>(Remember to make sure you are still enrolled in the course.)</p>
 			<div> 
 				<div class="box box-solid box-info">
-					<div class="box-header">Students in your school:</div>
+					<div class="box-header"><strong>Students in your school:</strong></div>
 					<div class="document-assignment-box-outer">
 						<div class="document-assignment-box-inner">
 							<div class="box-body table-responsive no-padding">
