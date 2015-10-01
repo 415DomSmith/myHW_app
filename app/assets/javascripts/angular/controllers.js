@@ -708,7 +708,7 @@ app.controller("LocalUploadController", ['$scope', 'Upload', '$timeout', "$rootS
               var file = files[i];
               if (!file.$error) { //TODO -- .$ERROR IS TRIGGERING ERRORS IN THE CONSOLE (not breaking anything). MAKE THE RED GO AWAY.
                 Upload.upload({
-                    url: 'https://salty-fjord-1026.herokuapp.com/api/users/:user_id/documents',
+                    url: 'http://www.myhwapp.com/api/users/:user_id/documents',
                     method: 'POST',
                     fields: {},
                     file: file,
