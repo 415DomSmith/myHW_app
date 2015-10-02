@@ -61,7 +61,6 @@ gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 
 
-gem 'postgres-copy'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

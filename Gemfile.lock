@@ -174,11 +174,6 @@ GEM
       mime-types
       mimemagic (= 0.3.0)
     pg (0.18.3)
-    postgres-copy (0.9.3)
-      activerecord (>= 4.0)
-      pg (>= 0.17)
-      rails (>= 4.0)
-      responders
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -295,7 +290,6 @@ DEPENDENCIES
   omniauth-google-oauth2
   paperclip (~> 4.3)
   pg
-  postgres-copy
   pry-rails
   puma
   rack-rewrite

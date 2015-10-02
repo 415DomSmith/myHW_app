@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get "/api/users/:user_id/courses/:course_id/assignments" => "statics#submissions_for_course"
   	
     
-
+    get "/api/courses/:course_id/export" => "courses#index"
 
     # get "/omniauth/:provider/callback" => 'sessions#create'
 

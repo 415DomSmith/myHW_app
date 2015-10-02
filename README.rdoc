@@ -1,75 +1,38 @@
 == README
 
+This project was Dominic Smith and Parker Lewis' capstone project for Galvanize's six month full-stack program. The goal behind it was to create a platform that can take some of the work out of assigning homework and grading, and help teachers visualize student progress.  
 
-Description:
-A platform for students and teachers to interact digitally online. Teachers assign homework through our app or by posting electronic documents, either uploaded to our app or pulled down from google drive. Teachers can track and grade assignments, and maintain a classroom grade book for each student. Teachers and students will be able to chat via a Firebase/Angular chat feature. Teachers can post classroom announcements. Teachers can manage a class-room calendar. 
+
+The result was a platform for students and teachers to interact digitally online. Teachers author and assign homework through our app, or by posting electronic documents, either uploaded to our app or pulled down from Google Drive. Teachers can track and grade assignments, and maintain a classroom grade book for each student. On the teachers "Classroom Command Center", teachers can grade assignment submissions, see a visual representation of a students progress in class and with assignments, or create new assignments for the whole class. Teachers and students in each class can chat in real time. Teachers can post classroom announcements, and they can manage and share a class-room calendar through Google Calendars.
+
+On the students side of the app, they can see all of their pending assignments, or go to a classroom page and see assignments just for that class. They can see their grade and points in a class, and communicate with the teacher or classmates in real-time. If the teacher chooses to publish a class calendar (through Google), students can also see events on the calendar.  
 
 Technologies:
 - Rails for back-end
-- Paperclip for local file storage
 - Angular for front-end
+- Google OAuth for authentication and user data
 - Twitter Bootstrap for reactivity
-- Firebase or socket.io for chat
+- Paperclip and Amazon s3 for file storage
+- Google Drive API for sharing files
+- Chart JS for data visualizations
+- Firebase for real-time chat
 
-
-APIs:
-Google drive api
-Google OAuth
-Stretch API's:
-Google calendar for custom class-room calendars
-aeries gradebook API integration
-
-Roadmap:
-
-By Monday (14th):
-Base / MVP features:
-oAuth / Google log-in only
-File upload with paperclip for local storage
-Google drive integration (get all of teachers docs)
-Score tracking / Grade books
-Students submit links to work or submit a form
-Students and teachers can see individual students grades
-
-By Monday (21th)
-Firebase chat
-Classroom Announcements 
-Some styling with nice animations
-ChartJs or D3 for classroom and individual student analytics (for teachers and students)
-
-By Monday(28th)
-Discussion boards for assignments and classrooms
-Google Calendar integration for scheduling assignments and classroom events
-Nice styling (jQuery dragging)
 
 
 Stretch Goals:
-Scheduled emails to students (and possibly parents)
+User invites to sign-up. Teachers can invite students to create their account.
+Scheduled emails to students (and possibly parents), showing weekly or monthly points totals
 Classroom photo album
-Chat teacher for staff (only teachers of the same school)
+Chat for only teachers or staff (only admin users of the same school)
+SchoolLoop or Aeries API integration for gradebook exporting
 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
 
-* Ruby version
+* Ruby version: 4.2.3
 
-* System dependencies
+* Database: PotsgreSQL
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 
 
 Please feel free to use a different markup language if you do not plan to run

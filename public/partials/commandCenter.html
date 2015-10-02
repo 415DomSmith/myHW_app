@@ -1,16 +1,25 @@
 <div style="margin-top: 30px; height: 20px;"></div>
 <div class="row">
-	<div class="col-sm-8 col-xs-12">
+	<div class="col-sm-12 col-xs-12">
 		<h3>Teacher Command Center for {{courseObj.course.name}} - {{courseObj.course.subject}}</h3>
 	</div>
-	<div class="col-sm-4 col-xs-12">
-		<button ng-click="toNewAssignment()" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> New Assignment</button>
-		<button ng-click="toNewAnnouncement()" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> New Announcement</button>
-		<button ng-click="toEditCourse()" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Edit Course</button>
-	</div>
-
-
 </div>
+<div class="row">
+	<div class="col-sm-12 col-xs-12 cc-buttons">
+		<div>
+			<button ng-click="toNewAssignment()" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> New Assignment</button>
+
+			<button ng-click="toNewAnnouncement()" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> New Announcement</button>
+	 
+			<button ng-click="toEditCourse()" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Edit Course</button>
+
+			<!-- <button ng-click="downloadCSV()" class="btn btn-sm btn-info"><i class="fa fa-table"></i> Export Data to CSV File</button>
+
+			<button ng-click="downloadXLS()" class="btn btn-sm btn-info"><i class="fa fa-file-excel-o"></i> Export Data to XLS File</button> -->
+		</div>
+	</div>
+</div>
+
 
 <section class="content">
 

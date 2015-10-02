@@ -481,7 +481,7 @@ app.controller("ProfileController", ["$scope", "$location","$rootScope", "Assign
 // COMMANDCENTER CONTROLLER =========================
 // ==================================================
 
-app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", 'SubmissionsForCourse', '$firebaseArray', function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course, SubmissionsForCourse, $firebaseArray){
+app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", 'SubmissionsForCourse', '$firebaseArray', "$http", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course, SubmissionsForCourse, $firebaseArray, $http){
     //PATHS
     $scope.toNewAssignment = function(){
         $location.path("/courses/" + $routeParams.id + "/assignments/new");
@@ -500,6 +500,36 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         init($scope.category);
     };
     
+// FILE DOWNLOAD OF COURSE / SUBMISSION DATA -- TODO: Make it work.
+
+    $scope.downloadCSV = function() {
+        // $http.get('/courses/' + $routeParams.id + '/export/students.csv').then(function (res) {
+        //     console.log(res); //making get call to update current file library. updating userDocs renders new file on the screen.
+        // });
+        $http({method: 'GET', url: '/api/courses/' + $routeParams.id + '/export.csv/'}).
+            success(function(data, status, headers, config) {
+                // console.log(data);
+                // console.log(headers);
+                // console.log(config);
+                var anchor = angular.element('<a/>');
+                anchor.css({display: 'none'}); // Make sure it's not visible
+                angular.element(document.body).append(anchor); // Attach to document
+                anchor.attr({
+                href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+                target: '_blank',
+                download: 'course-data.csv'
+                })[0].click();
+                
+            anchor.remove(); // Clean it up afterwards                  
+            }).
+            error(function(data, status, headers, config) {
+    // if there's an error you should see it here
+            });
+        };
+
+    $scope.downloadXLS = function(downloadPath) {
+        window.open(downloadPath, '_blank', '');
+    };
 
     // FIREBASE CHAT
 
