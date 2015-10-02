@@ -20,6 +20,94 @@
 	height: 250px;
 }
 
+.box-header {
+  font-size: 14px
+}
+
+.light-blue-box{
+  /*border: 4px solid #00c0ef;*/
+  border-right: 4px solid #00c0ef;
+  border-left: 4px solid #00c0ef;
+  border-bottom: 4px solid #00c0ef;
+  border-radius: 2%;
+  -webkit-transition: border .3s;
+  -moz-transition: border .3s;
+  -o-transition: border .3s;
+  -ms-transition: border .3s;
+  transition: border .3s;
+}
+
+.light-blue-box:hover {
+  /*border: 6px solid #00c0ef;*/
+  border-left: 8px solid #00c0ef;
+  border-right: 8px solid #00c0ef;
+  border-bottom: 8px solid #00c0ef;
+  border-radius: 3%;
+}
+
+
+.orange-box{
+  /*border: 4px solid #f39c12;*/
+  border-right: 4px solid #f39c12;
+  border-left: 4px solid #f39c12;
+  border-bottom: 4px solid #f39c12;
+  border-radius: 2%;
+  -webkit-transition: border .3s;
+  -moz-transition: border .3s;
+  -o-transition: border .3s;
+  -ms-transition: border .3s;
+  transition: border .3s;
+}
+
+.orange-box:hover {
+  /*border: 6px solid #f39c12;*/
+  border-left: 8px solid #f39c12;
+  border-right: 8px solid #f39c12;
+  border-bottom: 8px solid #f39c12;
+  border-radius: 3%;
+}
+
+.red-box{
+  /*border: 4px solid #f56954;*/
+  border-right: 4px solid #f56954;
+  border-left: 4px solid #f56954;
+  border-bottom: 4px solid #f56954;
+  border-radius: 2%;
+  -webkit-transition: border .3s;
+  -moz-transition: border .3s;
+  -o-transition: border .3s;
+  -ms-transition: border .3s;
+  transition: border .3s;
+}
+
+.red-box:hover {
+  /*border: 6px solid #f56954;*/
+  border-left: 8px solid #f56954;
+  border-right: 8px solid #f56954;
+  border-bottom: 8px solid #f56954;
+  border-radius: 3%;
+}
+
+.green-box{
+  /*border: 4px solid #00a65a;*/
+  border-right: 4px solid #00a65a;
+  border-left: 4px solid #00a65a;
+  border-bottom: 4px solid #00a65a;
+  border-radius: 2%;
+  -webkit-transition: border .3s;
+  -moz-transition: border .3s;
+  -o-transition: border .3s;
+  -ms-transition: border .3s;
+  transition: border .3s;
+}
+
+.green-box:hover {
+  /*border: 6px solid #00a65a;*/
+  border-left: 8px solid #00a65a;
+  border-right: 8px solid #00a65a;
+  border-bottom: 8px solid #00a65a;
+  border-radius: 3%;
+}
 
 
 .box-250 {
