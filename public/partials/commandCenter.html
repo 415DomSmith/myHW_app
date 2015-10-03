@@ -26,7 +26,7 @@
 
 	<div class="row">
 		<div class="col-sm-4 col-xs-12"> <!-- ASSIGNMENT BOX -->
-			<div class="box box-solid box-warning assignment-box-outer">
+			<div class="box box-solid box-warning orange-box assignment-box-outer">
 				<div class="box-header text-center">{{category}} Assignments</div>
 				<br>
 					<label for="category">Category:</label>
@@ -69,7 +69,7 @@
 			</div>
 		</div> <!-- END ASSIGNMENT BOX -->
 		<div class="col-sm-4 col-xs-12"> <!-- CHART1 BOX -->
-			<div class="box box-solid box-danger assignment-box-outer">
+			<div class="box box-solid box-danger red-box assignment-box-outer">
 				<div class="box-header text-center">{{category}} Assignments vs. Average and Max Scores</div>
 					<div class="assignment-box-inner">
 						<div class="inner">
@@ -96,7 +96,7 @@
 		</div> <!-- END CHART1 BOX -->
 		
 		<div class="col-sm-4 col-xs-12"> <!-- GRAPH2 BOX -->
-			<div class="box box-solid box-success assignment-box-outer">
+			<div class="box box-solid box-success green-box assignment-box-outer">
 				<div class="box-header text-center">Submissions per Assignment</div>
 					<div class="assignment-box-inner">
 						<div class="inner">
@@ -118,7 +118,7 @@
 
 	<div class="row">
 		<div class="col-sm-4 col-xs-12"> <!-- CHAT BOX -->
-			<div class="box box-solid box-info chat-box-outer">
+			<div class="box box-solid box-info light-blue-box chat-box-outer">
 				<div class="box-header text-center">Chatroom for {{courseObj.course.name}}</div>
 				<div class="assignment-box-inner">
 					<div class="inner">
@@ -146,7 +146,7 @@
 		</div> <!-- END CHAT BOX -->
 
 		<div class="col-sm-8 col-xs-12"> <!-- CALENDAR BOX -->
-			<div class="box box-solid box-info">
+			<div class="box box-solid box-info light-blue-box calendar-box">
 				<div class="box-header text-center">Class Calendar</div>
 				<div class="assignment-box-inner">
 					<div class="inner">
@@ -165,7 +165,7 @@
 <div class="row">
 	<div class="col-sm-12 col-xs-12">
 				<div class="col-sm-12 col-xs-12"> <!-- ANNOUNCEMENTS BOX -->
-			<div class="box box-solid box-info assignment-box-outer">
+			<div class="box box-solid box-info light-blue-box assignment-box-outer">
 				<div class="box-header text-center">Announcements</div>
 				<div class="assignment-box-inner">
 					<div class="inner">
@@ -238,7 +238,7 @@
 	<div class="row">
 
 		<div class="col-sm-6 col-xs-12" ng-repeat="student in students | filter: studentQuery"> <!-- STUDENT BOX -->
-			<div class="box box-solid box-primary">
+			<div class="box box-solid box-primary student-box">
 				<div class="box-header text-center">{{student.name}}</div>
 					<div class="inner"> <!-- STUDENT INNER BOX BEGIN-->
 						<div class="row"><!-- ROW FOR GRADE GAUGE AND SUBMISSION TABLE -->
@@ -270,7 +270,7 @@
 												
 														<td>{{student.studentChartLabels[$index]}}</td>
 														<td>{{submission.score}} / {{submission.max}}</td>
-														<td><a class="btn btn-xs btn-info" ng-href="/#/courses/{{student.courseId}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}/score">Grade</a></td>
+														<td><a class="btn btn-xs btn-info light-blue-box" ng-href="/#/courses/{{student.courseId}}/assignments/{{submission.assignment_id}}/submissions/{{submission.id}}/score">Grade</a></td>
 														
 												</tr>
 											</tbody>	
