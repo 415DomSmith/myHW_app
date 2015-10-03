@@ -38,3 +38,4 @@ def self.to_csv(foo_attributes = column_names, bar_attributes = bar.column_names
     end
   end
 end
+end
