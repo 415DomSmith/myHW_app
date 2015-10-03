@@ -13,7 +13,7 @@ app.controller("LoginController", ["$scope", "$location", "$http", "$auth", "$an
 	};
 
     $scope.myInterval = 3000;
-    $scope.slides = [ {image: 'educational_technology.jpg', text: "A platform for Teachers and Students to interact online."} , {image: 'technology-education.jpg', text: "Create assignments, and share them with your class." }, {image: 'education-ICT.jpg'}];
+    $scope.slides = [ {image: 'img4.jpg', text: "myHW: A platform for Teachers and Students to interact online."} , {image: 'img2.jpg', text: "myHW: Create assignments, and share them with your class." }, {image: 'img1.jpg', text: 'myHW: Teachers can grade student submissions, and track student performance.'}];
     
     $scope.scrollToAbout = function () {
         $location.hash('about');
@@ -508,7 +508,7 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         // });
         $http({method: 'GET', url: '/api/courses/' + $routeParams.id + '/export.csv/'}).
             success(function(data, status, headers, config) {
-                // console.log(data);
+                console.log(data);
                 // console.log(headers);
                 // console.log(config);
                 var anchor = angular.element('<a/>');

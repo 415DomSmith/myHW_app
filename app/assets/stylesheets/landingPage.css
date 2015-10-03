@@ -7,40 +7,42 @@
 }
 
 .intro-box {
-    display: table;
-    width: 100%;
-    height: 500px;
-    
-    color: #fff;
-    background: url('/assets/trianglifyBG.png') no-repeat center scroll;
-    background-color: rgba(0,0,0,0.1);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+  display: table;
+  width: 100%;
+  height: 800px;
+  color: #fff;
+  background: url('/assets/trianglifyBG.png') no-repeat center scroll;
+  background-color: rgba(0,0,0,0.1);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+/*    margin-left: -5px;
+  margin-top: -5px;*/ 
 }
+
 .intro .intro-body {
-       
-    height: 580px;
+  height: 480px;
 }
 
 @media(min-width:768px) {
-    .intro {
-        height: 100%;
-        padding: 0;
-    }
+  .intro {
+      height: 100%;
+      padding: 0;
+  }
 }
 
 .slides_control > div{
-  height: 300px;
+  height: 500px;
+  width: 100%;
   float: none;
   margin: 0 auto;
 }
 
 .slides_control {
   /*position:absolute;*/
-  height: 300px;
-  width: 50%;
+  height: 500px;
+  width: 100%;
   float: none;
   margin: 0 auto;
   margin-right: auto; 
@@ -48,45 +50,71 @@
 
 .demo-instructions {
   width: 100%; 
-  margin-top: 50px;
-  padding-bottom: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  /*background: url('/assets/trianglifyBG.png') no-repeat center scroll;*/
+  /*background-color: rgba(0,0,0,0.1);*/
+  /*-webkit-background-size: cover;*/
+  /*-moz-background-size: cover;*/
+  /*background-size: cover;*/
+  /*-o-background-size: cover;*/
 }
 
 .carousel-control {
-    display: none; 
+  display: none; 
 }
 
 .carousel-image{
-  width: 500px;
-  height: 330px;
+  width: 100%;
+  height: 500px;
   margin: auto;
   margin-top: 10px;
-
 }
 
 .carousel-caption {
-    margin-bottom: 80px;
+  margin-bottom: 300px;
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 4px;
 }
 
 .content-section {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
+.sign-in-button {
+  background-color: rgba(255,255,255,0.5);
+  padding: 10px 20px;
+  border-radius: 4px;
+}
 
 .login-title {
     font-family: 'Kaushan Script', cursive;
-    font-weight: 500;
+    /*font-weight: 500px;*/
 }
 
 .login-text {
     margin-top: 50px;
     width: 100%;
+    background-color: rgba(255,255,255,0.4);
 }
 
 .landing-page-body {
-    background: url('/assets/trianglifyBG.png') no-repeat scroll;
+    /*background: url('/assets/trianglifyBG.png') no-repeat scroll;*/
     height: 800px;
     width: 100%;
+}
+
+.landing-info-box {
+  margin-top: 20px; 
+}
+
+.landing-info-spacing {
+  margin-top: 30px;
+}
+
+.landing-info-box h4 {
+  line-height: 30px;
+
 }
 
 .about-title {

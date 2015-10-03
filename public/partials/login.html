@@ -1,11 +1,12 @@
 <a href="https://github.com/415DomSmith/myHW_app" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 20000000" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 
 <header class="intro-box">
-    <div class="intro-body">
-        <div class="container">
-            <div class="row">
-                <h1 class="intro-title">myHW</h1>
+    <!-- <h1 class="intro-title">myHW</h1> -->
+    <div class="intro-body">      
+           <!--  <div class="row"> -->
+                
                 <carousel interval="myInterval" class="slides_control">
+
                     <slide ng-repeat="slide in slides" active="slide.active">
                         <img ng-src="{{slide.image}}" class="carousel-image">
                         <div class="carousel-caption">
@@ -13,32 +14,81 @@
                         </div>
                     </slide>
                 </carousel>
-            </div>    
-        </div>
-    </div>
-</header> 
-<section id="login" name="login" class="container content-section text-center">
-        
-            <h2 class="login-title">Login / Join Here</h2>
+            <!-- </div>     -->
+            <section id="login" name="login" class="container content-section text-center">
+        <h2 class="login-title">Login / Join Here</h2>
             <h6> (Scroll down to learn more about myHW and how to login with a demo account) </h6>
     
             <div class="form-box" id="login-box">
-                <div class="footer">                                     
+                <div class="sign-in-button">                                     
                     <button type="submit" ng-click="authenticateUser()" class="btn bg-red btn-block"><i class="fa fa-google-plus"></i> Sign in with Google
                     </button>  
                 </div> 
-            </div>
-            <div class="box box-primary demo-instructions">
-                <h4 style="margin-top: 50px;">Want to demo myHW before signing up? <a target="_blank" href="https://accounts.google.com/Logout?">Logout of your Google account</a>, and login with one of our demo accounts.</h4>
-                <h4 style="margin-top: 50px;">To see the view of a teacher, login with: <strong>my.hw.teacher.demo@gmail.com</strong> </h4>
-                <h4 style="margin-top: 50px;">To see the view of a student, login with: <strong>my.hw.student.demo@gmail.com</strong></h4>
-                <h4 style="margin-top: 50px;">When prompted for a password, enter <strong>demodemo</strong>.</h4>
-            </div>
-</section>
+            </div>    
+    </div>
+    </section>
+</header> 
 
-<div class="landing-page-body container content-section text-center">
+<div class="landing-page-body container content-section ">
     <section>
-        <h2 class="about-title">About</h2>   
+        <div class="row landing-info-spacing">
+            <div class="col-sm-1 col-xs-0"></div>
+            <div class="col-sm-3 col-xs-12">
+                <img src="demo-img.png" class="img-responsive" alt="">
+            </div>
+            <div class="col-sm-1 col-xs-0"></div>
+            <div class="col-sm-6 col-xs-12 landing-info-box">
+                <h3>Demo myHW before signing up</h3>
+                <h4><a target="_blank" href="https://accounts.google.com/Logout?">Logout of Google</a>, and login with one of our accounts. <br>
+                <strong>Teacher view:</strong> my.hw.teacher.demo@gmail.com <br>
+                <strong>Student view:</strong> my.hw.student.demo@gmail.com <br>
+                When prompted for a password, enter demodemo.</h4>
+            </div>
+            <div class="col-sm-1 col-xs-0"></div>
+        </div>
+        <div class="row landing-info-spacing">
+            <div class="col-sm-1 col-xs-0"></div>
+            <div class="col-sm-6 col-xs-12 landing-info-box">
+                <h3>Assignment Management</h3>
+                <h4>Create assignments, attach documents to them, and set due dates. <br>Grade student submissions, and view student progress.<br>
+                Integrate Google Calendar to keep students up to date on assignments and activities.
+                </h4>
+            </div>
+            <div class="col-sm-1 col-xs-0"></div>
+            <div class="col-sm-3 col-xs-12 landing-info-box">
+                <img src="assignment-img.png" class="img-responsive" alt="">
+
+            </div>
+            <div class="col-sm-1 col-xs-0"></div>
+        </div>
+        <div class="row landing-info-spacing">
+            <div class="col-sm-1 col-xs-0"></div>
+            <div class="col-sm-3 col-xs-12">
+                <img src="demo-img.png" class="img-responsive" alt="">
+            </div>
+            <div class="col-sm-1 col-xs-0"></div>
+            <div class="col-sm-6 col-xs-12 landing-info-box">
+                <h3>Categorize Lessons and Assignments</h3>
+                <h4></h4>
+            </div>
+            <div class="col-sm-1 col-xs-0"></div>
+        </div>
+        <div class="row landing-info-spacing">
+            <div class="col-sm-1 col-xs-0"></div>
+            <div class="col-sm-6 col-xs-12 landing-info-box">
+                <h3>Visualize Student Progress</h3>
+                <h4>
+                </h4>
+            </div>
+            <div class="col-sm-1 col-xs-0"></div>
+            <div class="col-sm-3 col-xs-12 landing-info-box">
+                <img src="visualize-img.png" class="img-responsive" alt="">
+            </div>
+            <div class="col-sm-1 col-xs-0"></div>
+        </div>
+        <!-- <div class="box box-primary demo-instructions">
+                
+        
         <div class="box box-primary login-text">
             <h3> myHW uses your Google account to allow you to bring in files from Google Drive and assign and share them with your students. </h3>
             
@@ -55,7 +105,7 @@
         </div>     
                       
     </section>
-</div>  
+</div>   -->
 <!-- Footer -->
 <footer class="footy">
     <div class="container text-center">
