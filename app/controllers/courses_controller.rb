@@ -4,24 +4,24 @@ class CoursesController < ApplicationController
 	before_action :confirm_teacher, only: [:create, :update, :destroy]
 	
 
-	def index ### SERVES FILE OF COURSE INFO FOR DOWNLOAD
+	# def index ### SERVES CSV FILE OF COURSE INFO FOR DOWNLOAD
 		
-		@course = Course.find(params[:course_id])
-		@assignments = @course.assignments.order(:created_at)
-		# @students = @course.users
-		@submissions = [] 
+	# 	@course = Course.find(params[:course_id])
+	# 	@assignments = @course.assignments.order(:created_at)
+	# 	# @students = @course.users
+	# 	@submissions = [] 
 		
-		@assignments.each do |assignment|
-			submission = Submission.where("assignment_id" => assignment.id)
-			@submissions << submission
-		end
-		binding.pry		
-		respond_to do |format|
+	# 	@assignments.each do |assignment|
+	# 		submission = Submission.where("assignment_id" => assignment.id)
+	# 		@submissions << submission
+	# 	end
+	# 	binding.pry		
+	# 	respond_to do |format|
 
-	    format.csv { send_data @submissions.to_csv }
-	    # format.xls
-  	end
-	end
+	#     format.csv { send_data @submissions.to_csv }
+	#     # format.xls
+ #  	end
+	# end
 
 	def show
 		# binding.pry

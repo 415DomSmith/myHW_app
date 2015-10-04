@@ -10,6 +10,7 @@ class Course < ActiveRecord::Base
 
 	has_many :announcements
 
+#### TODO: BUILD CSV FILE##### 
 	# def self.to_csv
 	# 	attributes = %w{id name assignment_title score max}
  #  	CSV.generate(headers: true) do |csv|
@@ -21,21 +22,21 @@ class Course < ActiveRecord::Base
 	# end
 
 
-def self.to_csv(foo_attributes = column_names, bar_attributes = bar.column_names, options = {})
+# def self.to_csv(foo_attributes = column_names, bar_attributes = bar.column_names, options = {})
 
-  CSV.generate(options) do |csv|
-    csv.add_row foo_attributes + bar_attributes
+#   CSV.generate(options) do |csv|
+#     csv.add_row foo_attributes + bar_attributes
 
-    all.each do |foo|
+#     all.each do |foo|
 
-      values = foo.attributes.slice(*foo_attributes).values
+#       values = foo.attributes.slice(*foo_attributes).values
 
-      if foo.contact_details
-        values += foo.contact_details.attributes.slice(*bar_attributes).values
-      end
+#       if foo.contact_details
+#         values += foo.contact_details.attributes.slice(*bar_attributes).values
+#       end
 
-      csv.add_row values
-    end
-  end
-end
+#       csv.add_row values
+#     end
+#   end
+# end
 end
