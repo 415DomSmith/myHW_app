@@ -117,6 +117,14 @@
 
 }
 
+.landing-img {
+  height: 200px;
+  width: 260px;
+  margin-left: 0px;
+  margin-right: auto;  
+
+}
+
 .about-title {
     margin-top: 50px;
     font-family: 'Kaushan Script', cursive;
