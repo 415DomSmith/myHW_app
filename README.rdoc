@@ -1,4 +1,6 @@
 == README
+Visit: http://www.myhwapp.com
+
 
 This project was Dominic Smith and Parker Lewis' capstone project for Galvanize's six month full-stack program. The goal behind it was to create a platform that can take some of the work out of assigning homework and grading, and help teachers visualize student progress.  
 
