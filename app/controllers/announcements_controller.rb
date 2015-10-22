@@ -4,10 +4,8 @@ class AnnouncementsController < ApplicationController
 	before_action :confirm_teacher, only: [:create, :update, :destroy]
 
 	def create
-		# binding.pry
 		@course = Course.find(params["course_id"])
 		@announcement = @course.announcements.new(announcement_params)
-		# binding.pry
 		if @announcement.save
 			render json: @announcement, status: :created
 		else

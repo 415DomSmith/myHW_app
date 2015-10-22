@@ -482,7 +482,8 @@ app.controller("ProfileController", ["$scope", "$location","$rootScope", "Assign
 // ==================================================
 
 app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "Assignment", "$routeParams", "Submission", "Course", 'SubmissionsForCourse', '$firebaseArray', "$http", function ($scope, $location, $rootScope, Assignment, $routeParams, Submission, Course, SubmissionsForCourse, $firebaseArray, $http){
-    //PATHS
+
+//PATHS
     $scope.toNewAssignment = function(){
         $location.path("/courses/" + $routeParams.id + "/assignments/new");
     };
@@ -542,10 +543,6 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         // use ref to create synchronized arr
         $scope.messages = $firebaseArray(messagesRef);
     });
-
-    
-
-    // $scope.messages.$add({author: "Parker", imageUrl: "http://cutepuppyclub.com/wp-content/uploads/2015/05/White-Cute-Puppy-.jpg", message: "Hello world!"})
     
     $scope.newMessage = {author: $scope.currentUser.user.name, imageUrl: $scope.currentUser.user.image, message: ""};
 
@@ -576,6 +573,18 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
             $scope.assignments = $scope.courseObj.assignments;  
             $scope.enrolled_students = $scope.courseObj.enrolled_students;
             var arr = Object.keys($scope.enrolled_students).map(function(k){ return $scope.enrolled_students[k]});
+
+
+
+
+
+
+
+
+
+
+
+
 
         // CHART LOGIC
 
@@ -621,8 +630,6 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                             max = submission.max;
                             averageCounter ++;
                             submissionCounter ++;
-
-                            // console.log(scoreSum)
                         });
 
                         // console.log(scoreSum, "outside")
@@ -644,6 +651,24 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
         }); // End of Get on courses for charts logic and all of its callbacks
 
         //____________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // STUDENT LOGIC
         Course.get({id: $routeParams.id}, function(course){
@@ -672,8 +697,6 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                         studentChartTotalPoints.push(submission.score);
                         max += submission.max;
                         points += submission.score;
-                        // console.log(max)
-                        // console.log(points)
                     });
                     student.max = max;
                     student.points = points;
@@ -685,24 +708,13 @@ app.controller("CommandCenterController", ["$scope", "$location","$rootScope", "
                     student.studentChartSeries = ["Student's Points", "Max Points"];
                     student.studentChartData = [studentChartTotalPoints, studentChartMaxPoints];
                     student.courseId = $routeParams.id;
-                    // student.max = max;
-                    // student.points = points;
-                    // console.log(max)
-                    // console.log(points)
-                    // console.log(student)
 
                     //push student to students
                     if (!student.isTeacher) {
                         $scope.students.push(student);    
                     };
                     
-                    // console.log(student)
-                    // console.log(studentChartLabels)
-
-
-                    // console.log(studentChartLabels, "before")
                     studentChartLabels = [];
-                    // console.log(studentChartLabels, "after")
                     
                     studentChartTotalPoints = [];
                     studentChartMaxPoints = [];

@@ -6,8 +6,6 @@ class StaticsController < ApplicationController
   end
 
   def additional_info
-  	# binding.pry
-  	
   end
 
   def submissions_for_course
@@ -18,19 +16,17 @@ class StaticsController < ApplicationController
   	@course = Course.find(params["course_id"])
 
   	# Find the submissions of that user for that individual course
-    # binding.pry
     if params["category"]
-      # @submissions_for_course = @user.submissions.where(course_id: @course.id, category: params["category"])
       if params["category"] == "All"
         @submissions_for_course = @user.submissions.where(course_id: @course.id)
       else
+        # Find all of the assignments for a course in a given category
         @assignments = @course.assignments.where(category: params["category"])
-        # binding.pry
         @assignments.each do |assignment|
-          # binding.pry
+          # Find all of the submissions for that assignment
           assignment.submissions.each do |submission|
-            # binding.pry
             if submission.user_id == @user.id
+              # Add them to the submissions for the course
               @submissions_for_course << submission
             end
           end
@@ -41,7 +37,6 @@ class StaticsController < ApplicationController
     end
   	
 
-    # binding.pry
   	render json: @submissions_for_course, status: :ok
   	
   end
