@@ -4,12 +4,14 @@ var app = angular.module("myHWApp", ["ngRoute",'ng-token-auth', 'ngFileUpload', 
 app.config(["$authProvider", function($authProvider) {
     $authProvider.configure({
       authProviderPaths: {
-      google_oauth2: '/auth/google_oauth2' // <-- note that this is different than what was set with github
+      google_oauth2: '/auth/google_oauth2'
       },
       omniauthWindowType:'newWindow',
     });
   }]);
 
+
+// Wrong route redirect
 app.config(["$httpProvider", function($httpProvider) {
 	$httpProvider.defaults.headers.common['X-CSRF-Token'] =
     $('meta[name=csrf-token]').attr('content');
